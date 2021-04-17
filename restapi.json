@@ -180,6 +180,15 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "list",
+                        "in": "path",
+                        "description": "List ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -492,7 +501,7 @@
                                         "message": {
                                             "description": "Deletes a session.",
                                             "type": "string",
-                                            "example": "No valid session key was provided as basic auth password or You do not have access to this session."
+                                            "example": "No valid session key was provided as basic auth password or\n     *              You do not have access to this session."
                                         }
                                     },
                                     "type": "object"
@@ -520,13 +529,13 @@
                 }
             }
         },
-        "/subscriber": {
+        "/api/v2/subscriber": {
             "post": {
                 "tags": [
                     "subscribers"
                 ],
                 "summary": "Create a subscriber list",
-                "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\n     *     address yet).",
+                "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with\n     *     the given email address yet).",
                 "operationId": "PhpList\\RestBundle\\Controller\\SubscriberController::postAction",
                 "parameters": [
                     {
@@ -651,7 +660,8 @@
                                     "properties": {
                                         "message": {
                                             "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
-                                            "type": "No valid session key was provided as basic auth password."
+                                            "type": "string",
+                                            "example": "No valid session key was provided as basic auth password."
                                         }
                                     },
                                     "type": "object"
