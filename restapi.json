@@ -180,6 +180,15 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "list",
+                        "in": "path",
+                        "description": "List ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -651,7 +660,8 @@
                                     "properties": {
                                         "message": {
                                             "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
-                                            "type": "No valid session key was provided as basic auth password."
+                                            "type": "string",
+                                            "example": "No valid session key was provided as basic auth password."
                                         }
                                     },
                                     "type": "object"
