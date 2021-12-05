@@ -2,6 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "phpList4 REST API",
+        "description": "This bundle provides the REST API for phpList.",
         "version": "4.0.0"
     },
     "paths": {
@@ -12,7 +13,7 @@
                 ],
                 "summary": "Gets a list of all subscriber lists.",
                 "description": "Returns a json list of all subscriber lists.",
-                "operationId": "PhpList\\RestBundle\\Controller\\ListController::cgetAction",
+                "operationId": "55de401a35e051e041f1ff18648a1b0b",
                 "parameters": [
                     {
                         "name": "session",
@@ -64,7 +65,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Gets a list of all subscriber lists.",
                                             "type": "string",
                                             "example": "No valid session key was provided as basic auth password."
                                         }
@@ -84,7 +84,7 @@
                 ],
                 "summary": "Gets a subscriber list.",
                 "description": "Returns a single subscriber lists with specified ID",
-                "operationId": "PhpList\\RestBundle\\Controller\\ListController::getAction",
+                "operationId": "b08cfc501bb8f8eda595a3c86e3b90ed",
                 "parameters": [
                     {
                         "name": "list",
@@ -135,7 +135,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Gets a subscriber list.",
                                             "type": "string",
                                             "example": "No valid session key was provided as basic auth password."
                                         }
@@ -152,7 +151,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Gets a subscriber list.",
                                             "type": "string",
                                             "example": "There is no list with that ID."
                                         }
@@ -170,7 +168,7 @@
                 ],
                 "summary": "Deletes a list.",
                 "description": "Deletes a single subscriber list passed as",
-                "operationId": "PhpList\\RestBundle\\Controller\\ListController::deleteAction",
+                "operationId": "d81f62bf8e86c31019127f86c35987b2",
                 "parameters": [
                     {
                         "name": "session",
@@ -202,7 +200,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Deletes a subscriber list.",
                                             "type": "string",
                                             "example": "No valid session key was provided as basic auth password or You do not have access to this session."
                                         }
@@ -219,7 +216,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Deletes a subscriber list.",
                                             "type": "string",
                                             "example": "There is no session with that ID."
                                         }
@@ -239,7 +235,7 @@
                 ],
                 "summary": "Gets a list of all subscribers (members) of a subscriber list.",
                 "description": "Returns a json list of all subscriber lists.",
-                "operationId": "PhpList\\RestBundle\\Controller\\ListController::getMembersAction",
+                "operationId": "c8750709a040c047a92c9647539f32dd",
                 "parameters": [
                     {
                         "name": "session",
@@ -302,7 +298,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Gets a list of all subscribers (members) of a subscriber list.",
                                             "type": "string",
                                             "example": "No valid session key was provided as basic auth password."
                                         }
@@ -322,7 +317,7 @@
                 ],
                 "summary": "Gets the total number of subscribers of a list",
                 "description": "Returns a count of all subscribers in a given list.",
-                "operationId": "PhpList\\RestBundle\\Controller\\ListController::getSubscribersCountAction",
+                "operationId": "736389b83490d2490a74a8bd46a9857c",
                 "parameters": [
                     {
                         "name": "session",
@@ -354,7 +349,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Gets the total number of subscribers of a list.",
                                             "type": "string",
                                             "example": "No valid session key was provided as basic auth password."
                                         }
@@ -374,7 +368,7 @@
                 ],
                 "summary": "Log in or create new session.",
                 "description": "Given valid login data, this will generate a login token that will be valid for 1 hour",
-                "operationId": "PhpList\\RestBundle\\Controller\\SessionController::postAction",
+                "operationId": "b23bc3baa9a61e1062fa93124cc52798",
                 "requestBody": {
                     "description": "Pass session credentials",
                     "required": true,
@@ -387,13 +381,11 @@
                                 ],
                                 "properties": {
                                     "login_name": {
-                                        "description": "Creates a new session (if the provided credentials are valid).",
                                         "type": "string",
                                         "format": "string",
                                         "example": "admin"
                                     },
                                     "password": {
-                                        "description": "Creates a new session (if the provided credentials are valid).",
                                         "type": "string",
                                         "format": "password",
                                         "example": "eetIc/Gropvoc1"
@@ -412,17 +404,14 @@
                                 "schema": {
                                     "properties": {
                                         "id": {
-                                            "description": "Creates a new session (if the provided credentials are valid).",
                                             "type": "integer",
                                             "example": "1234"
                                         },
                                         "key": {
-                                            "description": "Creates a new session (if the provided credentials are valid).",
                                             "type": "string",
                                             "example": "2cfe100561473c6cdd99c9e2f26fa974"
                                         },
                                         "expiry": {
-                                            "description": "Creates a new session (if the provided credentials are valid).",
                                             "type": "string",
                                             "example": "2017-07-20T18:22:48+00:00"
                                         }
@@ -439,7 +428,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Creates a new session (if the provided credentials are valid).",
                                             "type": "string",
                                             "example": "Empty json, invalid data and or incomplete data"
                                         }
@@ -456,7 +444,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Creates a new session (if the provided credentials are valid).",
                                             "type": "string",
                                             "example": "Not authorized."
                                         }
@@ -476,7 +463,7 @@
                 ],
                 "summary": "Delete a session.",
                 "description": "Delete the session passed as paramater",
-                "operationId": "PhpList\\RestBundle\\Controller\\SessionController::deleteAction",
+                "operationId": "f4d35cefb1622515d122441a4547f2cc",
                 "parameters": [
                     {
                         "name": "session",
@@ -499,7 +486,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Deletes a session.",
                                             "type": "string",
                                             "example": "No valid session key was provided as basic auth password or\n     *              You do not have access to this session."
                                         }
@@ -516,7 +502,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Deletes a session.",
                                             "type": "string",
                                             "example": "There is no session with that ID."
                                         }
@@ -536,7 +521,7 @@
                 ],
                 "summary": "Create a subscriber list",
                 "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with\n     *     the given email address yet).",
-                "operationId": "PhpList\\RestBundle\\Controller\\SubscriberController::postAction",
+                "operationId": "13d081ac41de827d61315e9aa771123d",
                 "parameters": [
                     {
                         "name": "session",
@@ -559,31 +544,26 @@
                                 ],
                                 "properties": {
                                     "email": {
-                                        "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                         "type": "string",
                                         "format": "string",
                                         "example": "admin"
                                     },
                                     "confirmed": {
-                                        "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                         "type": "string",
                                         "format": "boolean",
                                         "example": "eetIc/Gropvoc1"
                                     },
                                     "blacklisted": {
-                                        "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                         "type": "string",
                                         "format": "boolean",
                                         "example": "eetIc/Gropvoc1"
                                     },
                                     "html_entail": {
-                                        "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                         "type": "string",
                                         "format": "boolean",
                                         "example": "eetIc/Gropvoc1"
                                     },
                                     "disabled": {
-                                        "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                         "type": "string",
                                         "format": "boolean",
                                         "example": "eetIc/Gropvoc1"
@@ -602,47 +582,38 @@
                                 "schema": {
                                     "properties": {
                                         "creation_date": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "integer",
                                             "example": "2017-12-16T18:44:27+00:00"
                                         },
                                         "email": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "string",
                                             "example": "subscriber@example.com"
                                         },
                                         "confirmed": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "boolean",
                                             "example": "false"
                                         },
                                         "blacklisted": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "boolean",
                                             "example": "false"
                                         },
                                         "bounced": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "integer",
                                             "example": "0"
                                         },
                                         "unique_id": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "string",
                                             "example": "69f4e92cf50eafca9627f35704f030f4"
                                         },
                                         "html_entail": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "boolean",
                                             "example": "false"
                                         },
                                         "disabled": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "boolean",
                                             "example": "false"
                                         },
                                         "id": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "integer",
                                             "example": "1"
                                         }
@@ -659,7 +630,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "string",
                                             "example": "No valid session key was provided as basic auth password."
                                         }
@@ -676,7 +646,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "string",
                                             "example": "This resource already exists."
                                         }
@@ -693,7 +662,6 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with the given email\naddress yet).",
                                             "type": "string",
                                             "example": "Some fields invalid: email, confirmed, html_email"
                                         }
