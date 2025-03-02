@@ -255,14 +255,14 @@
                 }
             }
         },
-        "/lists/{list}/members": {
+        "/lists/{id}/subscribers": {
             "get": {
                 "tags": [
                     "lists"
                 ],
-                "summary": "Gets a list of all subscribers (members) of a subscriber list.",
+                "summary": "Gets a list of all subscribers of a subscriber list.",
                 "description": "Returns a JSON list of all subscribers for a subscriber list.",
-                "operationId": "29f6848c27ee3e30b7e4bd7997c73a18",
+                "operationId": "4758420770106043c526018727384dc0",
                 "parameters": [
                     {
                         "name": "session",
@@ -274,7 +274,7 @@
                         }
                     },
                     {
-                        "name": "list",
+                        "name": "id",
                         "in": "path",
                         "description": "List ID",
                         "required": true,
@@ -355,14 +355,14 @@
                 }
             }
         },
-        "/lists/{list}/count": {
+        "/lists/{id}/count": {
             "get": {
                 "tags": [
                     "lists"
                 ],
                 "summary": "Gets the total number of subscribers of a list",
                 "description": "Returns a count of all subscribers in a given list.",
-                "operationId": "c1e2f17c0078014a816c914a25d8e889",
+                "operationId": "55d76d7f22b445a9d9dd7ba38a3156cf",
                 "parameters": [
                     {
                         "name": "session",
@@ -374,7 +374,7 @@
                         }
                     },
                     {
-                        "name": "list",
+                        "name": "id",
                         "in": "path",
                         "description": "List ID",
                         "required": true,
@@ -559,14 +559,14 @@
                 }
             }
         },
-        "/subscriber": {
+        "/subscribers": {
             "post": {
                 "tags": [
                     "subscribers"
                 ],
                 "summary": "Create a subscriber",
                 "description": "Creates a new subscriber (if there is no subscriber with the given email address yet).",
-                "operationId": "9dc1ae0a66e2eed292c4aed09bab8de0",
+                "operationId": "e99d8d230dcb6ef5004ca48d716cd66b",
                 "parameters": [
                     {
                         "name": "session",
@@ -593,19 +593,11 @@
                                         "format": "string",
                                         "example": "admin@example.com"
                                     },
-                                    "confirmed": {
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "blacklisted": {
+                                    "request_confirmation": {
                                         "type": "boolean",
                                         "example": false
                                     },
                                     "html_email": {
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "disabled": {
                                         "type": "boolean",
                                         "example": false
                                     }
@@ -712,6 +704,106 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/subscribers/{subscriber}": {
+            "get": {
+                "tags": [
+                    "subscribers"
+                ],
+                "summary": "Get a subscriber",
+                "description": "Get subscriber date by id.",
+                "operationId": "e44a0899dcd578274795f5899d6a9fa5",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Subscriber ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "creation_date": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2017-12-16T18:44:27+00:00"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "subscriber@example.com"
+                                        },
+                                        "confirmed": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "blacklisted": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "bounced": {
+                                            "type": "integer",
+                                            "example": 0
+                                        },
+                                        "unique_id": {
+                                            "type": "string",
+                                            "example": "69f4e92cf50eafca9627f35704f030f4"
+                                        },
+                                        "html_email": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "disabled": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No valid session key was provided as basic auth password."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 }
             }
