@@ -292,14 +292,18 @@
                                     "type": "array",
                                     "items": {
                                         "properties": {
-                                            "creation_date": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2016-07-22T15:01:17+00:00"
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
                                             },
                                             "email": {
                                                 "type": "string",
-                                                "example": "oliver@example.com"
+                                                "example": "subscriber@example.com"
+                                            },
+                                            "creation_date": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2023-01-01T12:00:00Z"
                                             },
                                             "confirmed": {
                                                 "type": "boolean",
@@ -307,15 +311,15 @@
                                             },
                                             "blacklisted": {
                                                 "type": "boolean",
-                                                "example": true
+                                                "example": false
                                             },
                                             "bounce_count": {
                                                 "type": "integer",
-                                                "example": 17
+                                                "example": 0
                                             },
                                             "unique_id": {
                                                 "type": "string",
-                                                "example": "95feb7fe7e06e6c11ca8d0c48cb46e89"
+                                                "example": "abc123"
                                             },
                                             "html_email": {
                                                 "type": "boolean",
@@ -323,11 +327,36 @@
                                             },
                                             "disabled": {
                                                 "type": "boolean",
-                                                "example": true
+                                                "example": false
                                             },
-                                            "id": {
-                                                "type": "integer",
-                                                "example": 1
+                                            "subscribedLists": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Newsletter"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Monthly updates"
+                                                        },
+                                                        "creation_date": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2022-12-01T10:00:00Z"
+                                                        },
+                                                        "public": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
                                             }
                                         },
                                         "type": "object"
@@ -743,42 +772,71 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "creation_date": {
-                                            "type": "string",
-                                            "format": "date-time",
-                                            "example": "2017-12-16T18:44:27+00:00"
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
                                         },
                                         "email": {
                                             "type": "string",
                                             "example": "subscriber@example.com"
                                         },
+                                        "creation_date": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2023-01-01T12:00:00Z"
+                                        },
                                         "confirmed": {
                                             "type": "boolean",
-                                            "example": false
+                                            "example": true
                                         },
                                         "blacklisted": {
                                             "type": "boolean",
                                             "example": false
                                         },
-                                        "bounced": {
+                                        "bounce_count": {
                                             "type": "integer",
                                             "example": 0
                                         },
                                         "unique_id": {
                                             "type": "string",
-                                            "example": "69f4e92cf50eafca9627f35704f030f4"
+                                            "example": "abc123"
                                         },
                                         "html_email": {
                                             "type": "boolean",
-                                            "example": false
+                                            "example": true
                                         },
                                         "disabled": {
                                             "type": "boolean",
                                             "example": false
                                         },
-                                        "id": {
-                                            "type": "integer",
-                                            "example": 1
+                                        "subscribedLists": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Newsletter"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Monthly updates"
+                                                    },
+                                                    "creation_date": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2022-12-01T10:00:00Z"
+                                                    },
+                                                    "public": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"
