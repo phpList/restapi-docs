@@ -106,17 +106,17 @@
                 }
             }
         },
-        "/lists/{list}": {
+        "/lists/{listId}": {
             "get": {
                 "tags": [
                     "lists"
                 ],
                 "summary": "Gets a subscriber list.",
                 "description": "Returns a single subscriber list with specified ID.",
-                "operationId": "0dc1b40be222c4283ef1e39ee210d077",
+                "operationId": "f5d26161429d82b84e1210a7e4f885f7",
                 "parameters": [
                     {
-                        "name": "list",
+                        "name": "listId",
                         "in": "path",
                         "description": "List ID",
                         "required": true,
@@ -195,7 +195,7 @@
                 ],
                 "summary": "Deletes a list.",
                 "description": "Deletes a single subscriber list.",
-                "operationId": "ab4b8e42dd519312a942be1f3a86771b",
+                "operationId": "baa72cde782863de1f53e89dfbd93e42",
                 "parameters": [
                     {
                         "name": "session",
@@ -207,7 +207,7 @@
                         }
                     },
                     {
-                        "name": "list",
+                        "name": "listId",
                         "in": "path",
                         "description": "List ID",
                         "required": true,
@@ -255,14 +255,14 @@
                 }
             }
         },
-        "/lists/{id}/subscribers": {
+        "/lists/{listId}/subscribers": {
             "get": {
                 "tags": [
                     "lists"
                 ],
                 "summary": "Gets a list of all subscribers of a subscriber list.",
                 "description": "Returns a JSON list of all subscribers for a subscriber list.",
-                "operationId": "4758420770106043c526018727384dc0",
+                "operationId": "dd21a10e3957c57f1bcd1384f83ef5b8",
                 "parameters": [
                     {
                         "name": "session",
@@ -274,7 +274,7 @@
                         }
                     },
                     {
-                        "name": "id",
+                        "name": "listId",
                         "in": "path",
                         "description": "List ID",
                         "required": true,
@@ -355,14 +355,14 @@
                 }
             }
         },
-        "/lists/{id}/count": {
+        "/lists/{listId}/count": {
             "get": {
                 "tags": [
                     "lists"
                 ],
                 "summary": "Gets the total number of subscribers of a list",
                 "description": "Returns a count of all subscribers in a given list.",
-                "operationId": "55d76d7f22b445a9d9dd7ba38a3156cf",
+                "operationId": "fc4c315635de3590e75656c209220f08",
                 "parameters": [
                     {
                         "name": "session",
@@ -374,7 +374,7 @@
                         }
                     },
                     {
-                        "name": "id",
+                        "name": "listId",
                         "in": "path",
                         "description": "List ID",
                         "required": true,
@@ -501,17 +501,17 @@
                 }
             }
         },
-        "/sessions/{session}": {
+        "/sessions/{sessionId}": {
             "delete": {
                 "tags": [
                     "sessions"
                 ],
                 "summary": "Delete a session.",
                 "description": "Delete the session passed as a parameter.",
-                "operationId": "fbeec6cb2db5898313a8dd3a91b2b57a",
+                "operationId": "c6593eee8fe5b33f5737fb73937b6951",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "sessionId",
                         "in": "path",
                         "description": "Session ID",
                         "required": true,
@@ -708,14 +708,14 @@
                 }
             }
         },
-        "/subscribers/{subscriber}": {
+        "/subscribers/{subscriberId}": {
             "get": {
                 "tags": [
                     "subscribers"
                 ],
                 "summary": "Get a subscriber",
                 "description": "Get subscriber date by id.",
-                "operationId": "e44a0899dcd578274795f5899d6a9fa5",
+                "operationId": "cbc1272277c07c01e9f0214a21979a4a",
                 "parameters": [
                     {
                         "name": "session",
@@ -727,7 +727,7 @@
                         }
                     },
                     {
-                        "name": "id",
+                        "name": "subscriberId",
                         "in": "path",
                         "description": "Subscriber ID",
                         "required": true,
