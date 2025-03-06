@@ -5,15 +5,21 @@
         "description": "This bundle provides the REST API for phpList.",
         "version": "4.0.0"
     },
+    "servers": [
+        {
+            "url": "https://www.phplist.com/api/v2",
+            "description": "Production server"
+        }
+    ],
     "paths": {
-        "/api/v2/lists": {
+        "/lists": {
             "get": {
                 "tags": [
                     "lists"
                 ],
                 "summary": "Gets a list of all subscriber lists.",
-                "description": "Returns a json list of all subscriber lists.",
-                "operationId": "55de401a35e051e041f1ff18648a1b0b",
+                "description": "Returns a JSON list of all subscriber lists.",
+                "operationId": "81c74c22179cb7ac081aa6e77b9f6631",
                 "parameters": [
                     {
                         "name": "session",
@@ -26,35 +32,51 @@
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
-                                },
-                                "example": [
-                                    {
-                                        "name": "News",
-                                        "description": "News (and some fun stuff)",
-                                        "creation_date": "2016-06-22T15:01:17+00:00",
-                                        "list_position": 12,
-                                        "subject_prefix": "phpList",
-                                        "public": true,
-                                        "category": "news",
-                                        "id": 1
-                                    },
-                                    {
-                                        "name": "More news",
-                                        "description": "",
-                                        "creation_date": "2016-06-22T15:01:17+00:00",
-                                        "list_position": 12,
-                                        "subject_prefix": "",
-                                        "public": true,
-                                        "category": "",
-                                        "id": 2
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "example": "News"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "News (and some fun stuff)"
+                                            },
+                                            "creation_date": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2016-06-22T15:01:17+00:00"
+                                            },
+                                            "list_position": {
+                                                "type": "integer",
+                                                "example": 12
+                                            },
+                                            "subject_prefix": {
+                                                "type": "string",
+                                                "example": "phpList"
+                                            },
+                                            "public": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "category": {
+                                                "type": "string",
+                                                "example": "news"
+                                            },
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            }
+                                        },
+                                        "type": "object"
                                     }
-                                ]
+                                }
                             }
                         }
                     },
@@ -77,17 +99,17 @@
                 }
             }
         },
-        "/api/v2/lists/{list}": {
+        "/lists/{listId}": {
             "get": {
                 "tags": [
                     "lists"
                 ],
                 "summary": "Gets a subscriber list.",
-                "description": "Returns a single subscriber lists with specified ID",
-                "operationId": "b08cfc501bb8f8eda595a3c86e3b90ed",
+                "description": "Returns a single subscriber list with specified ID.",
+                "operationId": "f5d26161429d82b84e1210a7e4f885f7",
                 "parameters": [
                     {
-                        "name": "list",
+                        "name": "listId",
                         "in": "path",
                         "description": "List ID",
                         "required": true,
@@ -113,18 +135,16 @@
                                 "schema": {
                                     "type": "object"
                                 },
-                                "example": [
-                                    {
-                                        "name": "News",
-                                        "description": "News (and some fun stuff)",
-                                        "creation_date": "2016-06-22T15:01:17+00:00",
-                                        "list_position": 12,
-                                        "subject_prefix": "phpList",
-                                        "public": true,
-                                        "category": "news",
-                                        "id": 1
-                                    }
-                                ]
+                                "example": {
+                                    "name": "News",
+                                    "description": "News (and some fun stuff)",
+                                    "creation_date": "2016-06-22T15:01:17+00:00",
+                                    "list_position": 12,
+                                    "subject_prefix": "phpList",
+                                    "public": true,
+                                    "category": "news",
+                                    "id": 1
+                                }
                             }
                         }
                     },
@@ -167,8 +187,8 @@
                     "lists"
                 ],
                 "summary": "Deletes a list.",
-                "description": "Deletes a single subscriber list passed as",
-                "operationId": "d81f62bf8e86c31019127f86c35987b2",
+                "description": "Deletes a single subscriber list.",
+                "operationId": "baa72cde782863de1f53e89dfbd93e42",
                 "parameters": [
                     {
                         "name": "session",
@@ -180,7 +200,7 @@
                         }
                     },
                     {
-                        "name": "list",
+                        "name": "listId",
                         "in": "path",
                         "description": "List ID",
                         "required": true,
@@ -201,7 +221,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "No valid session key was provided as basic auth password or You do not have access to this session."
+                                            "example": "No valid session key was provided."
                                         }
                                     },
                                     "type": "object"
@@ -228,14 +248,14 @@
                 }
             }
         },
-        "/api/v2/lists/{list}/members": {
+        "/lists/{listId}/subscribers": {
             "get": {
                 "tags": [
                     "lists"
                 ],
-                "summary": "Gets a list of all subscribers (members) of a subscriber list.",
-                "description": "Returns a json list of all subscriber lists.",
-                "operationId": "c8750709a040c047a92c9647539f32dd",
+                "summary": "Gets a list of all subscribers of a subscriber list.",
+                "description": "Returns a JSON list of all subscribers for a subscriber list.",
+                "operationId": "dd21a10e3957c57f1bcd1384f83ef5b8",
                 "parameters": [
                     {
                         "name": "session",
@@ -247,7 +267,7 @@
                         }
                     },
                     {
-                        "name": "list",
+                        "name": "listId",
                         "in": "path",
                         "description": "List ID",
                         "required": true,
@@ -262,32 +282,79 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
-                                },
-                                "example": [
-                                    {
-                                        "creation_date": "2016-07-22T15:01:17+00:00",
-                                        "email": "oliver@example.com",
-                                        "confirmed": true,
-                                        "blacklisted": true,
-                                        "bounce_count": 17,
-                                        "unique_id": "95feb7fe7e06e6c11ca8d0c48cb46e89",
-                                        "html_email": true,
-                                        "disabled": true,
-                                        "id": 1
-                                    },
-                                    {
-                                        "creation_date": "2017-07-22T15:12:17+00:00",
-                                        "email": "sam@example.com",
-                                        "confirmed": true,
-                                        "blacklisted": false,
-                                        "bounce_count": 1,
-                                        "unique_id": "95feb7fe7e06e6c11ca8d0c48cb4616d",
-                                        "html_email": false,
-                                        "disabled": false,
-                                        "id": 2
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "subscriber@example.com"
+                                            },
+                                            "creation_date": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2023-01-01T12:00:00Z"
+                                            },
+                                            "confirmed": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "blacklisted": {
+                                                "type": "boolean",
+                                                "example": false
+                                            },
+                                            "bounce_count": {
+                                                "type": "integer",
+                                                "example": 0
+                                            },
+                                            "unique_id": {
+                                                "type": "string",
+                                                "example": "abc123"
+                                            },
+                                            "html_email": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "disabled": {
+                                                "type": "boolean",
+                                                "example": false
+                                            },
+                                            "subscribedLists": {
+                                                "type": "array",
+                                                "items": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 2
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Newsletter"
+                                                        },
+                                                        "description": {
+                                                            "type": "string",
+                                                            "example": "Monthly updates"
+                                                        },
+                                                        "creation_date": {
+                                                            "type": "string",
+                                                            "format": "date-time",
+                                                            "example": "2022-12-01T10:00:00Z"
+                                                        },
+                                                        "public": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
                                     }
-                                ]
+                                }
                             }
                         }
                     },
@@ -310,14 +377,14 @@
                 }
             }
         },
-        "/api/v2/lists/{list}/count": {
+        "/lists/{listId}/count": {
             "get": {
                 "tags": [
                     "lists"
                 ],
                 "summary": "Gets the total number of subscribers of a list",
                 "description": "Returns a count of all subscribers in a given list.",
-                "operationId": "736389b83490d2490a74a8bd46a9857c",
+                "operationId": "fc4c315635de3590e75656c209220f08",
                 "parameters": [
                     {
                         "name": "session",
@@ -329,7 +396,7 @@
                         }
                     },
                     {
-                        "name": "list",
+                        "name": "listId",
                         "in": "path",
                         "description": "List ID",
                         "required": true,
@@ -361,14 +428,14 @@
                 }
             }
         },
-        "/api/v2/sessions": {
+        "/sessions": {
             "post": {
                 "tags": [
                     "sessions"
                 ],
                 "summary": "Log in or create new session.",
-                "description": "Given valid login data, this will generate a login token that will be valid for 1 hour",
-                "operationId": "b23bc3baa9a61e1062fa93124cc52798",
+                "description": "Given valid login data, this will generate a login token that will be valid for 1 hour.",
+                "operationId": "08336f63605d853592fc942e7c13fcd7",
                 "requestBody": {
                     "description": "Pass session credentials",
                     "required": true,
@@ -405,7 +472,7 @@
                                     "properties": {
                                         "id": {
                                             "type": "integer",
-                                            "example": "1234"
+                                            "example": 1234
                                         },
                                         "key": {
                                             "type": "string",
@@ -438,7 +505,7 @@
                         }
                     },
                     "401": {
-                        "description": "Success",
+                        "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -456,17 +523,17 @@
                 }
             }
         },
-        "/api/v2/sessions/{session}": {
+        "/sessions/{sessionId}": {
             "delete": {
                 "tags": [
                     "sessions"
                 ],
                 "summary": "Delete a session.",
-                "description": "Delete the session passed as paramater",
-                "operationId": "f4d35cefb1622515d122441a4547f2cc",
+                "description": "Delete the session passed as a parameter.",
+                "operationId": "c6593eee8fe5b33f5737fb73937b6951",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "sessionId",
                         "in": "path",
                         "description": "Session ID",
                         "required": true,
@@ -487,7 +554,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "No valid session key was provided as basic auth password or\n     *              You do not have access to this session."
+                                            "example": "No valid session key was provided as basic auth password."
                                         }
                                     },
                                     "type": "object"
@@ -514,14 +581,14 @@
                 }
             }
         },
-        "/api/v2/subscriber": {
+        "/subscribers": {
             "post": {
                 "tags": [
                     "subscribers"
                 ],
-                "summary": "Create a subscriber list",
-                "description": "Creates a new subscriber (if the provided data is valid and there is no subscriber with\n     *     the given email address yet).",
-                "operationId": "13d081ac41de827d61315e9aa771123d",
+                "summary": "Create a subscriber",
+                "description": "Creates a new subscriber (if there is no subscriber with the given email address yet).",
+                "operationId": "e99d8d230dcb6ef5004ca48d716cd66b",
                 "parameters": [
                     {
                         "name": "session",
@@ -546,27 +613,15 @@
                                     "email": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "admin"
+                                        "example": "admin@example.com"
                                     },
-                                    "confirmed": {
-                                        "type": "string",
-                                        "format": "boolean",
-                                        "example": "eetIc/Gropvoc1"
+                                    "request_confirmation": {
+                                        "type": "boolean",
+                                        "example": false
                                     },
-                                    "blacklisted": {
-                                        "type": "string",
-                                        "format": "boolean",
-                                        "example": "eetIc/Gropvoc1"
-                                    },
-                                    "html_entail": {
-                                        "type": "string",
-                                        "format": "boolean",
-                                        "example": "eetIc/Gropvoc1"
-                                    },
-                                    "disabled": {
-                                        "type": "string",
-                                        "format": "boolean",
-                                        "example": "eetIc/Gropvoc1"
+                                    "html_email": {
+                                        "type": "boolean",
+                                        "example": false
                                     }
                                 },
                                 "type": "object"
@@ -582,7 +637,8 @@
                                 "schema": {
                                     "properties": {
                                         "creation_date": {
-                                            "type": "integer",
+                                            "type": "string",
+                                            "format": "date-time",
                                             "example": "2017-12-16T18:44:27+00:00"
                                         },
                                         "email": {
@@ -591,31 +647,31 @@
                                         },
                                         "confirmed": {
                                             "type": "boolean",
-                                            "example": "false"
+                                            "example": false
                                         },
                                         "blacklisted": {
                                             "type": "boolean",
-                                            "example": "false"
+                                            "example": false
                                         },
                                         "bounced": {
                                             "type": "integer",
-                                            "example": "0"
+                                            "example": 0
                                         },
                                         "unique_id": {
                                             "type": "string",
                                             "example": "69f4e92cf50eafca9627f35704f030f4"
                                         },
-                                        "html_entail": {
+                                        "html_email": {
                                             "type": "boolean",
-                                            "example": "false"
+                                            "example": false
                                         },
                                         "disabled": {
                                             "type": "boolean",
-                                            "example": "false"
+                                            "example": false
                                         },
                                         "id": {
                                             "type": "integer",
-                                            "example": "1"
+                                            "example": 1
                                         }
                                     },
                                     "type": "object"
@@ -673,6 +729,149 @@
                     }
                 }
             }
+        },
+        "/subscribers/{subscriberId}": {
+            "get": {
+                "tags": [
+                    "subscribers"
+                ],
+                "summary": "Get a subscriber",
+                "description": "Get subscriber date by id.",
+                "operationId": "cbc1272277c07c01e9f0214a21979a4a",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "subscriberId",
+                        "in": "path",
+                        "description": "Subscriber ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "subscriber@example.com"
+                                        },
+                                        "creation_date": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2023-01-01T12:00:00Z"
+                                        },
+                                        "confirmed": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "blacklisted": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "bounce_count": {
+                                            "type": "integer",
+                                            "example": 0
+                                        },
+                                        "unique_id": {
+                                            "type": "string",
+                                            "example": "abc123"
+                                        },
+                                        "html_email": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "disabled": {
+                                            "type": "boolean",
+                                            "example": false
+                                        },
+                                        "subscribedLists": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Newsletter"
+                                                    },
+                                                    "description": {
+                                                        "type": "string",
+                                                        "example": "Monthly updates"
+                                                    },
+                                                    "creation_date": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2022-12-01T10:00:00Z"
+                                                    },
+                                                    "public": {
+                                                        "type": "boolean",
+                                                        "example": true
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No valid session key was provided as basic auth password."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "lists",
+            "description": "lists"
+        },
+        {
+            "name": "sessions",
+            "description": "sessions"
+        },
+        {
+            "name": "subscribers",
+            "description": "subscribers"
+        }
+    ]
 }
