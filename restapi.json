@@ -1,9 +1,16 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "phpList4 REST API",
-        "description": "This bundle provides the REST API for phpList.",
-        "version": "4.0.0"
+        "title": "My API Documentation",
+        "description": "This is the OpenAPI documentation for My API.",
+        "contact": {
+            "email": "support@phplist.com"
+        },
+        "license": {
+            "name": "AGPL-3.0-or-later",
+            "url": "https://www.gnu.org/licenses/agpl.txt"
+        },
+        "version": "1.0.0"
     },
     "servers": [
         {
