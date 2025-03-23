@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "My API Documentation",
-        "description": "This is the OpenAPI documentation for My API.",
+        "title": "PhpList API Documentation",
+        "description": "This is the OpenAPI documentation for PhpList API.",
         "contact": {
             "email": "support@phplist.com"
         },
