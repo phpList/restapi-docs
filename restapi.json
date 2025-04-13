@@ -325,119 +325,6 @@
                 }
             }
         },
-        "/lists/{listId}/subscribers": {
-            "get": {
-                "tags": [
-                    "lists"
-                ],
-                "summary": "Gets a list of all subscribers of a subscriber list.",
-                "description": "Returns a JSON list of all subscribers for a subscriber list.",
-                "operationId": "dd21a10e3957c57f1bcd1384f83ef5b8",
-                "parameters": [
-                    {
-                        "name": "session",
-                        "in": "header",
-                        "description": "Session ID obtained from authentication",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "listId",
-                        "in": "path",
-                        "description": "List ID",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Subscriber"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/lists/{listId}/count": {
-            "get": {
-                "tags": [
-                    "lists"
-                ],
-                "summary": "Gets the total number of subscribers of a list",
-                "description": "Returns a count of all subscribers in a given list.",
-                "operationId": "fc4c315635de3590e75656c209220f08",
-                "parameters": [
-                    {
-                        "name": "session",
-                        "in": "header",
-                        "description": "Session ID obtained from authentication",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "listId",
-                        "in": "path",
-                        "description": "List ID",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "subscribers_count": {
-                                            "type": "integer",
-                                            "example": 42
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/sessions": {
             "post": {
                 "tags": [
@@ -503,13 +390,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Empty json, invalid data and or incomplete data"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/BadRequestResponse"
                                 }
                             }
                         }
@@ -659,13 +540,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "This resource already exists."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/AlreadyExistsResponse"
                                 }
                             }
                         }
@@ -887,6 +762,284 @@
                     }
                 }
             }
+        },
+        "/lists/{listId}/subscribers": {
+            "get": {
+                "tags": [
+                    "subscriptions"
+                ],
+                "summary": "Gets a list of all subscribers of a subscriber list.",
+                "description": "Returns a JSON list of all subscribers for a subscriber list.",
+                "operationId": "6cfcb3c8ae96935d2833e98bde0e5c92",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "listId",
+                        "in": "path",
+                        "description": "List ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Subscriber"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "subscriptions"
+                ],
+                "summary": "Create subscription",
+                "description": "Subscribe subscriber to a list.",
+                "operationId": "877e873f40fb0c4c97ec3db92d90eebc",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "listId",
+                        "in": "path",
+                        "description": "List ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass session credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "emails"
+                                ],
+                                "properties": {
+                                    "emails": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "email"
+                                        },
+                                        "example": [
+                                            "test1@example.com",
+                                            "test2@example.com"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Subscription"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlreadyExistsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "subscriptions"
+                ],
+                "summary": "Delete subscription",
+                "description": "Delete subscription.",
+                "operationId": "50e71f7c52f8e499b4d8bf3b8cc4e9f8",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "listId",
+                        "in": "path",
+                        "description": "List ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "emails",
+                        "in": "query",
+                        "description": "emails of subscribers to delete from list.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Subscriber or subscription not found."
+                    }
+                }
+            }
+        },
+        "/lists/{listId}/count": {
+            "get": {
+                "tags": [
+                    "subscriptions"
+                ],
+                "summary": "Gets the total number of subscribers of a list",
+                "description": "Returns a count of all subscribers in a given list.",
+                "operationId": "16541d0ca2e36cbc5f00979e0d55245f",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "listId",
+                        "in": "path",
+                        "description": "List ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "subscribers_count": {
+                                            "type": "integer",
+                                            "example": 42
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -906,6 +1059,11 @@
                         "example": "Monthly updates"
                     },
                     "creation_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2022-12-01T10:00:00Z"
+                    },
+                    "subscription_date": {
                         "type": "string",
                         "format": "date-time",
                         "example": "2022-12-01T10:00:00Z"
@@ -956,11 +1114,27 @@
                         "type": "boolean",
                         "example": false
                     },
-                    "subscribedLists": {
+                    "subscribed_lists": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/SubscriberList"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "Subscription": {
+                "properties": {
+                    "subscriber": {
+                        "$ref": "#/components/schemas/Subscriber"
+                    },
+                    "subscriber_list": {
+                        "$ref": "#/components/schemas/SubscriberList"
+                    },
+                    "subscription_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01T12:00:00Z"
                     }
                 },
                 "type": "object"
@@ -982,6 +1156,24 @@
                     }
                 },
                 "type": "object"
+            },
+            "BadRequestResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Invalid json format"
+                    }
+                },
+                "type": "object"
+            },
+            "AlreadyExistsResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "This resource already exists."
+                    }
+                },
+                "type": "object"
             }
         }
     },
@@ -997,6 +1189,10 @@
         {
             "name": "subscribers",
             "description": "subscribers"
+        },
+        {
+            "name": "subscriptions",
+            "description": "subscriptions"
         }
     ]
 }
