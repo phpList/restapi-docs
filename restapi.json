@@ -19,6 +19,52 @@
         }
     ],
     "paths": {
+        "/campaigns": {
+            "get": {
+                "tags": [
+                    "campaigns"
+                ],
+                "summary": "Gets a list of all campaigns.",
+                "description": "Returns a JSON list of all campaigns/messages.",
+                "operationId": "6a3f46e69e2963faa4a81a5dcb65a439",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Message"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/lists": {
             "get": {
                 "tags": [
@@ -933,7 +979,7 @@
                 ],
                 "summary": "Delete subscription",
                 "description": "Delete subscription.",
-                "operationId": "50e71f7c52f8e499b4d8bf3b8cc4e9f8",
+                "operationId": "c6a8ef93867e2c66bb70b86aba8b1ea8",
                 "parameters": [
                     {
                         "name": "session",
@@ -1063,11 +1109,6 @@
                         "format": "date-time",
                         "example": "2022-12-01T10:00:00Z"
                     },
-                    "subscription_date": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2022-12-01T10:00:00Z"
-                    },
                     "public": {
                         "type": "boolean",
                         "example": true
@@ -1139,6 +1180,183 @@
                 },
                 "type": "object"
             },
+            "Template": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Newsletter"
+                    },
+                    "template": {
+                        "type": "string",
+                        "example": "Hello World!",
+                        "nullable": true
+                    },
+                    "template_text": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "order": {
+                        "type": "integer",
+                        "nullable": true
+                    }
+                },
+                "type": "object",
+                "nullable": true
+            },
+            "Message": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "unique_id": {
+                        "type": "string",
+                        "example": "2df6b147-8470-45ed-8e4e-86aa01af400d"
+                    },
+                    "template": {
+                        "oneOf": [
+                            {
+                                "$ref": "#/components/schemas/Template"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "message_content": {
+                        "properties": {
+                            "subject": {
+                                "type": "string",
+                                "example": "Newsletter"
+                            },
+                            "text": {
+                                "type": "string",
+                                "example": "Hello World!"
+                            },
+                            "text_message": {
+                                "type": "string"
+                            },
+                            "footer": {
+                                "type": "string",
+                                "example": "This is a footer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message_format": {
+                        "properties": {
+                            "html_formated": {
+                                "type": "boolean"
+                            },
+                            "send_format": {
+                                "type": "string",
+                                "example": "text",
+                                "nullable": true
+                            },
+                            "as_text": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "as_html": {
+                                "type": "boolean"
+                            },
+                            "as_pdf": {
+                                "type": "boolean"
+                            },
+                            "as_text_and_html": {
+                                "type": "boolean"
+                            },
+                            "as_text_and_pdf": {
+                                "type": "boolean"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message_metadata": {
+                        "properties": {
+                            "status": {
+                                "type": "string",
+                                "example": "sent"
+                            },
+                            "processed": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "views": {
+                                "type": "integer",
+                                "example": 12
+                            },
+                            "bounce_count": {
+                                "type": "integer"
+                            },
+                            "entered": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true
+                            },
+                            "sent": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message_schedule": {
+                        "properties": {
+                            "repeat_interval": {
+                                "type": "string",
+                                "nullable": true
+                            },
+                            "repeat_until": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true
+                            },
+                            "requeue_interval": {
+                                "type": "string",
+                                "nullable": true
+                            },
+                            "requeue_until": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message_options": {
+                        "properties": {
+                            "from_field": {
+                                "type": "string",
+                                "example": " My Name <my@email.com>",
+                                "nullable": true
+                            },
+                            "to_field": {
+                                "type": "string",
+                                "example": "",
+                                "nullable": true
+                            },
+                            "reply_to": {
+                                "type": "string",
+                                "nullable": true
+                            },
+                            "embargo": {
+                                "type": "string",
+                                "example": "2023-01-01T12:00:00Z",
+                                "nullable": true
+                            },
+                            "user_selection": {
+                                "type": "string",
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
             "UnauthorizedResponse": {
                 "properties": {
                     "message": {
@@ -1178,6 +1396,10 @@
         }
     },
     "tags": [
+        {
+            "name": "campaigns",
+            "description": "campaigns"
+        },
         {
             "name": "lists",
             "description": "lists"
