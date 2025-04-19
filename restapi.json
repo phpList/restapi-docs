@@ -89,6 +89,10 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
+                                    "template_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
                                     "message_content": {
                                         "properties": {
                                             "subject": {
@@ -153,6 +157,11 @@
                                     },
                                     "message_schedule": {
                                         "properties": {
+                                            "embargo": {
+                                                "type": "string",
+                                                "format": "date-time",
+                                                "example": "2025-04-17 09:00:00"
+                                            },
                                             "repeat_interval": {
                                                 "type": "string",
                                                 "example": "24 hours"
@@ -187,10 +196,6 @@
                                             "reply_to": {
                                                 "type": "string",
                                                 "example": "reply@example.com"
-                                            },
-                                            "embargo": {
-                                                "type": "string",
-                                                "example": "2025-04-17 09:00:00"
                                             },
                                             "user_selection": {
                                                 "type": "string",
@@ -252,6 +257,15 @@
                         "name": "session",
                         "in": "header",
                         "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "messageId",
+                        "in": "path",
+                        "description": "message ID",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1549,6 +1563,11 @@
                                 "type": "string",
                                 "format": "date-time",
                                 "nullable": true
+                            },
+                            "embargo": {
+                                "type": "string",
+                                "example": "2023-01-01T12:00:00Z",
+                                "nullable": true
                             }
                         },
                         "type": "object"
@@ -1567,11 +1586,6 @@
                             },
                             "reply_to": {
                                 "type": "string",
-                                "nullable": true
-                            },
-                            "embargo": {
-                                "type": "string",
-                                "example": "2023-01-01T12:00:00Z",
                                 "nullable": true
                             },
                             "user_selection": {
