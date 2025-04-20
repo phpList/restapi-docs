@@ -420,10 +420,6 @@
                                     "public": {
                                         "type": "boolean",
                                         "example": true
-                                    },
-                                    "owner": {
-                                        "type": "number",
-                                        "example": 12
                                     }
                                 },
                                 "type": "object"
