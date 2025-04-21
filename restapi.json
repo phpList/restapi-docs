@@ -94,115 +94,19 @@
                                         "example": 1
                                     },
                                     "message_content": {
-                                        "properties": {
-                                            "subject": {
-                                                "type": "string",
-                                                "example": "Campaign Subject"
-                                            },
-                                            "text": {
-                                                "type": "string",
-                                                "example": "Full text content"
-                                            },
-                                            "text_message": {
-                                                "type": "string",
-                                                "example": "Short text message"
-                                            },
-                                            "footer": {
-                                                "type": "string",
-                                                "example": "Unsubscribe link here"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/MessageContentRequest"
                                     },
                                     "message_format": {
-                                        "properties": {
-                                            "html_formated": {
-                                                "type": "boolean",
-                                                "example": true
-                                            },
-                                            "send_format": {
-                                                "type": "string",
-                                                "enum": [
-                                                    "html",
-                                                    "text",
-                                                    "invite"
-                                                ],
-                                                "example": "html"
-                                            },
-                                            "format_options": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "string",
-                                                    "enum": [
-                                                        "text",
-                                                        "html",
-                                                        "pdf"
-                                                    ]
-                                                },
-                                                "example": [
-                                                    "html"
-                                                ]
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/MessageFormatRequest"
                                     },
                                     "message_metadata": {
-                                        "properties": {
-                                            "status": {
-                                                "type": "string",
-                                                "example": "draft"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/MessageMetadataRequest"
                                     },
                                     "message_schedule": {
-                                        "properties": {
-                                            "embargo": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2025-04-17 09:00:00"
-                                            },
-                                            "repeat_interval": {
-                                                "type": "string",
-                                                "example": "24 hours"
-                                            },
-                                            "repeat_until": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2025-04-30T00:00:00+04:00"
-                                            },
-                                            "requeue_interval": {
-                                                "type": "string",
-                                                "example": "12 hours"
-                                            },
-                                            "requeue_until": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2025-04-20T00:00:00+04:00"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/MessageScheduleRequest"
                                     },
                                     "message_options": {
-                                        "properties": {
-                                            "from_field": {
-                                                "type": "string",
-                                                "example": "info@example.com"
-                                            },
-                                            "to_field": {
-                                                "type": "string",
-                                                "example": "subscriber@example.com"
-                                            },
-                                            "reply_to": {
-                                                "type": "string",
-                                                "example": "reply@example.com"
-                                            },
-                                            "user_selection": {
-                                                "type": "string",
-                                                "example": "all-active-users"
-                                            }
-                                        },
-                                        "type": "object"
+                                        "$ref": "#/components/schemas/MessageOptionsRequest"
                                     }
                                 },
                                 "type": "object"
@@ -289,6 +193,95 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "campaigns"
+                ],
+                "summary": "Update campaign by id.",
+                "description": "Updates campaign/message by id.",
+                "operationId": "8b488555b144236663efdebe1ea71ee6",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "messageId",
+                        "in": "path",
+                        "description": "message ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update message.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "template_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "message_content": {
+                                        "$ref": "#/components/schemas/MessageContentRequest"
+                                    },
+                                    "message_format": {
+                                        "$ref": "#/components/schemas/MessageFormatRequest"
+                                    },
+                                    "message_schedule": {
+                                        "$ref": "#/components/schemas/MessageScheduleRequest"
+                                    },
+                                    "message_options": {
+                                        "$ref": "#/components/schemas/MessageOptionsRequest"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
                                 }
                             }
                         }
@@ -1327,6 +1320,153 @@
     },
     "components": {
         "schemas": {
+            "MessageContentRequest": {
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "example": "Campaign Subject"
+                    },
+                    "text": {
+                        "type": "string",
+                        "example": "Full text content"
+                    },
+                    "text_message": {
+                        "type": "string",
+                        "example": "Short text message"
+                    },
+                    "footer": {
+                        "type": "string",
+                        "example": "Unsubscribe link here"
+                    }
+                },
+                "type": "object"
+            },
+            "MessageFormatRequest": {
+                "properties": {
+                    "html_formated": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "send_format": {
+                        "type": "string",
+                        "enum": [
+                            "html",
+                            "text",
+                            "invite"
+                        ],
+                        "example": "html"
+                    },
+                    "format_options": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "text",
+                                "html",
+                                "pdf"
+                            ]
+                        },
+                        "example": [
+                            "html"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "MessageMetadataRequest": {
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "example": "draft"
+                    }
+                },
+                "type": "object"
+            },
+            "MessageScheduleRequest": {
+                "properties": {
+                    "embargo": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-17 09:00:00"
+                    },
+                    "repeat_interval": {
+                        "type": "string",
+                        "example": "24 hours"
+                    },
+                    "repeat_until": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-30T00:00:00+04:00"
+                    },
+                    "requeue_interval": {
+                        "type": "string",
+                        "example": "12 hours"
+                    },
+                    "requeue_until": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-20T00:00:00+04:00"
+                    }
+                },
+                "type": "object"
+            },
+            "MessageOptionsRequest": {
+                "properties": {
+                    "from_field": {
+                        "type": "string",
+                        "example": "info@example.com"
+                    },
+                    "to_field": {
+                        "type": "string",
+                        "example": "subscriber@example.com"
+                    },
+                    "reply_to": {
+                        "type": "string",
+                        "example": "reply@example.com"
+                    },
+                    "user_selection": {
+                        "type": "string",
+                        "example": "all-active-users"
+                    }
+                },
+                "type": "object"
+            },
+            "UnauthorizedResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "No valid session key was provided as basic auth password."
+                    }
+                },
+                "type": "object"
+            },
+            "ValidationErrorResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Some fields invalid: email, confirmed, html_email"
+                    }
+                },
+                "type": "object"
+            },
+            "BadRequestResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Invalid json format"
+                    }
+                },
+                "type": "object"
+            },
+            "AlreadyExistsResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "This resource already exists."
+                    }
+                },
+                "type": "object"
+            },
             "SubscriberList": {
                 "properties": {
                     "id": {
@@ -1590,42 +1730,6 @@
                             }
                         },
                         "type": "object"
-                    }
-                },
-                "type": "object"
-            },
-            "UnauthorizedResponse": {
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "example": "No valid session key was provided as basic auth password."
-                    }
-                },
-                "type": "object"
-            },
-            "ValidationErrorResponse": {
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "example": "Some fields invalid: email, confirmed, html_email"
-                    }
-                },
-                "type": "object"
-            },
-            "BadRequestResponse": {
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "example": "Invalid json format"
-                    }
-                },
-                "type": "object"
-            },
-            "AlreadyExistsResponse": {
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "example": "This resource already exists."
                     }
                 },
                 "type": "object"
