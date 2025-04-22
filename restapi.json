@@ -1316,6 +1316,52 @@
                     }
                 }
             }
+        },
+        "/templates": {
+            "get": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "Gets a list of all templates.",
+                "description": "Returns a JSON list of all templates.",
+                "operationId": "80405c8575b6a1c9db8619f187a6f91b",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Template"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -1557,6 +1603,47 @@
                 },
                 "type": "object"
             },
+            "TemplateImage": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 12
+                    },
+                    "template_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "mimetype": {
+                        "type": "string",
+                        "example": "image/png",
+                        "nullable": true
+                    },
+                    "filename": {
+                        "type": "string",
+                        "example": "header.png",
+                        "nullable": true
+                    },
+                    "data": {
+                        "description": "Base64-encoded image data",
+                        "type": "string",
+                        "format": "byte",
+                        "example": "iVBORw0KGgoAAAANSUhEUgAAA...",
+                        "nullable": true
+                    },
+                    "width": {
+                        "type": "integer",
+                        "example": 600,
+                        "nullable": true
+                    },
+                    "height": {
+                        "type": "integer",
+                        "example": 200,
+                        "nullable": true
+                    }
+                },
+                "type": "object",
+                "nullable": true
+            },
             "Template": {
                 "properties": {
                     "id": {
@@ -1578,6 +1665,13 @@
                     },
                     "order": {
                         "type": "integer",
+                        "nullable": true
+                    },
+                    "images": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TemplateImage"
+                        },
                         "nullable": true
                     }
                 },
@@ -1756,6 +1850,10 @@
         {
             "name": "subscriptions",
             "description": "subscriptions"
+        },
+        {
+            "name": "templates",
+            "description": "templates"
         }
     ]
 }
