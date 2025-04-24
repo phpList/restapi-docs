@@ -1362,6 +1362,58 @@
                     }
                 }
             }
+        },
+        "/templates/{templateId}": {
+            "get": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "Gets a templateI by id.",
+                "description": "Returns template by id.",
+                "operationId": "f3b8e0890ad48fbb3ef2d95416161aec",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "templateId",
+                        "in": "path",
+                        "description": "template ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Template"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
