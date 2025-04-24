@@ -88,24 +88,31 @@
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "content",
+                                    "format",
+                                    "metadata",
+                                    "schedule",
+                                    "options"
+                                ],
                                 "properties": {
                                     "template_id": {
                                         "type": "integer",
                                         "example": 1
                                     },
-                                    "message_content": {
+                                    "content": {
                                         "$ref": "#/components/schemas/MessageContentRequest"
                                     },
-                                    "message_format": {
+                                    "format": {
                                         "$ref": "#/components/schemas/MessageFormatRequest"
                                     },
-                                    "message_metadata": {
+                                    "metadata": {
                                         "$ref": "#/components/schemas/MessageMetadataRequest"
                                     },
-                                    "message_schedule": {
+                                    "schedule": {
                                         "$ref": "#/components/schemas/MessageScheduleRequest"
                                     },
-                                    "message_options": {
+                                    "options": {
                                         "$ref": "#/components/schemas/MessageOptionsRequest"
                                     }
                                 },
@@ -232,21 +239,27 @@
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "content",
+                                    "format",
+                                    "schedule",
+                                    "options"
+                                ],
                                 "properties": {
                                     "template_id": {
                                         "type": "integer",
                                         "example": 1
                                     },
-                                    "message_content": {
+                                    "content": {
                                         "$ref": "#/components/schemas/MessageContentRequest"
                                     },
-                                    "message_format": {
+                                    "format": {
                                         "$ref": "#/components/schemas/MessageFormatRequest"
                                     },
-                                    "message_schedule": {
+                                    "schedule": {
                                         "$ref": "#/components/schemas/MessageScheduleRequest"
                                     },
-                                    "message_options": {
+                                    "options": {
                                         "$ref": "#/components/schemas/MessageOptionsRequest"
                                     }
                                 },
@@ -1361,6 +1374,108 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "Create a new template.",
+                "description": "Returns a JSON response of created template.",
+                "operationId": "9d9ecb46961f9f456b093c7222c1dd5b",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass session credentials",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "Newsletter Template"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "example": "<html><body>[CONTENT]</body></html>"
+                                    },
+                                    "text": {
+                                        "type": "string",
+                                        "example": "[CONTENT]"
+                                    },
+                                    "file": {
+                                        "description": "Optional file upload for HTML content",
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "check_links": {
+                                        "description": "Check that all links have full URLs",
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "check_images": {
+                                        "description": "Check that all images have full URLs",
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "check_external_images": {
+                                        "description": "Check that all external images exist",
+                                        "type": "boolean",
+                                        "example": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Template"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/templates/{templateId}": {
@@ -1419,6 +1534,12 @@
     "components": {
         "schemas": {
             "MessageContentRequest": {
+                "required": [
+                    "subject",
+                    "text",
+                    "text_message",
+                    "footer"
+                ],
                 "properties": {
                     "subject": {
                         "type": "string",
@@ -1440,6 +1561,11 @@
                 "type": "object"
             },
             "MessageFormatRequest": {
+                "required": [
+                    "html_formated",
+                    "send_format",
+                    "format_options"
+                ],
                 "properties": {
                     "html_formated": {
                         "type": "boolean",
@@ -1481,6 +1607,9 @@
                 "type": "object"
             },
             "MessageScheduleRequest": {
+                "required": [
+                    "embargo"
+                ],
                 "properties": {
                     "embargo": {
                         "type": "string",
@@ -1509,6 +1638,9 @@
                 "type": "object"
             },
             "MessageOptionsRequest": {
+                "required": [
+                    "from_field"
+                ],
                 "properties": {
                     "from_field": {
                         "type": "string",
