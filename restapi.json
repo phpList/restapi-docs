@@ -1706,12 +1706,12 @@
                         "type": "string",
                         "example": "Newsletter"
                     },
-                    "template": {
+                    "content": {
                         "type": "string",
                         "example": "Hello World!",
                         "nullable": true
                     },
-                    "template_text": {
+                    "text": {
                         "type": "string",
                         "nullable": true
                     },
