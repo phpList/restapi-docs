@@ -795,13 +795,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "There is no session with that ID."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
                                 }
                             }
                         }
@@ -951,7 +945,14 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found"
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -1055,7 +1056,14 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found"
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -1101,7 +1109,14 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found"
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1154,6 +1169,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
                                 }
                             }
                         }
@@ -1228,6 +1253,16 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                }
+                            }
+                        }
+                    },
                     "403": {
                         "description": "Failure",
                         "content": {
@@ -1238,12 +1273,12 @@
                             }
                         }
                     },
-                    "400": {
+                    "404": {
                         "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
                                 }
                             }
                         }
@@ -1321,7 +1356,14 @@
                         }
                     },
                     "404": {
-                        "description": "Subscriber or subscription not found."
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1577,6 +1619,69 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "Deletes a template.",
+                "description": "Deletes template by id.",
+                "operationId": "b0dc1b522ff76c9a1af1e4a714f30e6d",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "templateId",
+                        "in": "path",
+                        "description": "Template ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
                                 }
                             }
                         }
