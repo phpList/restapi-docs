@@ -19,6 +19,143 @@
         }
     ],
     "paths": {
+        "/administrators": {
+            "post": {
+                "tags": [
+                    "administrators"
+                ],
+                "summary": "Create Administrator",
+                "description": "Create a new administrator.",
+                "operationId": "1013162c6a956cba858f57d66ca65043",
+                "requestBody": {
+                    "description": "Administrator data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateAdministratorRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Administrator created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateAdministratorRequest"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/administrators/{administratorId}": {
+            "get": {
+                "tags": [
+                    "administrators"
+                ],
+                "summary": "Get Administrator",
+                "description": "Get administrator by ID.",
+                "operationId": "025e7c081c2b7e0848d91e6fde8e869d",
+                "parameters": [
+                    {
+                        "name": "administratorId",
+                        "in": "path",
+                        "description": "Administrator ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Administrator found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Administrator"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Administrator not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "administrators"
+                ],
+                "summary": "Update Administrator",
+                "description": "Update an administrator.",
+                "operationId": "1de726c395eb8f1a6ea01bf610eee69b",
+                "parameters": [
+                    {
+                        "name": "administratorId",
+                        "in": "path",
+                        "description": "Administrator ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Administrator update data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateAdministratorRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Administrator updated successfully"
+                    },
+                    "404": {
+                        "description": "Administrator not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "administrators"
+                ],
+                "summary": "Delete Administrator",
+                "description": "Delete an administrator.",
+                "operationId": "d7432de5f213120f3f5b022fa9a0f596",
+                "parameters": [
+                    {
+                        "name": "administratorId",
+                        "in": "path",
+                        "description": "Administrator ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Administrator deleted successfully"
+                    },
+                    "404": {
+                        "description": "Administrator not found"
+                    }
+                }
+            }
+        },
         "/campaigns": {
             "get": {
                 "tags": [
@@ -1820,6 +1957,66 @@
                 },
                 "type": "object"
             },
+            "CreateAdministratorRequest": {
+                "required": [
+                    "login_name",
+                    "password",
+                    "email",
+                    "super_user"
+                ],
+                "properties": {
+                    "login_name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "minLength": 3,
+                        "example": "admin"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "maxLength": 255,
+                        "minLength": 6,
+                        "example": "StrongP@ssw0rd"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "admin@example.com"
+                    },
+                    "super_user": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateAdministratorRequest": {
+                "properties": {
+                    "login_name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "minLength": 3,
+                        "example": "admin"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "maxLength": 255,
+                        "minLength": 6,
+                        "example": "StrongP@ssw0rd"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "admin@example.com"
+                    },
+                    "super_user": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
             "UnauthorizedResponse": {
                 "properties": {
                     "message": {
@@ -2182,10 +2379,41 @@
                     }
                 },
                 "type": "object"
+            },
+            "Administrator": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "login_name": {
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "admin@example.com"
+                    },
+                    "super_user": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-29T12:34:56+00:00"
+                    }
+                },
+                "type": "object"
             }
         }
     },
     "tags": [
+        {
+            "name": "administrators",
+            "description": "administrators"
+        },
         {
             "name": "campaigns",
             "description": "campaigns"
