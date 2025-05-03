@@ -516,6 +516,29 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "after_id",
+                        "in": "query",
+                        "description": "Last id (starting from 0)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of results per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 25,
+                            "maximum": 100,
+                            "minimum": 1
+                        }
                     }
                 ],
                 "responses": {
@@ -524,45 +547,18 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "properties": {
-                                            "name": {
-                                                "type": "string",
-                                                "example": "News"
-                                            },
-                                            "description": {
-                                                "type": "string",
-                                                "example": "News (and some fun stuff)"
-                                            },
-                                            "creation_date": {
-                                                "type": "string",
-                                                "format": "date-time",
-                                                "example": "2016-06-22T15:01:17+00:00"
-                                            },
-                                            "list_position": {
-                                                "type": "integer",
-                                                "example": 12
-                                            },
-                                            "subject_prefix": {
-                                                "type": "string",
-                                                "example": "phpList"
-                                            },
-                                            "public": {
-                                                "type": "boolean",
-                                                "example": true
-                                            },
-                                            "category": {
-                                                "type": "string",
-                                                "example": "news"
-                                            },
-                                            "id": {
-                                                "type": "integer",
-                                                "example": 1
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SubscriberList"
                                             }
                                         },
-                                        "type": "object"
-                                    }
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/CursorPagination"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -636,17 +632,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
-                                },
-                                "example": {
-                                    "name": "News",
-                                    "description": "News (and some fun stuff)",
-                                    "creation_date": "2016-06-22T15:01:17+00:00",
-                                    "list_position": 12,
-                                    "subject_prefix": "phpList",
-                                    "public": true,
-                                    "category": "news",
-                                    "id": 1
+                                    "$ref": "#/components/schemas/SubscriberList"
                                 }
                             }
                         }
@@ -708,17 +694,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object"
-                                },
-                                "example": {
-                                    "name": "News",
-                                    "description": "News (and some fun stuff)",
-                                    "creation_date": "2016-06-22T15:01:17+00:00",
-                                    "list_position": 12,
-                                    "subject_prefix": "phpList",
-                                    "public": true,
-                                    "category": "news",
-                                    "id": 1
+                                    "$ref": "#/components/schemas/SubscriberList"
                                 }
                             }
                         }
@@ -2065,6 +2041,27 @@
                 },
                 "type": "object"
             },
+            "CursorPagination": {
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "example": 100
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "example": 25
+                    },
+                    "has_more": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "next_cursor": {
+                        "type": "integer",
+                        "example": 129
+                    }
+                },
+                "type": "object"
+            },
             "SubscriberList": {
                 "properties": {
                     "id": {
@@ -2079,7 +2076,7 @@
                         "type": "string",
                         "example": "Monthly updates"
                     },
-                    "creation_date": {
+                    "created_at": {
                         "type": "string",
                         "format": "date-time",
                         "example": "2022-12-01T10:00:00Z"
@@ -2101,7 +2098,7 @@
                         "type": "string",
                         "example": "subscriber@example.com"
                     },
-                    "creation_date": {
+                    "created_at": {
                         "type": "string",
                         "format": "date-time",
                         "example": "2023-01-01T12:00:00Z"
