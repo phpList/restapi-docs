@@ -19,6 +19,708 @@
         }
     ],
     "paths": {
+        "/administrators/attributes": {
+            "get": {
+                "tags": [
+                    "admin-attributes"
+                ],
+                "summary": "Gets a list of all DMIN attribute definitions.",
+                "description": "Returns a JSON list of all admin attribute definitions.",
+                "operationId": "ce05a304cefca567e1b71cb5c3630d01",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "after_id",
+                        "in": "query",
+                        "description": "Last id (starting from 0)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of results per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 25,
+                            "maximum": 100,
+                            "minimum": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AdminAttributeDefinition"
+                                            }
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/CursorPagination"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "admin-attributes"
+                ],
+                "summary": "Create an admin attribute definition.",
+                "description": "Returns created admin attribute definition.",
+                "operationId": "14a003143c65cefbd57f802f10784f01",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass parameters to create admin attribute.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Country"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "checkbox"
+                                    },
+                                    "order": {
+                                        "type": "number",
+                                        "example": 12
+                                    },
+                                    "default_value": {
+                                        "type": "string",
+                                        "example": "United States"
+                                    },
+                                    "required": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "table_name": {
+                                        "type": "string",
+                                        "example": "list_attributes"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminAttributeDefinition"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/administrators/attributes/{definitionId}": {
+            "get": {
+                "tags": [
+                    "admin-attributes"
+                ],
+                "summary": "Gets attribute with specified ID.",
+                "description": "Returns a single attribute with specified ID.",
+                "operationId": "f7e1e8f7e3f619a7669df05e0aa03c43",
+                "parameters": [
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "Definition ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminAttributeDefinition"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "There is no attribute with that ID."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "admin-attributes"
+                ],
+                "summary": "Update an admin attribute definition.",
+                "description": "Returns updated admin attribute definition.",
+                "operationId": "030d2e1a213e49728578ed7f7ac4efce",
+                "parameters": [
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "Definition ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass parameters to update admin attribute.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Country"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "checkbox"
+                                    },
+                                    "order": {
+                                        "type": "number",
+                                        "example": 12
+                                    },
+                                    "default_value": {
+                                        "type": "string",
+                                        "example": "United States"
+                                    },
+                                    "required": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "table_name": {
+                                        "type": "string",
+                                        "example": "list_attributes"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminAttributeDefinition"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "admin-attributes"
+                ],
+                "summary": "Deletes an attribute definition.",
+                "description": "Deletes a single admin attribute definition.",
+                "operationId": "3b0ae1565f53e2ab66e85f1c85af6d79",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "Definition ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/administrators/attribute-values/{adminId}/{definitionId}": {
+            "get": {
+                "tags": [
+                    "admin-attributes"
+                ],
+                "summary": "Gets admin attribute.",
+                "description": "Returns a single attribute.",
+                "operationId": "9b1cd3329996564658bc9e7bb8ce2037",
+                "parameters": [
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "attribute definition id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "adminId",
+                        "in": "path",
+                        "description": "Administrator id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminAttributeValue"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "There is no attribute with that ID."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "admin-attributes"
+                ],
+                "summary": "Create/update an admin attribute.",
+                "description": "Returns created/updated admin attribute.",
+                "operationId": "b64487183e6dd99e2551ced2bb247ac0",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "attribute definition id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "adminId",
+                        "in": "path",
+                        "description": "Administrator id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass parameters to create admin attribute.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "value": {
+                                        "type": "string",
+                                        "example": "United States"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminAttributeValue"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "admin-attributes"
+                ],
+                "summary": "Deletes an attribute.",
+                "description": "Deletes a single admin attribute.",
+                "operationId": "ab0043027b725b3f88e4db233998821b",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "attribute definition id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "adminId",
+                        "in": "path",
+                        "description": "Administrator id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/administrators/attribute-values/{adminId}": {
+            "get": {
+                "tags": [
+                    "admin-attributes"
+                ],
+                "summary": "Gets a list of all admin attributes.",
+                "description": "Returns a JSON list of all admin attributes.",
+                "operationId": "b1080b6b7b1ea3be2735259ec8bfe129",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "adminId",
+                        "in": "path",
+                        "description": "Administrator id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "after_id",
+                        "in": "query",
+                        "description": "Last id (starting from 0)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of results per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 25,
+                            "maximum": 100,
+                            "minimum": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AdminAttributeValue"
+                                            }
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/CursorPagination"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/administrators": {
             "get": {
                 "tags": [
@@ -26,7 +728,7 @@
                 ],
                 "summary": "Get Administrators",
                 "description": "Get list of administrators.",
-                "operationId": "7406e02f9905f1617ab10a681c21af6d",
+                "operationId": "54f61503fba250e8d628c449b60c3e1d",
                 "parameters": [
                     {
                         "name": "session",
@@ -94,7 +796,7 @@
                 ],
                 "summary": "Create Administrator",
                 "description": "Create a new administrator.",
-                "operationId": "1013162c6a956cba858f57d66ca65043",
+                "operationId": "e017d565fb2967a2213a239c87abcd1d",
                 "requestBody": {
                     "description": "Administrator data",
                     "required": true,
@@ -130,7 +832,7 @@
                 ],
                 "summary": "Get Administrator",
                 "description": "Get administrator by ID.",
-                "operationId": "025e7c081c2b7e0848d91e6fde8e869d",
+                "operationId": "62027460360cd09ca3e2d33b7ed76342",
                 "parameters": [
                     {
                         "name": "administratorId",
@@ -164,7 +866,7 @@
                 ],
                 "summary": "Update Administrator",
                 "description": "Update an administrator.",
-                "operationId": "1de726c395eb8f1a6ea01bf610eee69b",
+                "operationId": "852501e3d00643ba4eaa380a472fc505",
                 "parameters": [
                     {
                         "name": "administratorId",
@@ -202,7 +904,7 @@
                 ],
                 "summary": "Delete Administrator",
                 "description": "Delete an administrator.",
-                "operationId": "d7432de5f213120f3f5b022fa9a0f596",
+                "operationId": "9b86246d3fbaafb766f729d1553d095b",
                 "parameters": [
                     {
                         "name": "administratorId",
@@ -224,6 +926,141 @@
                 }
             }
         },
+        "/sessions": {
+            "post": {
+                "tags": [
+                    "sessions"
+                ],
+                "summary": "Log in or create new session.",
+                "description": "Given valid login data, this will generate a login token that will be valid for 1 hour.",
+                "operationId": "7b35956b20a6f1ec88f404d597e7b397",
+                "requestBody": {
+                    "description": "Pass session credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "login_name",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "login_name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "admin"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "eetIc/Gropvoc1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1234
+                                        },
+                                        "key": {
+                                            "type": "string",
+                                            "example": "2cfe100561473c6cdd99c9e2f26fa974"
+                                        },
+                                        "expiry": {
+                                            "type": "string",
+                                            "example": "2017-07-20T18:22:48+00:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{sessionId}": {
+            "delete": {
+                "tags": [
+                    "sessions"
+                ],
+                "summary": "Delete a session.",
+                "description": "Delete the session passed as a parameter.",
+                "operationId": "9d87dc3d373a03a84233dba79ee6c6b0",
+                "parameters": [
+                    {
+                        "name": "sessionId",
+                        "in": "path",
+                        "description": "Session ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/campaigns": {
             "get": {
                 "tags": [
@@ -231,7 +1068,7 @@
                 ],
                 "summary": "Gets a list of all campaigns.",
                 "description": "Returns a JSON list of all campaigns/messages.",
-                "operationId": "6a3f46e69e2963faa4a81a5dcb65a439",
+                "operationId": "bfd1698376e410375f2a75e8f80196dd",
                 "parameters": [
                     {
                         "name": "session",
@@ -306,7 +1143,7 @@
                 ],
                 "summary": "Create a message for campaign.",
                 "description": "Returns created message.",
-                "operationId": "0319d1013c704f8035533cd671a8f018",
+                "operationId": "f92d0fb311b9881aaa48199579215c64",
                 "parameters": [
                     {
                         "name": "session",
@@ -398,7 +1235,7 @@
                 ],
                 "summary": "Gets a campaign by id.",
                 "description": "Returns campaign/message by id.",
-                "operationId": "a505b5fd32721479dfb0d72198a467f8",
+                "operationId": "b0723e912c6dd8bab4671b3bd3b10834",
                 "parameters": [
                     {
                         "name": "session",
@@ -448,7 +1285,7 @@
                 ],
                 "summary": "Update campaign by id.",
                 "description": "Updates campaign/message by id.",
-                "operationId": "8b488555b144236663efdebe1ea71ee6",
+                "operationId": "7c9d30a8d09451d97787bd156e36d763",
                 "parameters": [
                     {
                         "name": "session",
@@ -543,7 +1380,7 @@
                 ],
                 "summary": "Delete campaign by id.",
                 "description": "Delete campaign/message by id.",
-                "operationId": "444811ab8b55fbdfb55fb281d02e45ef",
+                "operationId": "23d6499a0511bdd3ba59389ec9a7bdd6",
                 "parameters": [
                     {
                         "name": "session",
@@ -598,14 +1435,14 @@
                 }
             }
         },
-        "/lists": {
+        "/templates": {
             "get": {
                 "tags": [
-                    "lists"
+                    "templates"
                 ],
-                "summary": "Gets a list of all subscriber lists.",
-                "description": "Returns a JSON list of all subscriber lists.",
-                "operationId": "81c74c22179cb7ac081aa6e77b9f6631",
+                "summary": "Gets a list of all templates.",
+                "description": "Returns a JSON list of all templates.",
+                "operationId": "cca1a70af95c5b244fd05db5802cc316",
                 "parameters": [
                     {
                         "name": "session",
@@ -650,7 +1487,7 @@
                                         "items": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/SubscriberList"
+                                                "$ref": "#/components/schemas/Template"
                                             }
                                         },
                                         "pagination": {
@@ -676,11 +1513,11 @@
             },
             "post": {
                 "tags": [
-                    "lists"
+                    "templates"
                 ],
-                "summary": "Create a subscriber list.",
-                "description": "Returns created list.",
-                "operationId": "e09afbd99b3165a76c144fd324c2a626",
+                "summary": "Create a new template.",
+                "description": "Returns a JSON response of created template.",
+                "operationId": "c964380aea699a357d0540e3b7aeeb4a",
                 "parameters": [
                     {
                         "name": "session",
@@ -693,29 +1530,44 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Pass parameters to create a new subscriber list.",
+                    "description": "Pass session credentials",
                     "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "name"
+                                    "title"
                                 ],
                                 "properties": {
-                                    "name": {
+                                    "title": {
                                         "type": "string",
-                                        "format": "string",
-                                        "example": "News"
+                                        "example": "Newsletter Template"
                                     },
-                                    "description": {
+                                    "content": {
                                         "type": "string",
-                                        "example": "News (and some fun stuff)"
+                                        "example": "<html><body>[CONTENT]</body></html>"
                                     },
-                                    "list_position": {
-                                        "type": "number",
-                                        "example": 12
+                                    "text": {
+                                        "type": "string",
+                                        "example": "[CONTENT]"
                                     },
-                                    "public": {
+                                    "file": {
+                                        "description": "Optional file upload for HTML content",
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "check_links": {
+                                        "description": "Check that all links have full URLs",
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "check_images": {
+                                        "description": "Check that all images have full URLs",
+                                        "type": "boolean",
+                                        "example": false
+                                    },
+                                    "check_external_images": {
+                                        "description": "Check that all external images exist",
                                         "type": "boolean",
                                         "example": true
                                     }
@@ -731,7 +1583,10 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SubscriberList"
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Template"
+                                    }
                                 }
                             }
                         }
@@ -759,28 +1614,28 @@
                 }
             }
         },
-        "/lists/{listId}": {
+        "/templates/{templateId}": {
             "get": {
                 "tags": [
-                    "lists"
+                    "templates"
                 ],
-                "summary": "Gets a subscriber list.",
-                "description": "Returns a single subscriber list with specified ID.",
-                "operationId": "f5d26161429d82b84e1210a7e4f885f7",
+                "summary": "Gets a templateI by id.",
+                "description": "Returns template by id.",
+                "operationId": "4f30074c48686c6ff7ee73bb84aff74b",
                 "parameters": [
                     {
-                        "name": "listId",
-                        "in": "path",
-                        "description": "List ID",
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
                         "required": true,
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
-                        "name": "session",
-                        "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "name": "templateId",
+                        "in": "path",
+                        "description": "template ID",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -793,7 +1648,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/SubscriberList"
+                                    "$ref": "#/components/schemas/Template"
                                 }
                             }
                         }
@@ -813,13 +1668,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "There is no list with that ID."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
                                 }
                             }
                         }
@@ -828,11 +1677,11 @@
             },
             "delete": {
                 "tags": [
-                    "lists"
+                    "templates"
                 ],
-                "summary": "Deletes a list.",
-                "description": "Deletes a single subscriber list.",
-                "operationId": "baa72cde782863de1f53e89dfbd93e42",
+                "summary": "Deletes a template.",
+                "description": "Deletes template by id.",
+                "operationId": "d2f63db0112011300d6a8d283e1d7765",
                 "parameters": [
                     {
                         "name": "session",
@@ -844,9 +1693,9 @@
                         }
                     },
                     {
-                        "name": "listId",
+                        "name": "templateId",
                         "in": "path",
-                        "description": "List ID",
+                        "description": "Template ID",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -854,7 +1703,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "204": {
                         "description": "Success"
                     },
                     "403": {
@@ -887,7 +1736,7 @@
                 ],
                 "summary": "Gets a list of all subscribers of a subscriber list.",
                 "description": "Returns a JSON list of all subscribers for a subscriber list.",
-                "operationId": "1ed1a190b5454f9f3c6db5e9d357c8f3",
+                "operationId": "affac1e79f220de2be59726168252cfd",
                 "parameters": [
                     {
                         "name": "session",
@@ -904,7 +1753,7 @@
                         "description": "List ID",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         }
                     },
                     {
@@ -981,7 +1830,7 @@
                 ],
                 "summary": "Create subscription",
                 "description": "Subscribe subscriber to a list.",
-                "operationId": "877e873f40fb0c4c97ec3db92d90eebc",
+                "operationId": "df24f6b9a89883b6bb906292e52238cf",
                 "parameters": [
                     {
                         "name": "session",
@@ -1101,7 +1950,7 @@
                 ],
                 "summary": "Delete subscription",
                 "description": "Delete subscription.",
-                "operationId": "c6a8ef93867e2c66bb70b86aba8b1ea8",
+                "operationId": "f9b614f975fdf2438e73427a9b9a4f01",
                 "parameters": [
                     {
                         "name": "session",
@@ -1165,7 +2014,7 @@
                 ],
                 "summary": "Gets the total number of subscribers of a list",
                 "description": "Returns a count of all subscribers in a given list.",
-                "operationId": "a838fcfc6e408e735c12c3ce0418a9fc",
+                "operationId": "cb56d724ec73b7889ab67442fa25b61f",
                 "parameters": [
                     {
                         "name": "session",
@@ -1216,34 +2065,134 @@
                 }
             }
         },
-        "/sessions": {
+        "/subscriber/attributes": {
+            "get": {
+                "tags": [
+                    "subscriber-attributes"
+                ],
+                "summary": "Gets a list of all subscriber attribute definitions.",
+                "description": "Returns a JSON list of all subscriber attribute definitions.",
+                "operationId": "836e10648457b202964a1d053606db7b",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "after_id",
+                        "in": "query",
+                        "description": "Last id (starting from 0)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of results per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 25,
+                            "maximum": 100,
+                            "minimum": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/AttributeDefinition"
+                                            }
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/CursorPagination"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
-                    "sessions"
+                    "subscriber-attributes"
                 ],
-                "summary": "Log in or create new session.",
-                "description": "Given valid login data, this will generate a login token that will be valid for 1 hour.",
-                "operationId": "08336f63605d853592fc942e7c13fcd7",
+                "summary": "Create a subscriber attribute definition.",
+                "description": "Returns created subscriber attribute definition.",
+                "operationId": "33e0188e476c896f39615d4665259a42",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
-                    "description": "Pass session credentials",
+                    "description": "Pass parameters to create subscriber attribute.",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "login_name",
-                                    "password"
+                                    "name"
                                 ],
                                 "properties": {
-                                    "login_name": {
+                                    "name": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "admin"
+                                        "example": "Country"
                                     },
-                                    "password": {
+                                    "type": {
                                         "type": "string",
-                                        "format": "password",
-                                        "example": "eetIc/Gropvoc1"
+                                        "example": "checkbox"
+                                    },
+                                    "order": {
+                                        "type": "number",
+                                        "example": 12
+                                    },
+                                    "default_value": {
+                                        "type": "string",
+                                        "example": "United States"
+                                    },
+                                    "required": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "table_name": {
+                                        "type": "string",
+                                        "example": "list_attributes"
                                     }
                                 },
                                 "type": "object"
@@ -1257,36 +2206,84 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "example": 1234
-                                        },
-                                        "key": {
-                                            "type": "string",
-                                            "example": "2cfe100561473c6cdd99c9e2f26fa974"
-                                        },
-                                        "expiry": {
-                                            "type": "string",
-                                            "example": "2017-07-20T18:22:48+00:00"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/AttributeDefinition"
                                 }
                             }
                         }
                     },
-                    "400": {
+                    "403": {
                         "description": "Failure",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
                                 }
                             }
                         }
                     },
-                    "401": {
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriber/attributes/{definitionId}": {
+            "get": {
+                "tags": [
+                    "subscriber-attributes"
+                ],
+                "summary": "Gets attribute with specified ID.",
+                "description": "Returns a single attribute with specified ID.",
+                "operationId": "0dc1a6a0eb728200a1b0e646e65c0192",
+                "parameters": [
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "Definition ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AttributeDefinition"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
                         "description": "Failure",
                         "content": {
                             "application/json": {
@@ -1294,7 +2291,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Not authorized."
+                                            "example": "There is no attribute with that ID."
                                         }
                                     },
                                     "type": "object"
@@ -1303,21 +2300,129 @@
                         }
                     }
                 }
-            }
-        },
-        "/sessions/{sessionId}": {
-            "delete": {
+            },
+            "put": {
                 "tags": [
-                    "sessions"
+                    "subscriber-attributes"
                 ],
-                "summary": "Delete a session.",
-                "description": "Delete the session passed as a parameter.",
-                "operationId": "e3df844b3f4eee57da8d6ca631d95562",
+                "summary": "Update a subscriber attribute definition.",
+                "description": "Returns updated subscriber attribute definition.",
+                "operationId": "ee6c617179d82c3fee20be7684bdef01",
                 "parameters": [
                     {
-                        "name": "sessionId",
+                        "name": "definitionId",
                         "in": "path",
+                        "description": "Definition ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass parameters to update subscriber attribute.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Country"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "checkbox"
+                                    },
+                                    "order": {
+                                        "type": "number",
+                                        "example": 12
+                                    },
+                                    "default_value": {
+                                        "type": "string",
+                                        "example": "United States"
+                                    },
+                                    "required": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "table_name": {
+                                        "type": "string",
+                                        "example": "list_attributes"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AttributeDefinition"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "subscriber-attributes"
+                ],
+                "summary": "Deletes an attribute definition.",
+                "description": "Deletes a single subscriber attribute definition.",
+                "operationId": "357e449612480b2c793d264c9b762ca5",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
                         "description": "Session ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "Definition ID",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1351,6 +2456,319 @@
                 }
             }
         },
+        "/subscriber/attribute-values/{subscriberId}/{definitionId}": {
+            "post": {
+                "tags": [
+                    "subscriber-attributes"
+                ],
+                "summary": "Create/update a subscriber attribute.",
+                "description": "Returns created/updated subscriber attribute.",
+                "operationId": "6eaa4d0a145a75d7649c41ec5570d19b",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "attribute definition id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "subscriberId",
+                        "in": "path",
+                        "description": "Subscriber id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass parameters to create subscriber attribute.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "value": {
+                                        "type": "string",
+                                        "example": "United States"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SubscriberAttributeValue"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "subscriber-attributes"
+                ],
+                "summary": "Deletes an attribute.",
+                "description": "Deletes a single subscriber attribute.",
+                "operationId": "a4cfb41e412cf5edb45654d08bc253b0",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "attribute definition id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "subscriberId",
+                        "in": "path",
+                        "description": "Subscriber id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscribers/attribute-values/{subscriberId}": {
+            "get": {
+                "tags": [
+                    "subscriber-attributes"
+                ],
+                "summary": "Gets a list of all subscriber attributes.",
+                "description": "Returns a JSON list of all subscriber attributes.",
+                "operationId": "c56b129a07bb830498a2e2d9fa29c431",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "subscriberId",
+                        "in": "path",
+                        "description": "Subscriber id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "after_id",
+                        "in": "query",
+                        "description": "Last id (starting from 0)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of results per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 25,
+                            "maximum": 100,
+                            "minimum": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/SubscriberAttributeValue"
+                                            }
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/CursorPagination"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscribers/attribute-values/{subscriberId}/{definitionId}": {
+            "get": {
+                "tags": [
+                    "subscriber-attributes"
+                ],
+                "summary": "Gets subscriber attribute.",
+                "description": "Returns a single attribute.",
+                "operationId": "9331775697d9b47dd251648cfb300155",
+                "parameters": [
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "attribute definition id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "subscriberId",
+                        "in": "path",
+                        "description": "Subscriber id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SubscriberAttributeValue"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "There is no attribute with that ID."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/subscribers": {
             "post": {
                 "tags": [
@@ -1358,7 +2776,7 @@
                 ],
                 "summary": "Create a subscriber",
                 "description": "Creates a new subscriber (if there is no subscriber with the given email address yet).",
-                "operationId": "4e85ac96ab6623057c838686fa747356",
+                "operationId": "a25f07c357e91498114e83ba87b955dd",
                 "parameters": [
                     {
                         "name": "session",
@@ -1450,7 +2868,7 @@
                 ],
                 "summary": "Get a subscriber",
                 "description": "Get subscriber data by id.",
-                "operationId": "e4a8f8b93bce6d3b2a0aa018ac9d6380",
+                "operationId": "34cb6face31e89b412fd6ed399e972ca",
                 "parameters": [
                     {
                         "name": "session",
@@ -1510,7 +2928,7 @@
                 ],
                 "summary": "Update subscriber",
                 "description": "Update subscriber data by id.",
-                "operationId": "dbb055b95280a8d649d7ab6cf3caf812",
+                "operationId": "6515701f114383c7deb227d6f339ebf6",
                 "parameters": [
                     {
                         "name": "session",
@@ -1621,7 +3039,7 @@
                 ],
                 "summary": "Delete subscriber",
                 "description": "Delete subscriber by id.",
-                "operationId": "2efff15ebb752fb10a5070474157ed88",
+                "operationId": "08f2193855c51cc7c4ac57757982c900",
                 "parameters": [
                     {
                         "name": "session",
@@ -1669,14 +3087,14 @@
                 }
             }
         },
-        "/templates": {
+        "/lists": {
             "get": {
                 "tags": [
-                    "templates"
+                    "lists"
                 ],
-                "summary": "Gets a list of all templates.",
-                "description": "Returns a JSON list of all templates.",
-                "operationId": "80405c8575b6a1c9db8619f187a6f91b",
+                "summary": "Gets a list of all subscriber lists.",
+                "description": "Returns a JSON list of all subscriber lists.",
+                "operationId": "490f9c3bb23cc6f42aef9b3ec5835365",
                 "parameters": [
                     {
                         "name": "session",
@@ -1721,7 +3139,7 @@
                                         "items": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/Template"
+                                                "$ref": "#/components/schemas/SubscriberList"
                                             }
                                         },
                                         "pagination": {
@@ -1747,11 +3165,11 @@
             },
             "post": {
                 "tags": [
-                    "templates"
+                    "lists"
                 ],
-                "summary": "Create a new template.",
-                "description": "Returns a JSON response of created template.",
-                "operationId": "9d9ecb46961f9f456b093c7222c1dd5b",
+                "summary": "Create a subscriber list.",
+                "description": "Returns created list.",
+                "operationId": "000b485d89d00b8b311d77fa21c38f2c",
                 "parameters": [
                     {
                         "name": "session",
@@ -1764,49 +3182,12 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Pass session credentials",
+                    "description": "Pass parameters to create a new subscriber list.",
                     "required": true,
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
-                                "required": [
-                                    "title"
-                                ],
-                                "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "example": "Newsletter Template"
-                                    },
-                                    "content": {
-                                        "type": "string",
-                                        "example": "<html><body>[CONTENT]</body></html>"
-                                    },
-                                    "text": {
-                                        "type": "string",
-                                        "example": "[CONTENT]"
-                                    },
-                                    "file": {
-                                        "description": "Optional file upload for HTML content",
-                                        "type": "string",
-                                        "format": "binary"
-                                    },
-                                    "check_links": {
-                                        "description": "Check that all links have full URLs",
-                                        "type": "boolean",
-                                        "example": true
-                                    },
-                                    "check_images": {
-                                        "description": "Check that all images have full URLs",
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "check_external_images": {
-                                        "description": "Check that all external images exist",
-                                        "type": "boolean",
-                                        "example": true
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/CreateSubscriberListRequest"
                             }
                         }
                     }
@@ -1817,10 +3198,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Template"
-                                    }
+                                    "$ref": "#/components/schemas/SubscriberList"
                                 }
                             }
                         }
@@ -1848,28 +3226,28 @@
                 }
             }
         },
-        "/templates/{templateId}": {
+        "/lists/{listId}": {
             "get": {
                 "tags": [
-                    "templates"
+                    "lists"
                 ],
-                "summary": "Gets a templateI by id.",
-                "description": "Returns template by id.",
-                "operationId": "f3b8e0890ad48fbb3ef2d95416161aec",
+                "summary": "Gets a subscriber list.",
+                "description": "Returns a single subscriber list with specified ID.",
+                "operationId": "33dcdab5ee71974e2e5c76d2454683d4",
                 "parameters": [
                     {
-                        "name": "session",
-                        "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "name": "listId",
+                        "in": "path",
+                        "description": "List ID",
                         "required": true,
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
-                        "name": "templateId",
-                        "in": "path",
-                        "description": "template ID",
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1882,7 +3260,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Template"
+                                    "$ref": "#/components/schemas/SubscriberList"
                                 }
                             }
                         }
@@ -1902,7 +3280,13 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "There is no list with that ID."
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -1911,11 +3295,11 @@
             },
             "delete": {
                 "tags": [
-                    "templates"
+                    "lists"
                 ],
-                "summary": "Deletes a template.",
-                "description": "Deletes template by id.",
-                "operationId": "b0dc1b522ff76c9a1af1e4a714f30e6d",
+                "summary": "Deletes a list.",
+                "description": "Deletes a single subscriber list.",
+                "operationId": "a1de6ad5288afdea553e596717a1d4a6",
                 "parameters": [
                     {
                         "name": "session",
@@ -1927,9 +3311,9 @@
                         }
                     },
                     {
-                        "name": "templateId",
+                        "name": "listId",
                         "in": "path",
-                        "description": "Template ID",
+                        "description": "List ID",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1937,7 +3321,7 @@
                     }
                 ],
                 "responses": {
-                    "204": {
+                    "200": {
                         "description": "Success"
                     },
                     "403": {
@@ -1966,6 +3350,210 @@
     },
     "components": {
         "schemas": {
+            "UnauthorizedResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "No valid session key was provided as basic auth password."
+                    }
+                },
+                "type": "object"
+            },
+            "ValidationErrorResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Some fields invalid: email, confirmed, html_email"
+                    }
+                },
+                "type": "object"
+            },
+            "BadRequestResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "Invalid json format"
+                    }
+                },
+                "type": "object"
+            },
+            "AlreadyExistsResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "This resource already exists."
+                    }
+                },
+                "type": "object"
+            },
+            "NotFoundErrorResponse": {
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "There is no entity with that ID."
+                    }
+                },
+                "type": "object"
+            },
+            "CursorPagination": {
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "example": 100
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "example": 25
+                    },
+                    "has_more": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "next_cursor": {
+                        "type": "integer",
+                        "example": 129
+                    }
+                },
+                "type": "object"
+            },
+            "CreateAdministratorRequest": {
+                "required": [
+                    "login_name",
+                    "password",
+                    "email",
+                    "super_user"
+                ],
+                "properties": {
+                    "login_name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "minLength": 3,
+                        "example": "admin"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "maxLength": 255,
+                        "minLength": 6,
+                        "example": "StrongP@ssw0rd"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "admin@example.com"
+                    },
+                    "super_user": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateAdministratorRequest": {
+                "properties": {
+                    "login_name": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "minLength": 3,
+                        "example": "admin"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "maxLength": 255,
+                        "minLength": 6,
+                        "example": "StrongP@ssw0rd"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "admin@example.com"
+                    },
+                    "super_user": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "Administrator": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "login_name": {
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "admin@example.com"
+                    },
+                    "super_user": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-29T12:34:56+00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "AdminAttributeDefinition": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Country"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "checkbox"
+                    },
+                    "list_order": {
+                        "type": "integer",
+                        "example": 12
+                    },
+                    "default_value": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "table_name": {
+                        "type": "string",
+                        "example": "list_attributes"
+                    }
+                },
+                "type": "object"
+            },
+            "AdminAttributeValue": {
+                "properties": {
+                    "administrator": {
+                        "$ref": "#/components/schemas/Administrator"
+                    },
+                    "definition": {
+                        "$ref": "#/components/schemas/AttributeDefinition"
+                    },
+                    "value": {
+                        "type": "string",
+                        "example": "United States"
+                    }
+                },
+                "type": "object"
+            },
             "MessageContentRequest": {
                 "required": [
                     "subject",
@@ -2090,225 +3678,6 @@
                     "user_selection": {
                         "type": "string",
                         "example": "all-active-users"
-                    }
-                },
-                "type": "object"
-            },
-            "CreateAdministratorRequest": {
-                "required": [
-                    "login_name",
-                    "password",
-                    "email",
-                    "super_user"
-                ],
-                "properties": {
-                    "login_name": {
-                        "type": "string",
-                        "maxLength": 255,
-                        "minLength": 3,
-                        "example": "admin"
-                    },
-                    "password": {
-                        "type": "string",
-                        "format": "password",
-                        "maxLength": 255,
-                        "minLength": 6,
-                        "example": "StrongP@ssw0rd"
-                    },
-                    "email": {
-                        "type": "string",
-                        "format": "email",
-                        "example": "admin@example.com"
-                    },
-                    "super_user": {
-                        "type": "boolean",
-                        "example": false
-                    }
-                },
-                "type": "object"
-            },
-            "UpdateAdministratorRequest": {
-                "properties": {
-                    "login_name": {
-                        "type": "string",
-                        "maxLength": 255,
-                        "minLength": 3,
-                        "example": "admin"
-                    },
-                    "password": {
-                        "type": "string",
-                        "format": "password",
-                        "maxLength": 255,
-                        "minLength": 6,
-                        "example": "StrongP@ssw0rd"
-                    },
-                    "email": {
-                        "type": "string",
-                        "format": "email",
-                        "example": "admin@example.com"
-                    },
-                    "super_user": {
-                        "type": "boolean",
-                        "example": false
-                    }
-                },
-                "type": "object"
-            },
-            "UnauthorizedResponse": {
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "example": "No valid session key was provided as basic auth password."
-                    }
-                },
-                "type": "object"
-            },
-            "ValidationErrorResponse": {
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "example": "Some fields invalid: email, confirmed, html_email"
-                    }
-                },
-                "type": "object"
-            },
-            "BadRequestResponse": {
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "example": "Invalid json format"
-                    }
-                },
-                "type": "object"
-            },
-            "AlreadyExistsResponse": {
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "example": "This resource already exists."
-                    }
-                },
-                "type": "object"
-            },
-            "NotFoundErrorResponse": {
-                "required": [
-                    "message"
-                ],
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "example": "There is no entity with that ID."
-                    }
-                },
-                "type": "object"
-            },
-            "CursorPagination": {
-                "properties": {
-                    "total": {
-                        "type": "integer",
-                        "example": 100
-                    },
-                    "limit": {
-                        "type": "integer",
-                        "example": 25
-                    },
-                    "has_more": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "next_cursor": {
-                        "type": "integer",
-                        "example": 129
-                    }
-                },
-                "type": "object"
-            },
-            "SubscriberList": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 2
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "Newsletter"
-                    },
-                    "description": {
-                        "type": "string",
-                        "example": "Monthly updates"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2022-12-01T10:00:00Z"
-                    },
-                    "public": {
-                        "type": "boolean",
-                        "example": true
-                    }
-                },
-                "type": "object"
-            },
-            "Subscriber": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "email": {
-                        "type": "string",
-                        "example": "subscriber@example.com"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2023-01-01T12:00:00Z"
-                    },
-                    "confirmed": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "blacklisted": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "bounce_count": {
-                        "type": "integer",
-                        "example": 0
-                    },
-                    "unique_id": {
-                        "type": "string",
-                        "example": "69f4e92cf50eafca9627f35704f030f4"
-                    },
-                    "html_email": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "disabled": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "subscribed_lists": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/SubscriberList"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "Subscription": {
-                "properties": {
-                    "subscriber": {
-                        "$ref": "#/components/schemas/Subscriber"
-                    },
-                    "subscriber_list": {
-                        "$ref": "#/components/schemas/SubscriberList"
-                    },
-                    "subscription_date": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2023-01-01T12:00:00Z"
                     }
                 },
                 "type": "object"
@@ -2538,29 +3907,219 @@
                 },
                 "type": "object"
             },
-            "Administrator": {
+            "CreateSubscriberListRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "News"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "News (and some fun stuff)"
+                    },
+                    "list_position": {
+                        "type": "number",
+                        "example": 12
+                    },
+                    "public": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriberList": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Newsletter"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Monthly updates"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2022-12-01T10:00:00Z"
+                    },
+                    "list_position": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "subject_prefix": {
+                        "type": "string",
+                        "example": "Newsletter: "
+                    },
+                    "public": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "category": {
+                        "type": "string",
+                        "example": "News"
+                    }
+                },
+                "type": "object"
+            },
+            "Subscriber": {
                 "properties": {
                     "id": {
                         "type": "integer",
                         "example": 1
                     },
-                    "login_name": {
-                        "type": "string",
-                        "example": "admin"
-                    },
                     "email": {
                         "type": "string",
-                        "format": "email",
-                        "example": "admin@example.com"
-                    },
-                    "super_user": {
-                        "type": "boolean",
-                        "example": true
+                        "example": "subscriber@example.com"
                     },
                     "created_at": {
                         "type": "string",
                         "format": "date-time",
-                        "example": "2025-04-29T12:34:56+00:00"
+                        "example": "2023-01-01T12:00:00Z"
+                    },
+                    "confirmed": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "blacklisted": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "bounce_count": {
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "unique_id": {
+                        "type": "string",
+                        "example": "69f4e92cf50eafca9627f35704f030f4"
+                    },
+                    "html_email": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "disabled": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "subscribed_lists": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SubscriberList"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriberOnly": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "subscriber@example.com"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01T12:00:00Z"
+                    },
+                    "confirmed": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "blacklisted": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "bounce_count": {
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "unique_id": {
+                        "type": "string",
+                        "example": "69f4e92cf50eafca9627f35704f030f4"
+                    },
+                    "html_email": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "disabled": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "Subscription": {
+                "properties": {
+                    "subscriber": {
+                        "$ref": "#/components/schemas/SubscriberOnly"
+                    },
+                    "subscriber_list": {
+                        "$ref": "#/components/schemas/SubscriberList"
+                    },
+                    "subscription_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01T12:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "AttributeDefinition": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Country"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "checkbox"
+                    },
+                    "list_order": {
+                        "type": "integer",
+                        "example": 12
+                    },
+                    "default_value": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "table_name": {
+                        "type": "string",
+                        "example": "list_attributes"
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriberAttributeValue": {
+                "properties": {
+                    "subscriber": {
+                        "$ref": "#/components/schemas/Subscriber"
+                    },
+                    "definition": {
+                        "$ref": "#/components/schemas/AttributeDefinition"
+                    },
+                    "value": {
+                        "type": "string",
+                        "example": "United States"
                     }
                 },
                 "type": "object"
@@ -2569,32 +4128,40 @@
     },
     "tags": [
         {
+            "name": "admin-attributes",
+            "description": "admin-attributes"
+        },
+        {
             "name": "administrators",
             "description": "administrators"
-        },
-        {
-            "name": "campaigns",
-            "description": "campaigns"
-        },
-        {
-            "name": "lists",
-            "description": "lists"
-        },
-        {
-            "name": "subscriptions",
-            "description": "subscriptions"
         },
         {
             "name": "sessions",
             "description": "sessions"
         },
         {
-            "name": "subscribers",
-            "description": "subscribers"
+            "name": "campaigns",
+            "description": "campaigns"
         },
         {
             "name": "templates",
             "description": "templates"
+        },
+        {
+            "name": "subscriptions",
+            "description": "subscriptions"
+        },
+        {
+            "name": "subscriber-attributes",
+            "description": "subscriber-attributes"
+        },
+        {
+            "name": "subscribers",
+            "description": "subscribers"
+        },
+        {
+            "name": "lists",
+            "description": "lists"
         }
     ]
 }
