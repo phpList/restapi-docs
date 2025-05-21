@@ -24,7 +24,7 @@
                 "tags": [
                     "admin-attributes"
                 ],
-                "summary": "Gets a list of all DMIN attribute definitions.",
+                "summary": "Gets a list of all admin attribute definitions.",
                 "description": "Returns a JSON list of all admin attribute definitions.",
                 "operationId": "ce05a304cefca567e1b71cb5c3630d01",
                 "parameters": [
@@ -119,37 +119,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Country"
-                                    },
-                                    "type": {
-                                        "type": "string",
-                                        "example": "checkbox"
-                                    },
-                                    "order": {
-                                        "type": "number",
-                                        "example": 12
-                                    },
-                                    "default_value": {
-                                        "type": "string",
-                                        "example": "United States"
-                                    },
-                                    "required": {
-                                        "type": "boolean",
-                                        "example": true
-                                    },
-                                    "table_name": {
-                                        "type": "string",
-                                        "example": "list_attributes"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/CreateAdminAttributeDefinitionRequest"
                             }
                         }
                     }
@@ -288,37 +258,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Country"
-                                    },
-                                    "type": {
-                                        "type": "string",
-                                        "example": "checkbox"
-                                    },
-                                    "order": {
-                                        "type": "number",
-                                        "example": 12
-                                    },
-                                    "default_value": {
-                                        "type": "string",
-                                        "example": "United States"
-                                    },
-                                    "required": {
-                                        "type": "boolean",
-                                        "example": true
-                                    },
-                                    "table_name": {
-                                        "type": "string",
-                                        "example": "list_attributes"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/CreateAdminAttributeDefinitionRequest"
                             }
                         }
                     }
@@ -2165,37 +2105,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Country"
-                                    },
-                                    "type": {
-                                        "type": "string",
-                                        "example": "checkbox"
-                                    },
-                                    "order": {
-                                        "type": "number",
-                                        "example": 12
-                                    },
-                                    "default_value": {
-                                        "type": "string",
-                                        "example": "United States"
-                                    },
-                                    "required": {
-                                        "type": "boolean",
-                                        "example": true
-                                    },
-                                    "table_name": {
-                                        "type": "string",
-                                        "example": "list_attributes"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/CreateSubscriberAttributeDefinitionRequest"
                             }
                         }
                     }
@@ -2334,37 +2244,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "Country"
-                                    },
-                                    "type": {
-                                        "type": "string",
-                                        "example": "checkbox"
-                                    },
-                                    "order": {
-                                        "type": "number",
-                                        "example": 12
-                                    },
-                                    "default_value": {
-                                        "type": "string",
-                                        "example": "United States"
-                                    },
-                                    "required": {
-                                        "type": "boolean",
-                                        "example": true
-                                    },
-                                    "table_name": {
-                                        "type": "string",
-                                        "example": "list_attributes"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/CreateSubscriberAttributeDefinitionRequest"
                             }
                         }
                     }
@@ -2794,25 +2674,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "email"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "admin@example.com"
-                                    },
-                                    "request_confirmation": {
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "html_email": {
-                                        "type": "boolean",
-                                        "example": false
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/CreateSubscriberRequest"
                             }
                         }
                     }
@@ -2955,37 +2817,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "email"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "format": "string",
-                                        "example": "admin@example.com"
-                                    },
-                                    "confirmed": {
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "blacklisted": {
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "html_email": {
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "disabled": {
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "additional_data": {
-                                        "type": "string",
-                                        "example": "asdf"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/UpdateSubscriberRequest"
                             }
                         }
                     }
@@ -3080,6 +2912,157 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscribers/export": {
+            "get": {
+                "tags": [
+                    "subscribers"
+                ],
+                "summary": "Export subscribers",
+                "description": "Export subscribers to CSV file.",
+                "operationId": "5ba8977d33113a29d089c8eecf8cd869",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "batch_size",
+                        "in": "query",
+                        "description": "Number of subscribers to process in each batch (default: 1000)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1000
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "text/csv": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subscribers/import": {
+            "post": {
+                "tags": [
+                    "subscribers"
+                ],
+                "summary": "Import subscribers",
+                "description": "Import subscribers from CSV file.",
+                "operationId": "e370006d8ec6b1aa5b7fb65aa604d52b",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "CSV file with subscribers data",
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "request_confirmation": {
+                                        "description": "Whether to request confirmation from imported subscribers",
+                                        "type": "boolean",
+                                        "default": false
+                                    },
+                                    "html_email": {
+                                        "description": "Whether imported subscribers prefer HTML emails",
+                                        "type": "boolean",
+                                        "default": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "imported": {
+                                            "type": "integer"
+                                        },
+                                        "skipped": {
+                                            "type": "integer"
+                                        },
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
                                 }
                             }
                         }
@@ -3475,6 +3458,39 @@
                     "super_user": {
                         "type": "boolean",
                         "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "CreateAdminAttributeDefinitionRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "Country"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "checkbox"
+                    },
+                    "order": {
+                        "type": "number",
+                        "example": 12
+                    },
+                    "default_value": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "table_name": {
+                        "type": "string",
+                        "example": "list_attributes"
                     }
                 },
                 "type": "object"
@@ -3928,6 +3944,93 @@
                     "public": {
                         "type": "boolean",
                         "example": true
+                    }
+                },
+                "type": "object"
+            },
+            "CreateSubscriberAttributeDefinitionRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "Country"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "checkbox"
+                    },
+                    "order": {
+                        "type": "number",
+                        "example": 12
+                    },
+                    "default_value": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "table_name": {
+                        "type": "string",
+                        "example": "list_attributes"
+                    }
+                },
+                "type": "object"
+            },
+            "CreateSubscriberRequest": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "admin@example.com"
+                    },
+                    "request_confirmation": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "html_email": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateSubscriberRequest": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "admin@example.com"
+                    },
+                    "confirmed": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "blacklisted": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "html_email": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "disabled": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "additional_data": {
+                        "type": "string",
+                        "example": "asdf"
                     }
                 },
                 "type": "object"
