@@ -3003,15 +3003,15 @@
                                         "type": "string",
                                         "format": "binary"
                                     },
-                                    "request_confirmation": {
-                                        "description": "Whether to request confirmation from imported subscribers",
+                                    "list_id": {
+                                        "description": "List id to add imported subscribers to",
+                                        "type": "integer",
+                                        "default": null
+                                    },
+                                    "update_existing": {
+                                        "description": "Weather to update existing subscribers or not",
                                         "type": "boolean",
                                         "default": false
-                                    },
-                                    "html_email": {
-                                        "description": "Whether imported subscribers prefer HTML emails",
-                                        "type": "boolean",
-                                        "default": true
                                     }
                                 },
                                 "type": "object"
@@ -3026,9 +3026,6 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
                                         "imported": {
                                             "type": "integer"
                                         },
