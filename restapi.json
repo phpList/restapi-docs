@@ -2920,13 +2920,13 @@
             }
         },
         "/subscribers/export": {
-            "get": {
+            "post": {
                 "tags": [
                     "subscribers"
                 ],
                 "summary": "Export subscribers",
                 "description": "Export subscribers to CSV file.",
-                "operationId": "5ba8977d33113a29d089c8eecf8cd869",
+                "operationId": "e7c60458efe83e8e5ae96ecb4bf4a5b6",
                 "parameters": [
                     {
                         "name": "session",
@@ -2936,18 +2936,19 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
-                        "name": "batch_size",
-                        "in": "query",
-                        "description": "Number of subscribers to process in each batch (default: 1000)",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "default": 1000
-                        }
                     }
                 ],
+                "requestBody": {
+                    "description": "Filter parameters for subscribers to export. ",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExportSubscriberRequest"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -4028,6 +4029,56 @@
                     "additional_data": {
                         "type": "string",
                         "example": "asdf"
+                    }
+                },
+                "type": "object"
+            },
+            "ExportSubscriberRequest": {
+                "properties": {
+                    "date_type": {
+                        "description": "What date needs to be used for filtering (any, signup, changed, changelog, subscribed)",
+                        "default": "any",
+                        "enum": [
+                            "any",
+                            "signup",
+                            "changed",
+                            "changelog",
+                            "subscribed"
+                        ]
+                    },
+                    "list_id": {
+                        "description": "List ID from where to export",
+                        "type": "integer"
+                    },
+                    "date_from": {
+                        "description": "Start date for filtering (format: Y-m-d)",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "date_to": {
+                        "description": "End date for filtering (format: Y-m-d)",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "columns": {
+                        "description": "Columns to include in the export",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "default": [
+                            "id",
+                            "email",
+                            "confirmed",
+                            "blacklisted",
+                            "bounceCount",
+                            "createdAt",
+                            "updatedAt",
+                            "uniqueId",
+                            "htmlEmail",
+                            "disabled",
+                            "extraData"
+                        ]
                     }
                 },
                 "type": "object"
