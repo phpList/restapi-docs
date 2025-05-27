@@ -872,7 +872,7 @@
                     "sessions"
                 ],
                 "summary": "Log in or create new session.",
-                "description": "✅ **Status: Stable** – This method is stable and safe for production use.  Given valid login data, this will generate a login token that will be valid for 1 hour.",
+                "description": "✅ **Status: Stable** – This method is stable and safe for production use. Given valid login data, this will generate a login token that will be valid for 1 hour.",
                 "operationId": "7b35956b20a6f1ec88f404d597e7b397",
                 "requestBody": {
                     "description": "Pass session credentials",
@@ -1675,7 +1675,7 @@
                     "subscriptions"
                 ],
                 "summary": "Gets a list of all subscribers of a subscriber list.",
-                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. 🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all subscribers for a subscriber list.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all subscribers for a subscriber list.",
                 "operationId": "affac1e79f220de2be59726168252cfd",
                 "parameters": [
                     {
@@ -1953,7 +1953,7 @@
                     "subscriptions"
                 ],
                 "summary": "Gets the total number of subscribers of a list",
-                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. 🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a count of all subscribers in a given list.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a count of all subscribers in a given list.",
                 "operationId": "cb56d724ec73b7889ab67442fa25b61f",
                 "parameters": [
                     {
@@ -2655,7 +2655,7 @@
                     "subscribers"
                 ],
                 "summary": "Create a subscriber",
-                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. 🚧 **Status: Beta** – This method is under development. Avoid using in production. Creates a new subscriber (if there is no subscriber with the given email address yet).",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Creates a new subscriber (if there is no subscriber with the given email address yet).",
                 "operationId": "a25f07c357e91498114e83ba87b955dd",
                 "parameters": [
                     {
@@ -2729,7 +2729,7 @@
                     "subscribers"
                 ],
                 "summary": "Get a subscriber",
-                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. 🚧 **Status: Beta** – This method is under development. Avoid using in production. Get subscriber data by id.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Get subscriber data by id.",
                 "operationId": "34cb6face31e89b412fd6ed399e972ca",
                 "parameters": [
                     {
@@ -2789,7 +2789,7 @@
                     "subscribers"
                 ],
                 "summary": "Update subscriber",
-                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. 🚧 **Status: Beta** – This method is under development. Avoid using in production. Update subscriber data by id.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Update subscriber data by id.",
                 "operationId": "6515701f114383c7deb227d6f339ebf6",
                 "parameters": [
                     {
@@ -2870,7 +2870,7 @@
                     "subscribers"
                 ],
                 "summary": "Delete subscriber",
-                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. 🚧 **Status: Beta** – This method is under development. Avoid using in production. Delete subscriber by id.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Delete subscriber by id.",
                 "operationId": "08f2193855c51cc7c4ac57757982c900",
                 "parameters": [
                     {
@@ -2925,7 +2925,7 @@
                     "subscribers"
                 ],
                 "summary": "Export subscribers",
-                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. 🚧 **Status: Beta** – This method is under development. Avoid using in production. Export subscribers to CSV file.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Export subscribers to CSV file.",
                 "operationId": "e7c60458efe83e8e5ae96ecb4bf4a5b6",
                 "parameters": [
                     {
