@@ -3532,7 +3532,7 @@
                     },
                     "type": {
                         "type": "string",
-                        "example": "checkbox"
+                        "example": "select"
                     },
                     "list_order": {
                         "type": "integer",
@@ -3548,7 +3548,7 @@
                     },
                     "table_name": {
                         "type": "string",
-                        "example": "list_attributes"
+                        "example": "ukcounties"
                     }
                 },
                 "type": "object"
