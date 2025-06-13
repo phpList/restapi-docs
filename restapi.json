@@ -3429,6 +3429,34 @@
                     "super_user": {
                         "type": "boolean",
                         "example": false
+                    },
+                    "privileges": {
+                        "description": "Array of privileges where keys are privilege names and values are booleans",
+                        "properties": {
+                            "subscribers": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "campaigns": {
+                                "type": "boolean",
+                                "example": false
+                            },
+                            "statistics": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "settings": {
+                                "type": "boolean",
+                                "example": false
+                            }
+                        },
+                        "type": "object",
+                        "example": {
+                            "subscribers": true,
+                            "campaigns": false,
+                            "statistics": true,
+                            "settings": false
+                        }
                     }
                 },
                 "type": "object"
@@ -3456,6 +3484,34 @@
                     "super_user": {
                         "type": "boolean",
                         "example": false
+                    },
+                    "privileges": {
+                        "description": "Array of privileges where keys are privilege names and values are booleans",
+                        "properties": {
+                            "subscribers": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "campaigns": {
+                                "type": "boolean",
+                                "example": false
+                            },
+                            "statistics": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "settings": {
+                                "type": "boolean",
+                                "example": false
+                            }
+                        },
+                        "type": "object",
+                        "example": {
+                            "subscribers": true,
+                            "campaigns": false,
+                            "statistics": true,
+                            "settings": false
+                        }
                     }
                 },
                 "type": "object"
