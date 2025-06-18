@@ -1868,26 +1868,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "domains": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "domain": {
-                                                        "type": "string"
-                                                    },
-                                                    "subscribers": {
-                                                        "type": "integer"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        },
-                                        "total": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/TopDomainStats"
                                 }
                             }
                         }
@@ -1942,71 +1923,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "domains": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "domain": {
-                                                        "type": "string"
-                                                    },
-                                                    "confirmed": {
-                                                        "properties": {
-                                                            "count": {
-                                                                "type": "integer"
-                                                            },
-                                                            "percentage": {
-                                                                "type": "number",
-                                                                "format": "float"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    },
-                                                    "unconfirmed": {
-                                                        "properties": {
-                                                            "count": {
-                                                                "type": "integer"
-                                                            },
-                                                            "percentage": {
-                                                                "type": "number",
-                                                                "format": "float"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    },
-                                                    "blacklisted": {
-                                                        "properties": {
-                                                            "count": {
-                                                                "type": "integer"
-                                                            },
-                                                            "percentage": {
-                                                                "type": "number",
-                                                                "format": "float"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    },
-                                                    "total": {
-                                                        "properties": {
-                                                            "count": {
-                                                                "type": "integer"
-                                                            },
-                                                            "percentage": {
-                                                                "type": "number",
-                                                                "format": "float"
-                                                            }
-                                                        },
-                                                        "type": "object"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        },
-                                        "total": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/DetailedDomainStats"
                                 }
                             }
                         }
@@ -2062,11 +1979,11 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "localParts": {
+                                        "local_parts": {
                                             "type": "array",
                                             "items": {
                                                 "properties": {
-                                                    "localPart": {
+                                                    "local_part": {
                                                         "type": "string"
                                                     },
                                                     "count": {
@@ -4461,6 +4378,97 @@
                     "rate": {
                         "type": "number",
                         "format": "float"
+                    }
+                },
+                "type": "object",
+                "nullable": true
+            },
+            "TopDomainStats": {
+                "properties": {
+                    "domains": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "domain": {
+                                    "type": "string"
+                                },
+                                "subscribers": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "total": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "nullable": true
+            },
+            "DetailedDomainStats": {
+                "properties": {
+                    "domains": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "domain": {
+                                    "type": "string"
+                                },
+                                "confirmed": {
+                                    "properties": {
+                                        "count": {
+                                            "type": "integer"
+                                        },
+                                        "percentage": {
+                                            "type": "number",
+                                            "format": "float"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "unconfirmed": {
+                                    "properties": {
+                                        "count": {
+                                            "type": "integer"
+                                        },
+                                        "percentage": {
+                                            "type": "number",
+                                            "format": "float"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "blacklisted": {
+                                    "properties": {
+                                        "count": {
+                                            "type": "integer"
+                                        },
+                                        "percentage": {
+                                            "type": "number",
+                                            "format": "float"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "total": {
+                                    "properties": {
+                                        "count": {
+                                            "type": "integer"
+                                        },
+                                        "percentage": {
+                                            "type": "number",
+                                            "format": "float"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "total": {
+                        "type": "integer"
                     }
                 },
                 "type": "object",
