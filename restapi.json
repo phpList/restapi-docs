@@ -1978,30 +1978,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "local_parts": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "local_part": {
-                                                        "type": "string"
-                                                    },
-                                                    "count": {
-                                                        "type": "integer"
-                                                    },
-                                                    "percentage": {
-                                                        "type": "number",
-                                                        "format": "float"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        },
-                                        "total": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/LocalPartsStats"
                                 }
                             }
                         }
@@ -4462,6 +4439,33 @@
                                         }
                                     },
                                     "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "total": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "nullable": true
+            },
+            "LocalPartsStats": {
+                "properties": {
+                    "local_parts": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "local_part": {
+                                    "type": "string"
+                                },
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "percentage": {
+                                    "type": "number",
+                                    "format": "float"
                                 }
                             },
                             "type": "object"
