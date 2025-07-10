@@ -2663,14 +2663,89 @@
                 }
             }
         },
-        "/subscriber/attribute-values/{subscriberId}/{definitionId}": {
+        "/subscribers/attribute-values/{subscriberId}/{definitionId}": {
+            "get": {
+                "tags": [
+                    "subscriber-attributes"
+                ],
+                "summary": "Gets subscriber attribute.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a single attribute.",
+                "operationId": "9331775697d9b47dd251648cfb300155",
+                "parameters": [
+                    {
+                        "name": "definitionId",
+                        "in": "path",
+                        "description": "attribute definition id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "subscriberId",
+                        "in": "path",
+                        "description": "Subscriber id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SubscriberAttributeValue"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "There is no attribute with that ID."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "subscriber-attributes"
                 ],
                 "summary": "Create/update a subscriber attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns created/updated subscriber attribute.",
-                "operationId": "6eaa4d0a145a75d7649c41ec5570d19b",
+                "operationId": "2e2e50768570f012a28defd664415385",
                 "parameters": [
                     {
                         "name": "session",
@@ -2756,7 +2831,7 @@
                 ],
                 "summary": "Deletes an attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Deletes a single subscriber attribute.",
-                "operationId": "a4cfb41e412cf5edb45654d08bc253b0",
+                "operationId": "4942ec0e46932ea1c3d93bc8275b25f1",
                 "parameters": [
                     {
                         "name": "session",
@@ -2892,83 +2967,6 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/UnauthorizedResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/subscribers/attribute-values/{subscriberId}/{definitionId}": {
-            "get": {
-                "tags": [
-                    "subscriber-attributes"
-                ],
-                "summary": "Gets subscriber attribute.",
-                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a single attribute.",
-                "operationId": "9331775697d9b47dd251648cfb300155",
-                "parameters": [
-                    {
-                        "name": "definitionId",
-                        "in": "path",
-                        "description": "attribute definition id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "subscriberId",
-                        "in": "path",
-                        "description": "Subscriber id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "session",
-                        "in": "header",
-                        "description": "Session ID obtained from authentication",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/SubscriberAttributeValue"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedResponse"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Failure",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "There is no attribute with that ID."
-                                        }
-                                    },
-                                    "type": "object"
                                 }
                             }
                         }
