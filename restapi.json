@@ -1375,6 +1375,58 @@
                 }
             }
         },
+        "/campaigns/{messageId}/send": {
+            "post": {
+                "tags": [
+                    "campaigns"
+                ],
+                "summary": "Processes/sends campaign/message by id.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Processes/sends campaign/message by id.",
+                "operationId": "cf1917bb4c30cbe428af44854ca1022d",
+                "parameters": [
+                    {
+                        "name": "session",
+                        "in": "header",
+                        "description": "Session ID obtained from authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "messageId",
+                        "in": "path",
+                        "description": "message ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/templates": {
             "get": {
                 "tags": [
