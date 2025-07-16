@@ -19,19 +19,19 @@
         }
     ],
     "paths": {
-        "/administrators/attributes": {
+        "/api/v2/administrators/attributes": {
             "get": {
                 "tags": [
                     "admin-attributes"
                 ],
                 "summary": "Gets a list of all admin attribute definitions.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all admin attribute definitions.",
-                "operationId": "ce05a304cefca567e1b71cb5c3630d01",
+                "operationId": "68b7d9433a6358436de121484f402e3b",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -101,12 +101,12 @@
                 ],
                 "summary": "Create an admin attribute definition.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns created admin attribute definition.",
-                "operationId": "14a003143c65cefbd57f802f10784f01",
+                "operationId": "5bee92e632fc1245eba1d29f00558a80",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -158,14 +158,14 @@
                 }
             }
         },
-        "/administrators/attributes/{definitionId}": {
+        "/api/v2/administrators/attributes/{definitionId}": {
             "get": {
                 "tags": [
                     "admin-attributes"
                 ],
                 "summary": "Gets attribute with specified ID.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a single attribute with specified ID.",
-                "operationId": "f7e1e8f7e3f619a7669df05e0aa03c43",
+                "operationId": "9e57fc1f6a265beac32eb349f5c730f0",
                 "parameters": [
                     {
                         "name": "definitionId",
@@ -177,9 +177,9 @@
                         }
                     },
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -231,7 +231,7 @@
                 ],
                 "summary": "Update an admin attribute definition.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns updated admin attribute definition.",
-                "operationId": "030d2e1a213e49728578ed7f7ac4efce",
+                "operationId": "f9808a1d30aebafde1426e19dae9e8cf",
                 "parameters": [
                     {
                         "name": "definitionId",
@@ -243,9 +243,9 @@
                         }
                     },
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -302,12 +302,12 @@
                 ],
                 "summary": "Deletes an attribute definition.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Deletes a single admin attribute definition.",
-                "operationId": "3b0ae1565f53e2ab66e85f1c85af6d79",
+                "operationId": "5e22c902d069355dd7b6ee6fac9309af",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -350,14 +350,14 @@
                 }
             }
         },
-        "/administrators/attribute-values/{adminId}/{definitionId}": {
+        "/api/v2/administrators/attribute-values/{adminId}/{definitionId}": {
             "get": {
                 "tags": [
                     "admin-attributes"
                 ],
                 "summary": "Gets admin attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a single attribute.",
-                "operationId": "9b1cd3329996564658bc9e7bb8ce2037",
+                "operationId": "993bda3c9e739aebc4691af2f2326f6a",
                 "parameters": [
                     {
                         "name": "definitionId",
@@ -378,9 +378,9 @@
                         }
                     },
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -432,12 +432,12 @@
                 ],
                 "summary": "Create/update an admin attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns created/updated admin attribute.",
-                "operationId": "b64487183e6dd99e2551ced2bb247ac0",
+                "operationId": "675aaea8f721e9bb44ad4037a8cf2911",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -518,12 +518,12 @@
                 ],
                 "summary": "Deletes an attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Deletes a single admin attribute.",
-                "operationId": "ab0043027b725b3f88e4db233998821b",
+                "operationId": "4f76366b588001989ec8040c0335d2a4",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -575,19 +575,19 @@
                 }
             }
         },
-        "/administrators/attribute-values/{adminId}": {
+        "/api/v2/administrators/attribute-values/{adminId}": {
             "get": {
                 "tags": [
                     "admin-attributes"
                 ],
                 "summary": "Gets a list of all admin attributes.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all admin attributes.",
-                "operationId": "b1080b6b7b1ea3be2735259ec8bfe129",
+                "operationId": "3697baedcd4df34b5b8b78ef0b3238c5",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -661,19 +661,19 @@
                 }
             }
         },
-        "/administrators": {
+        "/api/v2/administrators": {
             "get": {
                 "tags": [
                     "administrators"
                 ],
                 "summary": "Get Administrators",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Get list of administrators.",
-                "operationId": "54f61503fba250e8d628c449b60c3e1d",
+                "operationId": "dfc888f94f2ce46ce7a2ae8e1d55ebbc",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -736,7 +736,18 @@
                 ],
                 "summary": "Create Administrator",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Create a new administrator.",
-                "operationId": "e017d565fb2967a2213a239c87abcd1d",
+                "operationId": "62e1c82af2ab59be7300fa99f73bc354",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "description": "Administrator data",
                     "required": true,
@@ -765,14 +776,14 @@
                 }
             }
         },
-        "/administrators/{administratorId}": {
+        "/api/v2/administrators/{administratorId}": {
             "get": {
                 "tags": [
                     "administrators"
                 ],
                 "summary": "Get Administrator",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Get administrator by ID.",
-                "operationId": "62027460360cd09ca3e2d33b7ed76342",
+                "operationId": "7b0c7aa05f2c6230af358826c3e6755a",
                 "parameters": [
                     {
                         "name": "administratorId",
@@ -781,6 +792,15 @@
                         "required": true,
                         "schema": {
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
@@ -806,7 +826,7 @@
                 ],
                 "summary": "Update Administrator",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Update an administrator.",
-                "operationId": "852501e3d00643ba4eaa380a472fc505",
+                "operationId": "08cb2e738c87f73709980cb140528918",
                 "parameters": [
                     {
                         "name": "administratorId",
@@ -815,6 +835,15 @@
                         "required": true,
                         "schema": {
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
@@ -844,7 +873,7 @@
                 ],
                 "summary": "Delete Administrator",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Delete an administrator.",
-                "operationId": "9b86246d3fbaafb766f729d1553d095b",
+                "operationId": "18f8713da580af36ce4b9909a8a1c01e",
                 "parameters": [
                     {
                         "name": "administratorId",
@@ -853,6 +882,15 @@
                         "required": true,
                         "schema": {
                             "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
                         }
                     }
                 ],
@@ -866,14 +904,14 @@
                 }
             }
         },
-        "/sessions": {
+        "/api/v2/sessions": {
             "post": {
                 "tags": [
                     "sessions"
                 ],
                 "summary": "Log in or create new session.",
                 "description": "✅ **Status: Stable** – This method is stable and safe for production use. Given valid login data, this will generate a login token that will be valid for 1 hour.",
-                "operationId": "7b35956b20a6f1ec88f404d597e7b397",
+                "operationId": "8ecb80a8846ff88c2cc875960f7268c1",
                 "requestBody": {
                     "description": "Pass session credentials",
                     "required": true,
@@ -955,19 +993,28 @@
                 }
             }
         },
-        "/sessions/{sessionId}": {
+        "/api/v2/sessions/{sessionId}": {
             "delete": {
                 "tags": [
                     "sessions"
                 ],
                 "summary": "Delete a session.",
                 "description": "✅ **Status: Stable** – This method is stable and safe for production use. Delete the session passed as a parameter.",
-                "operationId": "9d87dc3d373a03a84233dba79ee6c6b0",
+                "operationId": "a6b4f29398d881badfa190dd11326fc9",
                 "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "sessionId",
                         "in": "path",
-                        "description": "Session ID",
+                        "description": "Session id (not key as for authentication) obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1001,19 +1048,19 @@
                 }
             }
         },
-        "/campaigns": {
+        "/api/v2/campaigns": {
             "get": {
                 "tags": [
                     "campaigns"
                 ],
                 "summary": "Gets a list of all campaigns.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all campaigns/messages.",
-                "operationId": "bfd1698376e410375f2a75e8f80196dd",
+                "operationId": "ea24d861841d2dbccb639a4d2918aebc",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1083,12 +1130,12 @@
                 ],
                 "summary": "Create a message for campaign.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns created message.",
-                "operationId": "f92d0fb311b9881aaa48199579215c64",
+                "operationId": "4509477a54e9a738a3ff9ad71f8a7b00",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1168,19 +1215,19 @@
                 }
             }
         },
-        "/campaigns/{messageId}": {
+        "/api/v2/campaigns/{messageId}": {
             "get": {
                 "tags": [
                     "campaigns"
                 ],
                 "summary": "Gets a campaign by id.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns campaign/message by id.",
-                "operationId": "b0723e912c6dd8bab4671b3bd3b10834",
+                "operationId": "f1c98ff78ce3d1ce528257de4ce3da07",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1225,12 +1272,12 @@
                 ],
                 "summary": "Update campaign by id.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Updates campaign/message by id.",
-                "operationId": "7c9d30a8d09451d97787bd156e36d763",
+                "operationId": "442ec1af3bc897d7b2daf7d0013ea367",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1320,12 +1367,12 @@
                 ],
                 "summary": "Delete campaign by id.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Delete campaign/message by id.",
-                "operationId": "23d6499a0511bdd3ba59389ec9a7bdd6",
+                "operationId": "f13a1efd58d8cfb8bc67807adcec2d8e",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1375,19 +1422,19 @@
                 }
             }
         },
-        "/campaigns/{messageId}/send": {
+        "/api/v2/campaigns/{messageId}/send": {
             "post": {
                 "tags": [
                     "campaigns"
                 ],
                 "summary": "Processes/sends campaign/message by id.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Processes/sends campaign/message by id.",
-                "operationId": "cf1917bb4c30cbe428af44854ca1022d",
+                "operationId": "98fb211884bfcd9bf9206cd4d683532f",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1427,19 +1474,19 @@
                 }
             }
         },
-        "/templates": {
+        "/api/v2/templates": {
             "get": {
                 "tags": [
                     "templates"
                 ],
                 "summary": "Gets a list of all templates.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all templates.",
-                "operationId": "cca1a70af95c5b244fd05db5802cc316",
+                "operationId": "087039999e07f0b831aca77cb1f8bb1c",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1509,12 +1556,12 @@
                 ],
                 "summary": "Create a new template.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON response of created template.",
-                "operationId": "c964380aea699a357d0540e3b7aeeb4a",
+                "operationId": "1b4a0dd67dd9c65cd62ca500b7837a1d",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1606,19 +1653,19 @@
                 }
             }
         },
-        "/templates/{templateId}": {
+        "/api/v2/templates/{templateId}": {
             "get": {
                 "tags": [
                     "templates"
                 ],
                 "summary": "Gets a templateI by id.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns template by id.",
-                "operationId": "4f30074c48686c6ff7ee73bb84aff74b",
+                "operationId": "399ceead91ad931b306c585e3728027a",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1673,12 +1720,12 @@
                 ],
                 "summary": "Deletes a template.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Deletes template by id.",
-                "operationId": "d2f63db0112011300d6a8d283e1d7765",
+                "operationId": "fde16eb99758ec7a4deb05a597c25178",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1721,19 +1768,19 @@
                 }
             }
         },
-        "/analytics/campaigns": {
+        "/api/v2/analytics/campaigns": {
             "get": {
                 "tags": [
                     "analytics"
                 ],
                 "summary": "Gets campaign statistics.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns statistics overview for campaigns.",
-                "operationId": "3baa476c3823e3560207daecc233af41",
+                "operationId": "8a10d30d0e428611a077196e18382f1e",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1797,19 +1844,19 @@
                 }
             }
         },
-        "/analytics/view-opens": {
+        "/api/v2/analytics/view-opens": {
             "get": {
                 "tags": [
                     "analytics"
                 ],
                 "summary": "Gets view opens statistics.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns statistics for view opens.",
-                "operationId": "794bd50b6a684bb9a6a7890b62db9d66",
+                "operationId": "37095a7af610f1e0927dd04f772295db",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1873,19 +1920,19 @@
                 }
             }
         },
-        "/analytics/domains/top": {
+        "/api/v2/analytics/domains/top": {
             "get": {
                 "tags": [
                     "analytics"
                 ],
                 "summary": "Gets top domains statistics.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns statistics for the top domains with more than 5 subscribers.",
-                "operationId": "7cdf3160c1acc583004c9d6c4a4df2f6",
+                "operationId": "089df16cf97551967e12b2f3207f2cb3",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1938,19 +1985,19 @@
                 }
             }
         },
-        "/analytics/domains/confirmation": {
+        "/api/v2/analytics/domains/confirmation": {
             "get": {
                 "tags": [
                     "analytics"
                 ],
                 "summary": "Gets domain confirmation statistics.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns statistics for domains showing confirmation status.",
-                "operationId": "6b08051c3fdc700370a961101d222647",
+                "operationId": "8843c53978f1c83a02802678a5af54cd",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1993,19 +2040,19 @@
                 }
             }
         },
-        "/analytics/local-parts/top": {
+        "/api/v2/analytics/local-parts/top": {
             "get": {
                 "tags": [
                     "analytics"
                 ],
                 "summary": "Gets top local-parts statistics.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns statistics for the top local-parts of email addresses.",
-                "operationId": "e17c5698840d90fdf3d43afb919c2b96",
+                "operationId": "d9a575680a590b572c4607909b3cbfb0",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2048,19 +2095,19 @@
                 }
             }
         },
-        "/lists/{listId}/subscribers": {
+        "/api/v2/lists/{listId}/subscribers": {
             "get": {
                 "tags": [
                     "subscriptions"
                 ],
                 "summary": "Gets a list of all subscribers of a subscriber list.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all subscribers for a subscriber list.",
-                "operationId": "affac1e79f220de2be59726168252cfd",
+                "operationId": "a02c94c74a195fd2ad0443d9c32547d8",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2149,12 +2196,12 @@
                 ],
                 "summary": "Create subscription",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Subscribe subscriber to a list.",
-                "operationId": "df24f6b9a89883b6bb906292e52238cf",
+                "operationId": "2339631c4103a324c9938c05d00c7e31",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2269,12 +2316,12 @@
                 ],
                 "summary": "Delete subscription",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Delete subscription.",
-                "operationId": "f9b614f975fdf2438e73427a9b9a4f01",
+                "operationId": "3077470b8b4830d18ff3c14f51a5b06d",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2326,19 +2373,19 @@
                 }
             }
         },
-        "/lists/{listId}/count": {
+        "/api/v2/lists/{listId}/count": {
             "get": {
                 "tags": [
                     "subscriptions"
                 ],
                 "summary": "Gets the total number of subscribers of a list",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a count of all subscribers in a given list.",
-                "operationId": "cb56d724ec73b7889ab67442fa25b61f",
+                "operationId": "8be6d0b47d8fd6570b56c7cb3861e2ec",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2384,19 +2431,19 @@
                 }
             }
         },
-        "/subscriber/attributes": {
+        "/api/v2/subscriber/attributes": {
             "get": {
                 "tags": [
                     "subscriber-attributes"
                 ],
                 "summary": "Gets a list of all subscriber attribute definitions.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all subscriber attribute definitions.",
-                "operationId": "836e10648457b202964a1d053606db7b",
+                "operationId": "f70503d5f47cc2ab6295bd42eb856fd4",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2466,12 +2513,12 @@
                 ],
                 "summary": "Create a subscriber attribute definition.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns created subscriber attribute definition.",
-                "operationId": "33e0188e476c896f39615d4665259a42",
+                "operationId": "8fef310a07ca52eeff40b5be04390044",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2523,14 +2570,14 @@
                 }
             }
         },
-        "/subscriber/attributes/{definitionId}": {
+        "/api/v2/subscriber/attributes/{definitionId}": {
             "get": {
                 "tags": [
                     "subscriber-attributes"
                 ],
                 "summary": "Gets attribute with specified ID.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a single attribute with specified ID.",
-                "operationId": "0dc1a6a0eb728200a1b0e646e65c0192",
+                "operationId": "7849055bd039056a546715e8b52134c2",
                 "parameters": [
                     {
                         "name": "definitionId",
@@ -2542,9 +2589,9 @@
                         }
                     },
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2596,7 +2643,7 @@
                 ],
                 "summary": "Update a subscriber attribute definition.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns updated subscriber attribute definition.",
-                "operationId": "ee6c617179d82c3fee20be7684bdef01",
+                "operationId": "0bc3c67f8a9a49f80b1e207f0fe335a1",
                 "parameters": [
                     {
                         "name": "definitionId",
@@ -2608,9 +2655,9 @@
                         }
                     },
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2667,12 +2714,12 @@
                 ],
                 "summary": "Deletes an attribute definition.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Deletes a single subscriber attribute definition.",
-                "operationId": "357e449612480b2c793d264c9b762ca5",
+                "operationId": "f8140d683e9a508bb3a50042636abc0c",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2715,14 +2762,14 @@
                 }
             }
         },
-        "/subscribers/attribute-values/{subscriberId}/{definitionId}": {
+        "/api/v2/subscribers/attribute-values/{subscriberId}/{definitionId}": {
             "get": {
                 "tags": [
                     "subscriber-attributes"
                 ],
                 "summary": "Gets subscriber attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a single attribute.",
-                "operationId": "9331775697d9b47dd251648cfb300155",
+                "operationId": "8cec584aaa9a9a3bdc067a6f203d4b1b",
                 "parameters": [
                     {
                         "name": "definitionId",
@@ -2743,9 +2790,9 @@
                         }
                     },
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2797,12 +2844,12 @@
                 ],
                 "summary": "Create/update a subscriber attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns created/updated subscriber attribute.",
-                "operationId": "2e2e50768570f012a28defd664415385",
+                "operationId": "773db5461cc45db4ba539abf95ad918b",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2883,12 +2930,12 @@
                 ],
                 "summary": "Deletes an attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Deletes a single subscriber attribute.",
-                "operationId": "4942ec0e46932ea1c3d93bc8275b25f1",
+                "operationId": "7b68b308e95cad1dd0e73359cc644c52",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -2940,19 +2987,19 @@
                 }
             }
         },
-        "/subscribers/attribute-values/{subscriberId}": {
+        "/api/v2/subscribers/attribute-values/{subscriberId}": {
             "get": {
                 "tags": [
                     "subscriber-attributes"
                 ],
                 "summary": "Gets a list of all subscriber attributes.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all subscriber attributes.",
-                "operationId": "c56b129a07bb830498a2e2d9fa29c431",
+                "operationId": "0d06d25df0fa17dcbe377a32f228c796",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3026,19 +3073,19 @@
                 }
             }
         },
-        "/subscribers": {
+        "/api/v2/subscribers": {
             "post": {
                 "tags": [
                     "subscribers"
                 ],
                 "summary": "Create a subscriber",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Creates a new subscriber (if there is no subscriber with the given email address yet).",
-                "operationId": "a25f07c357e91498114e83ba87b955dd",
+                "operationId": "d3087676ec410e79550544985ec75409",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3100,19 +3147,19 @@
                 }
             }
         },
-        "/subscribers/{subscriberId}": {
+        "/api/v2/subscribers/{subscriberId}": {
             "get": {
                 "tags": [
                     "subscribers"
                 ],
                 "summary": "Get a subscriber",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Get subscriber data by id.",
-                "operationId": "34cb6face31e89b412fd6ed399e972ca",
+                "operationId": "130382f8a765154049824c4bb4b7136f",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3167,12 +3214,12 @@
                 ],
                 "summary": "Update subscriber",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Update subscriber data by id.",
-                "operationId": "6515701f114383c7deb227d6f339ebf6",
+                "operationId": "c7fd02049f53535110b7329281aefa6e",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3248,12 +3295,12 @@
                 ],
                 "summary": "Delete subscriber",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Delete subscriber by id.",
-                "operationId": "08f2193855c51cc7c4ac57757982c900",
+                "operationId": "719f3e26178ac8c7d65bcf2ff9d1d35f",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3296,19 +3343,19 @@
                 }
             }
         },
-        "/subscribers/export": {
+        "/api/v2/subscribers/export": {
             "post": {
                 "tags": [
                     "subscribers"
                 ],
                 "summary": "Export subscribers",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Export subscribers to CSV file.",
-                "operationId": "e7c60458efe83e8e5ae96ecb4bf4a5b6",
+                "operationId": "d8ec2cc2a42ae9cb888e38d504a1cab6",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3351,19 +3398,19 @@
                 }
             }
         },
-        "/subscribers/import": {
+        "/api/v2/subscribers/import": {
             "post": {
                 "tags": [
                     "subscribers"
                 ],
                 "summary": "Import subscribers",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Import subscribers from CSV file.",
-                "operationId": "e370006d8ec6b1aa5b7fb65aa604d52b",
+                "operationId": "7cd5d687b3cbe0fd9825996e1d105bcc",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3445,19 +3492,19 @@
                 }
             }
         },
-        "/lists": {
+        "/api/v2/lists": {
             "get": {
                 "tags": [
                     "lists"
                 ],
                 "summary": "Gets a list of all subscriber lists.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all subscriber lists.",
-                "operationId": "490f9c3bb23cc6f42aef9b3ec5835365",
+                "operationId": "ed0ed404ef48002705009cd8777e6b71",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3527,12 +3574,12 @@
                 ],
                 "summary": "Create a subscriber list.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns created list.",
-                "operationId": "000b485d89d00b8b311d77fa21c38f2c",
+                "operationId": "24609c8dc07b9c58de81b290481884de",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3584,14 +3631,14 @@
                 }
             }
         },
-        "/lists/{listId}": {
+        "/api/v2/lists/{listId}": {
             "get": {
                 "tags": [
                     "lists"
                 ],
                 "summary": "Gets a subscriber list.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a single subscriber list with specified ID.",
-                "operationId": "33dcdab5ee71974e2e5c76d2454683d4",
+                "operationId": "6e5f5ac3587ae710a87000c0537b0da4",
                 "parameters": [
                     {
                         "name": "listId",
@@ -3603,9 +3650,9 @@
                         }
                     },
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID obtained from authentication",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -3657,12 +3704,12 @@
                 ],
                 "summary": "Deletes a list.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Deletes a single subscriber list.",
-                "operationId": "a1de6ad5288afdea553e596717a1d4a6",
+                "operationId": "0d1c8c4721c26084c53b90e365a57a27",
                 "parameters": [
                     {
-                        "name": "session",
+                        "name": "php-auth-pw",
                         "in": "header",
-                        "description": "Session ID",
+                        "description": "Session key obtained from login",
                         "required": true,
                         "schema": {
                             "type": "string"
