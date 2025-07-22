@@ -3350,6 +3350,46 @@
                 }
             }
         },
+        "/api/v2/subscribers/confirm": {
+            "get": {
+                "tags": [
+                    "subscribers"
+                ],
+                "summary": "Confirm a subscriber by uniqueId.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production.",
+                "operationId": "1e4d7709f3d02f54a4fe6a183b253140",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "uniqueId": {
+                                        "type": "string",
+                                        "example": "e9d8c9b2e6"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Subscriber confirmed",
+                        "content": {
+                            "text/html": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Missing or invalid uniqueId"
+                    },
+                    "404": {
+                        "description": "Subscriber not found"
+                    }
+                }
+            }
+        },
         "/api/v2/subscribers/export": {
             "post": {
                 "tags": [
