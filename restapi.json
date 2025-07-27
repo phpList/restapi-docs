@@ -3350,123 +3350,42 @@
                 }
             }
         },
-        "/api/v2/subscribers/{subscriberId}/history": {
+        "/api/v2/subscribers/confirm": {
             "get": {
                 "tags": [
                     "subscribers"
                 ],
-                "summary": "Get subscriber event history",
-                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. ",
-                "operationId": "15830d2425a969a7482eefb114234d47",
-                "parameters": [
-                    {
-                        "name": "php-auth-pw",
-                        "in": "header",
-                        "description": "Session key obtained from login",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "subscriberId",
-                        "in": "path",
-                        "description": "Subscriber ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "after_id",
-                        "in": "query",
-                        "description": "Page number (pagination)",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "default": 1
-                        }
-                    },
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "description": "Max items per page",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "default": 25
-                        }
-                    },
-                    {
-                        "name": "ip",
-                        "in": "query",
-                        "description": "Filter by IP address",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "date_from",
-                        "in": "query",
-                        "description": "Filter by date (format: Y-m-d)",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "format": "date"
-                        }
-                    },
-                    {
-                        "name": "summery",
-                        "in": "query",
-                        "description": "Filter by summary text",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
+                "summary": "Confirm a subscriber by uniqueId.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production.",
+                "operationId": "1e4d7709f3d02f54a4fe6a183b253140",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "uniqueId": {
+                                        "type": "string",
+                                        "example": "e9d8c9b2e6"
+                                    }
+                                },
+                                "type": "object"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
-                        "description": "Paginated list of subscriber events",
+                        "description": "Subscriber confirmed",
                         "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "items": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/SubscriberHistory"
-                                            }
-                                        },
-                                        "pagination": {
-                                            "$ref": "#/components/schemas/CursorPagination"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
+                            "text/html": {}
                         }
                     },
-                    "403": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UnauthorizedResponse"
-                                }
-                            }
-                        }
+                    "400": {
+                        "description": "Missing or invalid uniqueId"
                     },
                     "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
-                                }
-                            }
-                        }
+                        "description": "Subscriber not found"
                     }
                 }
             }
@@ -5052,36 +4971,6 @@
                     "value": {
                         "type": "string",
                         "example": "United States"
-                    }
-                },
-                "type": "object"
-            },
-            "SubscriberHistory": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "ip": {
-                        "type": "string",
-                        "example": "127.0.0.1"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2022-12-01T10:00:00Z"
-                    },
-                    "summery": {
-                        "type": "string",
-                        "example": "Added by admin"
-                    },
-                    "detail": {
-                        "type": "string",
-                        "example": "Added with add-email on test"
-                    },
-                    "system_info": {
-                        "type": "string",
-                        "example": "HTTP_USER_AGENT = Mozilla/5.0"
                     }
                 },
                 "type": "object"
