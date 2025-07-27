@@ -911,6 +911,184 @@
                 }
             }
         },
+        "/api/v2/password-reset/request": {
+            "post": {
+                "tags": [
+                    "password-reset"
+                ],
+                "summary": "Request a password reset.",
+                "description": "Request a password reset token for an administrator account.",
+                "operationId": "7725789cb52ab5de77489011d4c43928",
+                "requestBody": {
+                    "description": "Administrator email",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "admin@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Password reset token generated"
+                    },
+                    "400": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/password-reset/validate": {
+            "post": {
+                "tags": [
+                    "password-reset"
+                ],
+                "summary": "Validate a password reset token.",
+                "description": "Validate a password reset token.",
+                "operationId": "336b157137fc4c4bd95714810f934ef8",
+                "requestBody": {
+                    "description": "Password reset token",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "example": "a1b2c3d4e5f6"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "valid": {
+                                            "type": "boolean",
+                                            "example": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/password-reset/reset": {
+            "post": {
+                "tags": [
+                    "password-reset"
+                ],
+                "summary": "Reset password with token.",
+                "description": "Reset an administrator password using a token.",
+                "operationId": "19b7cbd6a10c9636a579b35028d1b1fc",
+                "requestBody": {
+                    "description": "Password reset information",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token",
+                                    "newPassword"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "example": "a1b2c3d4e5f6"
+                                    },
+                                    "newPassword": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "newSecurePassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Password updated successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid or expired token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v2/sessions": {
             "post": {
                 "tags": [
@@ -5136,6 +5314,10 @@
         {
             "name": "administrators",
             "description": "administrators"
+        },
+        {
+            "name": "password-reset",
+            "description": "password-reset"
         },
         {
             "name": "sessions",
