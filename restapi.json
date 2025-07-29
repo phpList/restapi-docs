@@ -3788,6 +3788,9 @@
                                             "0",
                                             "1"
                                         ]
+                                    },
+                                    "skip_invalid_emails": {
+                                        "description": "Weather to skip invalid email or add with invalid_ prefix"
                                     }
                                 },
                                 "type": "object"
