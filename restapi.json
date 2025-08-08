@@ -2682,6 +2682,284 @@
                 }
             }
         },
+        "/api/v2/blacklist/check/{email}": {
+            "get": {
+                "tags": [
+                    "blacklist"
+                ],
+                "summary": "Check if email is blacklisted",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production.",
+                "operationId": "8f5aba09fc00fd3dc8cc76e65a7daf95",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "Email address to check",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "blacklisted": {
+                                            "type": "boolean"
+                                        },
+                                        "reason": {
+                                            "type": "string",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/blacklist/add": {
+            "post": {
+                "tags": [
+                    "blacklist"
+                ],
+                "summary": "Adds an email address to the blacklist.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production.",
+                "operationId": "7f78f4b5d64027dc48350d0fcaa638bb",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Email to blacklist",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "reason": {
+                                        "type": "string",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/blacklist/remove/{email}": {
+            "delete": {
+                "tags": [
+                    "blacklist"
+                ],
+                "summary": "Removes an email address from the blacklist.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production.",
+                "operationId": "38e6653f87e655e0f8f2a64eb9506f73",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "Email address to remove from blacklist",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/blacklist/info/{email}": {
+            "get": {
+                "tags": [
+                    "blacklist"
+                ],
+                "summary": "Gets detailed information about a blacklisted email.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production.",
+                "operationId": "ad7bb11ee621df03163c16daf9b7d24d",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "Email address to get information for",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "added": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "nullable": true
+                                        },
+                                        "reason": {
+                                            "type": "string",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequestResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v2/lists/{listId}/subscribers": {
             "get": {
                 "tags": [
@@ -5764,6 +6042,10 @@
         {
             "name": "analytics",
             "description": "analytics"
+        },
+        {
+            "name": "blacklist",
+            "description": "blacklist"
         },
         {
             "name": "subscriptions",
