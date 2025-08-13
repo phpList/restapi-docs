@@ -3296,6 +3296,140 @@
                 }
             }
         },
+        "/api/v2/subscribe-pages/{id}": {
+            "get": {
+                "tags": [
+                    "subscriptions"
+                ],
+                "summary": "Get subscribe page",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production.",
+                "operationId": "390db83b1de32e07d2d52b310eb0c1ea",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Subscribe page ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SubscribePage"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/subscribe-pages": {
+            "post": {
+                "tags": [
+                    "subscriptions"
+                ],
+                "summary": "Create subscribe page",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production.",
+                "operationId": "314286c5d8ef80c845f5dfd2d671bad3",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "active": {
+                                        "type": "boolean",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SubscribePage"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation failed",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v2/subscribers/attributes": {
             "get": {
                 "tags": [
@@ -6004,6 +6138,26 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2022-12-01T10:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "SubscribePage": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Subscribe to our newsletter"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "owner": {
+                        "$ref": "#/components/schemas/Administrator"
                     }
                 },
                 "type": "object"
