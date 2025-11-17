@@ -3988,14 +3988,14 @@
                 }
             }
         },
-        "/api/v2/subscribers/attributes": {
+        "/api/v2/attributes": {
             "get": {
                 "tags": [
                     "subscriber-attributes"
                 ],
                 "summary": "Gets a list of all subscriber attribute definitions.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all subscriber attribute definitions.",
-                "operationId": "6967a987ff39ddf03f3406bc68474f7a",
+                "operationId": "32f8f5612d7efb526f1aa56f194d3102",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
@@ -4070,7 +4070,7 @@
                 ],
                 "summary": "Create a subscriber attribute definition.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns created subscriber attribute definition.",
-                "operationId": "c11d004e79a0ae1798e990ed9e5e3f10",
+                "operationId": "8cf0c6bd315d14348f6fcc7733bdee5e",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
@@ -4127,14 +4127,14 @@
                 }
             }
         },
-        "/api/v2/subscribers/attributes/{definitionId}": {
+        "/api/v2/attributes/{definitionId}": {
             "get": {
                 "tags": [
                     "subscriber-attributes"
                 ],
                 "summary": "Gets attribute with specified ID.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a single attribute with specified ID.",
-                "operationId": "8c95f96db7876dc0db83c732f1ced535",
+                "operationId": "395c35f21b4e9b58cf674f2d7388fc5d",
                 "parameters": [
                     {
                         "name": "definitionId",
@@ -4200,7 +4200,7 @@
                 ],
                 "summary": "Update a subscriber attribute definition.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns updated subscriber attribute definition.",
-                "operationId": "a8db4bbd9d8fe18de78c0703f3260fe4",
+                "operationId": "6c4a7b00c41b0f4f93d434ef503bb095",
                 "parameters": [
                     {
                         "name": "definitionId",
@@ -4271,7 +4271,7 @@
                 ],
                 "summary": "Deletes an attribute definition.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Deletes a single subscriber attribute definition.",
-                "operationId": "3712009921a5b4e3807b4e1b36865637",
+                "operationId": "762041f6be129fd4436092cf05e4ade3",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
