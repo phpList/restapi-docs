@@ -4114,6 +4114,16 @@
                             }
                         }
                     },
+                    "409": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlreadyExistsResponse"
+                                }
+                            }
+                        }
+                    },
                     "422": {
                         "description": "Failure",
                         "content": {
