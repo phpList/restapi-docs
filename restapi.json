@@ -119,7 +119,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CreateAdminAttributeDefinitionRequest"
+                                "$ref": "#/components/schemas/AdminAttributeDefinitionRequest"
                             }
                         }
                     }
@@ -258,7 +258,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CreateAdminAttributeDefinitionRequest"
+                                "$ref": "#/components/schemas/AdminAttributeDefinitionRequest"
                             }
                         }
                     }
@@ -4088,7 +4088,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CreateSubscriberAttributeDefinitionRequest"
+                                "$ref": "#/components/schemas/SubscriberAttributeDefinitionRequest"
                             }
                         }
                     }
@@ -4227,7 +4227,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CreateSubscriberAttributeDefinitionRequest"
+                                "$ref": "#/components/schemas/SubscriberAttributeDefinitionRequest"
                             }
                         }
                     }
@@ -5734,7 +5734,7 @@
                 },
                 "type": "object"
             },
-            "CreateAdminAttributeDefinitionRequest": {
+            "AdminAttributeDefinitionRequest": {
                 "required": [
                     "name"
                 ],
@@ -5746,7 +5746,12 @@
                     },
                     "type": {
                         "type": "string",
-                        "example": "checkbox"
+                        "enum": [
+                            "textline",
+                            "hidden"
+                        ],
+                        "example": "hidden",
+                        "nullable": true
                     },
                     "order": {
                         "type": "number",
@@ -5759,10 +5764,6 @@
                     "required": {
                         "type": "boolean",
                         "example": true
-                    },
-                    "table_name": {
-                        "type": "string",
-                        "example": "list_attributes"
                     }
                 },
                 "type": "object"
@@ -5806,7 +5807,7 @@
                     },
                     "type": {
                         "type": "string",
-                        "example": "select"
+                        "example": "hidden"
                     },
                     "list_order": {
                         "type": "integer",
@@ -5819,10 +5820,6 @@
                     "required": {
                         "type": "boolean",
                         "example": true
-                    },
-                    "table_name": {
-                        "type": "string",
-                        "example": "ukcounties"
                     }
                 },
                 "type": "object"
@@ -6410,168 +6407,6 @@
                 "type": "object",
                 "nullable": true
             },
-            "CreateSubscriberListRequest": {
-                "required": [
-                    "name"
-                ],
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "format": "string",
-                        "example": "News"
-                    },
-                    "description": {
-                        "type": "string",
-                        "example": "News (and some fun stuff)"
-                    },
-                    "list_position": {
-                        "type": "number",
-                        "example": 12
-                    },
-                    "public": {
-                        "type": "boolean",
-                        "example": true
-                    }
-                },
-                "type": "object"
-            },
-            "CreateSubscriberAttributeDefinitionRequest": {
-                "required": [
-                    "name"
-                ],
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "format": "string",
-                        "example": "Country"
-                    },
-                    "type": {
-                        "type": "string",
-                        "example": "checkbox"
-                    },
-                    "order": {
-                        "type": "number",
-                        "example": 12
-                    },
-                    "default_value": {
-                        "type": "string",
-                        "example": "United States"
-                    },
-                    "required": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "table_name": {
-                        "type": "string",
-                        "example": "list_attributes"
-                    }
-                },
-                "type": "object"
-            },
-            "CreateSubscriberRequest": {
-                "required": [
-                    "email"
-                ],
-                "properties": {
-                    "email": {
-                        "type": "string",
-                        "format": "string",
-                        "example": "admin@example.com"
-                    },
-                    "request_confirmation": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "html_email": {
-                        "type": "boolean",
-                        "example": false
-                    }
-                },
-                "type": "object"
-            },
-            "UpdateSubscriberRequest": {
-                "required": [
-                    "email"
-                ],
-                "properties": {
-                    "email": {
-                        "type": "string",
-                        "format": "string",
-                        "example": "admin@example.com"
-                    },
-                    "confirmed": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "blacklisted": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "html_email": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "disabled": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "additional_data": {
-                        "type": "string",
-                        "example": "asdf"
-                    }
-                },
-                "type": "object"
-            },
-            "ExportSubscriberRequest": {
-                "properties": {
-                    "date_type": {
-                        "description": "What date needs to be used for filtering (any, signup, changed, changelog, subscribed)",
-                        "default": "any",
-                        "enum": [
-                            "any",
-                            "signup",
-                            "changed",
-                            "changelog",
-                            "subscribed"
-                        ]
-                    },
-                    "list_id": {
-                        "description": "List ID from where to export",
-                        "type": "integer"
-                    },
-                    "date_from": {
-                        "description": "Start date for filtering (format: Y-m-d)",
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "date_to": {
-                        "description": "End date for filtering (format: Y-m-d)",
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "columns": {
-                        "description": "Columns to include in the export",
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "default": [
-                            "id",
-                            "email",
-                            "confirmed",
-                            "blacklisted",
-                            "bounceCount",
-                            "createdAt",
-                            "updatedAt",
-                            "uniqueId",
-                            "htmlEmail",
-                            "disabled",
-                            "extraData"
-                        ]
-                    }
-                },
-                "type": "object"
-            },
             "SubscriberList": {
                 "properties": {
                     "id": {
@@ -6745,6 +6580,32 @@
                     "table_name": {
                         "type": "string",
                         "example": "list_attributes"
+                    },
+                    "options": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DynamicListAttrOption"
+                        },
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "DynamicListAttrOption": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "nullable": false
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "listorder": {
+                        "type": "integer",
+                        "example": 1,
+                        "nullable": false
                     }
                 },
                 "type": "object"
@@ -6835,6 +6696,206 @@
                     },
                     "owner": {
                         "$ref": "#/components/schemas/Administrator"
+                    }
+                },
+                "type": "object"
+            },
+            "CreateSubscriberListRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "News"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "News (and some fun stuff)"
+                    },
+                    "list_position": {
+                        "type": "number",
+                        "example": 12
+                    },
+                    "public": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "type": "object"
+            },
+            "CreateSubscriberRequest": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "admin@example.com"
+                    },
+                    "request_confirmation": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "html_email": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriberAttributeDefinitionRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Country"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "textline",
+                            "hidden",
+                            "creditcardno",
+                            "select",
+                            "date",
+                            "checkbox",
+                            "textarea",
+                            "radio",
+                            "checkboxgroup"
+                        ],
+                        "example": "checkbox",
+                        "nullable": true
+                    },
+                    "order": {
+                        "type": "integer",
+                        "example": 12,
+                        "nullable": true
+                    },
+                    "default_value": {
+                        "type": "string",
+                        "example": "United States",
+                        "nullable": true
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "options": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DynamicListAttr"
+                        },
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "DynamicListAttr": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "nullable": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "listorder": {
+                        "type": "integer",
+                        "example": 10,
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "ExportSubscriberRequest": {
+                "properties": {
+                    "date_type": {
+                        "description": "What date needs to be used for filtering (any, signup, changed, changelog, subscribed)",
+                        "default": "any",
+                        "enum": [
+                            "any",
+                            "signup",
+                            "changed",
+                            "changelog",
+                            "subscribed"
+                        ]
+                    },
+                    "list_id": {
+                        "description": "List ID from where to export",
+                        "type": "integer"
+                    },
+                    "date_from": {
+                        "description": "Start date for filtering (format: Y-m-d)",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "date_to": {
+                        "description": "End date for filtering (format: Y-m-d)",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "columns": {
+                        "description": "Columns to include in the export",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "default": [
+                            "id",
+                            "email",
+                            "confirmed",
+                            "blacklisted",
+                            "bounceCount",
+                            "createdAt",
+                            "updatedAt",
+                            "uniqueId",
+                            "htmlEmail",
+                            "disabled",
+                            "extraData"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateSubscriberRequest": {
+                "required": [
+                    "email"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "admin@example.com"
+                    },
+                    "confirmed": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "blacklisted": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "html_email": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "disabled": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "additional_data": {
+                        "type": "string",
+                        "example": "asdf"
                     }
                 },
                 "type": "object"
