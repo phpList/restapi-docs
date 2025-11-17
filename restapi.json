@@ -6602,7 +6602,7 @@
                         "type": "string",
                         "example": "United States"
                     },
-                    "listorder": {
+                    "list_order": {
                         "type": "integer",
                         "example": 1,
                         "nullable": false
@@ -6809,7 +6809,7 @@
                         "type": "string",
                         "example": "United States"
                     },
-                    "listorder": {
+                    "list_order": {
                         "type": "integer",
                         "example": 10,
                         "nullable": true
