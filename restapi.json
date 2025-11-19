@@ -5628,6 +5628,40 @@
                 },
                 "type": "object"
             },
+            "AdminAttributeDefinitionRequest": {
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "format": "string",
+                        "example": "Country"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "textline",
+                            "hidden"
+                        ],
+                        "example": "hidden",
+                        "nullable": true
+                    },
+                    "order": {
+                        "type": "number",
+                        "example": 12
+                    },
+                    "default_value": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "type": "object"
+            },
             "CreateAdministratorRequest": {
                 "required": [
                     "login_name",
@@ -5744,67 +5778,6 @@
                 },
                 "type": "object"
             },
-            "AdminAttributeDefinitionRequest": {
-                "required": [
-                    "name"
-                ],
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "format": "string",
-                        "example": "Country"
-                    },
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "textline",
-                            "hidden"
-                        ],
-                        "example": "hidden",
-                        "nullable": true
-                    },
-                    "order": {
-                        "type": "number",
-                        "example": 12
-                    },
-                    "default_value": {
-                        "type": "string",
-                        "example": "United States"
-                    },
-                    "required": {
-                        "type": "boolean",
-                        "example": true
-                    }
-                },
-                "type": "object"
-            },
-            "Administrator": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "login_name": {
-                        "type": "string",
-                        "example": "admin"
-                    },
-                    "email": {
-                        "type": "string",
-                        "format": "email",
-                        "example": "admin@example.com"
-                    },
-                    "super_user": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2025-04-29T12:34:56+00:00"
-                    }
-                },
-                "type": "object"
-            },
             "AdminAttributeDefinition": {
                 "properties": {
                     "id": {
@@ -5845,6 +5818,33 @@
                     "value": {
                         "type": "string",
                         "example": "United States"
+                    }
+                },
+                "type": "object"
+            },
+            "Administrator": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "login_name": {
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "admin@example.com"
+                    },
+                    "super_user": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-04-29T12:34:56+00:00"
                     }
                 },
                 "type": "object"
@@ -5922,6 +5922,30 @@
                 },
                 "type": "object"
             },
+            "MessageOptionsRequest": {
+                "required": [
+                    "from_field"
+                ],
+                "properties": {
+                    "from_field": {
+                        "type": "string",
+                        "example": "info@example.com"
+                    },
+                    "to_field": {
+                        "type": "string",
+                        "example": "subscriber@example.com"
+                    },
+                    "reply_to": {
+                        "type": "string",
+                        "example": "reply@example.com"
+                    },
+                    "user_selection": {
+                        "type": "string",
+                        "example": "all-active-users"
+                    }
+                },
+                "type": "object"
+            },
             "MessageScheduleRequest": {
                 "required": [
                     "embargo"
@@ -5953,104 +5977,77 @@
                 },
                 "type": "object"
             },
-            "MessageOptionsRequest": {
-                "required": [
-                    "from_field"
-                ],
+            "BounceRegex": {
                 "properties": {
-                    "from_field": {
-                        "type": "string",
-                        "example": "info@example.com"
+                    "id": {
+                        "type": "integer",
+                        "example": 10
                     },
-                    "to_field": {
+                    "regex": {
                         "type": "string",
-                        "example": "subscriber@example.com"
+                        "example": "/mailbox is full/i"
                     },
-                    "reply_to": {
+                    "regex_hash": {
                         "type": "string",
-                        "example": "reply@example.com"
+                        "example": "d41d8cd98f00b204e9800998ecf8427e"
                     },
-                    "user_selection": {
+                    "action": {
                         "type": "string",
-                        "example": "all-active-users"
+                        "example": "delete",
+                        "nullable": true
+                    },
+                    "list_order": {
+                        "type": "integer",
+                        "example": 0,
+                        "nullable": true
+                    },
+                    "admin_id": {
+                        "type": "integer",
+                        "example": 1,
+                        "nullable": true
+                    },
+                    "comment": {
+                        "type": "string",
+                        "example": "Auto-generated rule",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "active",
+                        "nullable": true
+                    },
+                    "count": {
+                        "type": "integer",
+                        "example": 5,
+                        "nullable": true
                     }
                 },
                 "type": "object"
             },
-            "TemplateImage": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 12
-                    },
-                    "template_id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "mimetype": {
-                        "type": "string",
-                        "example": "image/png",
-                        "nullable": true
-                    },
-                    "filename": {
-                        "type": "string",
-                        "example": "header.png",
-                        "nullable": true
-                    },
-                    "data": {
-                        "description": "Base64-encoded image data",
-                        "type": "string",
-                        "format": "byte",
-                        "example": "iVBORw0KGgoAAAANSUhEUgAAA...",
-                        "nullable": true
-                    },
-                    "width": {
-                        "type": "integer",
-                        "example": 600,
-                        "nullable": true
-                    },
-                    "height": {
-                        "type": "integer",
-                        "example": 200,
-                        "nullable": true
-                    }
-                },
-                "type": "object",
-                "nullable": true
-            },
-            "Template": {
+            "ListMessage": {
                 "properties": {
                     "id": {
                         "type": "integer",
                         "example": 1
                     },
-                    "title": {
+                    "message": {
+                        "$ref": "#/components/schemas/Message"
+                    },
+                    "subscriber_list": {
+                        "$ref": "#/components/schemas/SubscriberList"
+                    },
+                    "created_at": {
                         "type": "string",
-                        "example": "Newsletter"
+                        "format": "date-time",
+                        "example": "2022-12-01T10:00:00Z"
                     },
-                    "content": {
+                    "updated_at": {
                         "type": "string",
-                        "example": "Hello World!",
-                        "nullable": true
-                    },
-                    "text": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "order": {
-                        "type": "integer",
-                        "nullable": true
-                    },
-                    "images": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TemplateImage"
-                        },
-                        "nullable": true
+                        "format": "date-time",
+                        "example": "2022-12-01T10:00:00Z"
                     }
                 },
-                "type": "object",
-                "nullable": true
+                "type": "object"
             },
             "Message": {
                 "properties": {
@@ -6196,127 +6193,76 @@
                 },
                 "type": "object"
             },
-            "BounceRegex": {
+            "TemplateImage": {
                 "properties": {
                     "id": {
                         "type": "integer",
-                        "example": 10
+                        "example": 12
                     },
-                    "regex": {
-                        "type": "string",
-                        "example": "/mailbox is full/i"
-                    },
-                    "regex_hash": {
-                        "type": "string",
-                        "example": "d41d8cd98f00b204e9800998ecf8427e"
-                    },
-                    "action": {
-                        "type": "string",
-                        "example": "delete",
-                        "nullable": true
-                    },
-                    "list_order": {
+                    "template_id": {
                         "type": "integer",
-                        "example": 0,
+                        "example": 1
+                    },
+                    "mimetype": {
+                        "type": "string",
+                        "example": "image/png",
                         "nullable": true
                     },
-                    "admin_id": {
+                    "filename": {
+                        "type": "string",
+                        "example": "header.png",
+                        "nullable": true
+                    },
+                    "data": {
+                        "description": "Base64-encoded image data",
+                        "type": "string",
+                        "format": "byte",
+                        "example": "iVBORw0KGgoAAAANSUhEUgAAA...",
+                        "nullable": true
+                    },
+                    "width": {
                         "type": "integer",
-                        "example": 1,
+                        "example": 600,
                         "nullable": true
                     },
-                    "comment": {
-                        "type": "string",
-                        "example": "Auto-generated rule",
-                        "nullable": true
-                    },
-                    "status": {
-                        "type": "string",
-                        "example": "active",
-                        "nullable": true
-                    },
-                    "count": {
+                    "height": {
                         "type": "integer",
-                        "example": 5,
+                        "example": 200,
                         "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "CampaignStatistics": {
-                "properties": {
-                    "campaign_id": {
-                        "type": "integer"
-                    },
-                    "subject": {
-                        "type": "string"
-                    },
-                    "date_sent": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "sent": {
-                        "type": "integer"
-                    },
-                    "bounces": {
-                        "type": "integer"
-                    },
-                    "forwards": {
-                        "type": "integer"
-                    },
-                    "unique_views": {
-                        "type": "integer"
-                    },
-                    "total_clicks": {
-                        "type": "integer"
-                    },
-                    "unique_clicks": {
-                        "type": "integer"
                     }
                 },
                 "type": "object",
                 "nullable": true
             },
-            "ViewOpensStatistics": {
+            "Template": {
                 "properties": {
-                    "campaign_id": {
-                        "type": "integer"
+                    "id": {
+                        "type": "integer",
+                        "example": 1
                     },
-                    "subject": {
-                        "type": "string"
+                    "title": {
+                        "type": "string",
+                        "example": "Newsletter"
                     },
-                    "sent": {
-                        "type": "integer"
+                    "content": {
+                        "type": "string",
+                        "example": "Hello World!",
+                        "nullable": true
                     },
-                    "unique_views": {
-                        "type": "integer"
+                    "text": {
+                        "type": "string",
+                        "nullable": true
                     },
-                    "rate": {
-                        "type": "number",
-                        "format": "float"
-                    }
-                },
-                "type": "object",
-                "nullable": true
-            },
-            "TopDomainStats": {
-                "properties": {
-                    "domains": {
+                    "order": {
+                        "type": "integer",
+                        "nullable": true
+                    },
+                    "images": {
                         "type": "array",
                         "items": {
-                            "properties": {
-                                "domain": {
-                                    "type": "string"
-                                },
-                                "subscribers": {
-                                    "type": "integer"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    },
-                    "total": {
-                        "type": "integer"
+                            "$ref": "#/components/schemas/TemplateImage"
+                        },
+                        "nullable": true
                     }
                 },
                 "type": "object",
@@ -6329,6 +6275,7 @@
                         "items": {
                             "properties": {
                                 "domain": {
+                                    "description": "This bundle provides the REST API for phpList.",
                                     "type": "string"
                                 },
                                 "confirmed": {
@@ -6390,6 +6337,63 @@
                 "type": "object",
                 "nullable": true
             },
+            "CampaignStatistics": {
+                "properties": {
+                    "campaign_id": {
+                        "type": "integer"
+                    },
+                    "subject": {
+                        "type": "string"
+                    },
+                    "date_sent": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "sent": {
+                        "type": "integer"
+                    },
+                    "bounces": {
+                        "type": "integer"
+                    },
+                    "forwards": {
+                        "type": "integer"
+                    },
+                    "unique_views": {
+                        "type": "integer"
+                    },
+                    "total_clicks": {
+                        "type": "integer"
+                    },
+                    "unique_clicks": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "nullable": true
+            },
+            "TopDomainStats": {
+                "properties": {
+                    "domains": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "domain": {
+                                    "type": "string"
+                                },
+                                "subscribers": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "total": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "nullable": true
+            },
             "LocalPartsStats": {
                 "properties": {
                     "local_parts": {
@@ -6417,298 +6421,27 @@
                 "type": "object",
                 "nullable": true
             },
-            "SubscriberList": {
+            "ViewOpensStatistics": {
                 "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 2
+                    "campaign_id": {
+                        "type": "integer"
                     },
-                    "name": {
-                        "type": "string",
-                        "example": "Newsletter"
+                    "subject": {
+                        "type": "string"
                     },
-                    "description": {
-                        "type": "string",
-                        "example": "Monthly updates"
+                    "sent": {
+                        "type": "integer"
                     },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2022-12-01T10:00:00Z"
+                    "unique_views": {
+                        "type": "integer"
                     },
-                    "list_position": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "subject_prefix": {
-                        "type": "string",
-                        "example": "Newsletter: "
-                    },
-                    "public": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "category": {
-                        "type": "string",
-                        "example": "News"
+                    "rate": {
+                        "type": "number",
+                        "format": "float"
                     }
                 },
-                "type": "object"
-            },
-            "Subscriber": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "email": {
-                        "type": "string",
-                        "example": "subscriber@example.com"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2023-01-01T12:00:00Z"
-                    },
-                    "confirmed": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "blacklisted": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "bounce_count": {
-                        "type": "integer",
-                        "example": 0
-                    },
-                    "unique_id": {
-                        "type": "string",
-                        "example": "69f4e92cf50eafca9627f35704f030f4"
-                    },
-                    "html_email": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "disabled": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "subscribed_lists": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/SubscriberList"
-                        }
-                    }
-                },
-                "type": "object"
-            },
-            "SubscriberOnly": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "email": {
-                        "type": "string",
-                        "example": "subscriber@example.com"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2023-01-01T12:00:00Z"
-                    },
-                    "confirmed": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "blacklisted": {
-                        "type": "boolean",
-                        "example": false
-                    },
-                    "bounce_count": {
-                        "type": "integer",
-                        "example": 0
-                    },
-                    "unique_id": {
-                        "type": "string",
-                        "example": "69f4e92cf50eafca9627f35704f030f4"
-                    },
-                    "html_email": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "disabled": {
-                        "type": "boolean",
-                        "example": false
-                    }
-                },
-                "type": "object"
-            },
-            "Subscription": {
-                "properties": {
-                    "subscriber": {
-                        "$ref": "#/components/schemas/SubscriberOnly"
-                    },
-                    "subscriber_list": {
-                        "$ref": "#/components/schemas/SubscriberList"
-                    },
-                    "subscription_date": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2023-01-01T12:00:00Z"
-                    }
-                },
-                "type": "object"
-            },
-            "AttributeDefinition": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "Country"
-                    },
-                    "type": {
-                        "type": "string",
-                        "example": "checkbox"
-                    },
-                    "list_order": {
-                        "type": "integer",
-                        "example": 12
-                    },
-                    "default_value": {
-                        "type": "string",
-                        "example": "United States"
-                    },
-                    "required": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "table_name": {
-                        "type": "string",
-                        "example": "list_attributes"
-                    },
-                    "options": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DynamicListAttrOption"
-                        },
-                        "nullable": true
-                    }
-                },
-                "type": "object"
-            },
-            "DynamicListAttrOption": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1,
-                        "nullable": false
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "United States"
-                    },
-                    "list_order": {
-                        "type": "integer",
-                        "example": 1,
-                        "nullable": false
-                    }
-                },
-                "type": "object"
-            },
-            "SubscriberAttributeValue": {
-                "properties": {
-                    "subscriber": {
-                        "$ref": "#/components/schemas/Subscriber"
-                    },
-                    "definition": {
-                        "$ref": "#/components/schemas/AttributeDefinition"
-                    },
-                    "value": {
-                        "type": "string",
-                        "example": "United States"
-                    }
-                },
-                "type": "object"
-            },
-            "SubscriberHistory": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "ip": {
-                        "type": "string",
-                        "example": "127.0.0.1"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2022-12-01T10:00:00Z"
-                    },
-                    "summery": {
-                        "type": "string",
-                        "example": "Added by admin"
-                    },
-                    "detail": {
-                        "type": "string",
-                        "example": "Added with add-email on test"
-                    },
-                    "system_info": {
-                        "type": "string",
-                        "example": "HTTP_USER_AGENT = Mozilla/5.0"
-                    }
-                },
-                "type": "object"
-            },
-            "ListMessage": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "message": {
-                        "$ref": "#/components/schemas/Message"
-                    },
-                    "subscriber_list": {
-                        "$ref": "#/components/schemas/SubscriberList"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2022-12-01T10:00:00Z"
-                    },
-                    "updated_at": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2022-12-01T10:00:00Z"
-                    }
-                },
-                "type": "object"
-            },
-            "SubscribePage": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "title": {
-                        "type": "string",
-                        "example": "Subscribe to our newsletter"
-                    },
-                    "active": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "owner": {
-                        "$ref": "#/components/schemas/Administrator"
-                    }
-                },
-                "type": "object"
+                "type": "object",
+                "nullable": true
             },
             "CreateSubscriberListRequest": {
                 "required": [
@@ -6906,6 +6639,274 @@
                     "additional_data": {
                         "type": "string",
                         "example": "asdf"
+                    }
+                },
+                "type": "object"
+            },
+            "AttributeDefinition": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Country"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "checkbox"
+                    },
+                    "list_order": {
+                        "type": "integer",
+                        "example": 12
+                    },
+                    "default_value": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "required": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "table_name": {
+                        "type": "string",
+                        "example": "list_attributes"
+                    },
+                    "options": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DynamicListAttrOption"
+                        },
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "DynamicListAttrOption": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1,
+                        "nullable": false
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "United States"
+                    },
+                    "list_order": {
+                        "type": "integer",
+                        "example": 1,
+                        "nullable": false
+                    }
+                },
+                "type": "object"
+            },
+            "SubscribePage": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Subscribe to our newsletter"
+                    },
+                    "active": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "owner": {
+                        "$ref": "#/components/schemas/Administrator"
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriberAttributeValue": {
+                "properties": {
+                    "subscriber": {
+                        "$ref": "#/components/schemas/Subscriber"
+                    },
+                    "definition": {
+                        "$ref": "#/components/schemas/AttributeDefinition"
+                    },
+                    "value": {
+                        "type": "string",
+                        "example": "United States"
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriberHistory": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "ip": {
+                        "type": "string",
+                        "example": "127.0.0.1"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2022-12-01T10:00:00Z"
+                    },
+                    "summery": {
+                        "type": "string",
+                        "example": "Added by admin"
+                    },
+                    "detail": {
+                        "type": "string",
+                        "example": "Added with add-email on test"
+                    },
+                    "system_info": {
+                        "type": "string",
+                        "example": "HTTP_USER_AGENT = Mozilla/5.0"
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriberList": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Newsletter"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Monthly updates"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2022-12-01T10:00:00Z"
+                    },
+                    "list_position": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "subject_prefix": {
+                        "type": "string",
+                        "example": "Newsletter: "
+                    },
+                    "public": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "category": {
+                        "type": "string",
+                        "example": "News"
+                    }
+                },
+                "type": "object"
+            },
+            "Subscriber": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "subscriber@example.com"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01T12:00:00Z"
+                    },
+                    "confirmed": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "blacklisted": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "bounce_count": {
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "unique_id": {
+                        "type": "string",
+                        "example": "69f4e92cf50eafca9627f35704f030f4"
+                    },
+                    "html_email": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "disabled": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "subscribed_lists": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SubscriberList"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriberOnly": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "subscriber@example.com"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01T12:00:00Z"
+                    },
+                    "confirmed": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "blacklisted": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "bounce_count": {
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "unique_id": {
+                        "type": "string",
+                        "example": "69f4e92cf50eafca9627f35704f030f4"
+                    },
+                    "html_email": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "disabled": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                },
+                "type": "object"
+            },
+            "Subscription": {
+                "properties": {
+                    "subscriber": {
+                        "$ref": "#/components/schemas/SubscriberOnly"
+                    },
+                    "subscriber_list": {
+                        "$ref": "#/components/schemas/SubscriberList"
+                    },
+                    "subscription_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01T12:00:00Z"
                     }
                 },
                 "type": "object"
