@@ -4329,14 +4329,14 @@
                 }
             }
         },
-        "/api/v2/subscribers/attribute-values/{subscriberId}/{definitionId}": {
+        "/api/v2/subscribers/{subscriberId}/attributes/{definitionId}": {
             "get": {
                 "tags": [
                     "subscriber-attributes"
                 ],
                 "summary": "Gets subscriber attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a single attribute.",
-                "operationId": "8cec584aaa9a9a3bdc067a6f203d4b1b",
+                "operationId": "67a8bd1d1ba2fcbe8f7f6e40dff6e310",
                 "parameters": [
                     {
                         "name": "definitionId",
@@ -4409,9 +4409,9 @@
                 "tags": [
                     "subscriber-attributes"
                 ],
-                "summary": "Create/update a subscriber attribute.",
+                "summary": "Create/update a subscriber attribute value.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns created/updated subscriber attribute.",
-                "operationId": "773db5461cc45db4ba539abf95ad918b",
+                "operationId": "556382bb314fde54677216acec2dc57f",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
@@ -4497,7 +4497,7 @@
                 ],
                 "summary": "Deletes an attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Deletes a single subscriber attribute.",
-                "operationId": "7b68b308e95cad1dd0e73359cc644c52",
+                "operationId": "14e2f0f832da2c5561c43bcbaa133846",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
@@ -4554,14 +4554,14 @@
                 }
             }
         },
-        "/api/v2/subscribers/attribute-values/{subscriberId}": {
+        "/api/v2/subscribers/{subscriberId}/attributes": {
             "get": {
                 "tags": [
                     "subscriber-attributes"
                 ],
                 "summary": "Gets a list of all subscriber attributes.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all subscriber attributes.",
-                "operationId": "0d06d25df0fa17dcbe377a32f228c796",
+                "operationId": "60f45d54bafdebc6701d65a3152b2ca9",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
