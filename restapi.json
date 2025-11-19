@@ -5813,7 +5813,7 @@
                         "$ref": "#/components/schemas/Administrator"
                     },
                     "definition": {
-                        "$ref": "#/components/schemas/AttributeDefinition"
+                        "$ref": "#/components/schemas/AdminAttributeDefinition"
                     },
                     "value": {
                         "type": "string",
@@ -5840,6 +5840,12 @@
                     "super_user": {
                         "type": "boolean",
                         "example": true
+                    },
+                    "privileges": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
                     },
                     "created_at": {
                         "type": "string",
@@ -5957,7 +5963,7 @@
                         "example": "2025-04-17 09:00:00"
                     },
                     "repeat_interval": {
-                        "type": "string",
+                        "type": "integer",
                         "example": "24 hours"
                     },
                     "repeat_until": {
@@ -5966,7 +5972,7 @@
                         "example": "2025-04-30T00:00:00+04:00"
                     },
                     "requeue_interval": {
-                        "type": "string",
+                        "type": "integer",
                         "example": "12 hours"
                     },
                     "requeue_until": {
@@ -6655,7 +6661,8 @@
                     },
                     "type": {
                         "type": "string",
-                        "example": "checkbox"
+                        "example": "checkbox",
+                        "nullable": true
                     },
                     "list_order": {
                         "type": "integer",
@@ -6668,10 +6675,6 @@
                     "required": {
                         "type": "boolean",
                         "example": true
-                    },
-                    "table_name": {
-                        "type": "string",
-                        "example": "list_attributes"
                     },
                     "options": {
                         "type": "array",
@@ -6752,7 +6755,7 @@
                         "format": "date-time",
                         "example": "2022-12-01T10:00:00Z"
                     },
-                    "summery": {
+                    "summary": {
                         "type": "string",
                         "example": "Added by admin"
                     },
