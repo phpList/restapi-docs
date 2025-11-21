@@ -5869,7 +5869,8 @@
                     },
                     "content": {
                         "type": "string",
-                        "example": "<html><body>[CONTENT]</body></html>"
+                        "example": "<html><body>[CONTENT]</body></html>",
+                        "nullable": true
                     },
                     "text": {
                         "type": "string",
