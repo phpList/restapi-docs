@@ -350,14 +350,14 @@
                 }
             }
         },
-        "/api/v2/administrators/attribute-values/{adminId}/{definitionId}": {
+        "/api/v2/administrators/{adminId}/attributes/{definitionId}": {
             "get": {
                 "tags": [
                     "admin-attributes"
                 ],
                 "summary": "Gets admin attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a single attribute.",
-                "operationId": "993bda3c9e739aebc4691af2f2326f6a",
+                "operationId": "c78ef2b0910f4e150dbcd2a6cd0ea27e",
                 "parameters": [
                     {
                         "name": "definitionId",
@@ -432,7 +432,7 @@
                 ],
                 "summary": "Create/update an admin attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns created/updated admin attribute.",
-                "operationId": "675aaea8f721e9bb44ad4037a8cf2911",
+                "operationId": "3cc645e3d26cc49501ad67adda844712",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
@@ -518,7 +518,7 @@
                 ],
                 "summary": "Deletes an attribute.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Deletes a single admin attribute.",
-                "operationId": "4f76366b588001989ec8040c0335d2a4",
+                "operationId": "7e8b9cefb17ef3cbb69501820e0d0f6c",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
@@ -575,14 +575,14 @@
                 }
             }
         },
-        "/api/v2/administrators/attribute-values/{adminId}": {
+        "/api/v2/administrators/{adminId}/attributes": {
             "get": {
                 "tags": [
                     "admin-attributes"
                 ],
                 "summary": "Gets a list of all admin attributes.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all admin attributes.",
-                "operationId": "3697baedcd4df34b5b8b78ef0b3238c5",
+                "operationId": "d6a09a4d6f2451e72c2a8b23e2fd1911",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
@@ -654,6 +654,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
                                 }
                             }
                         }
@@ -776,17 +786,17 @@
                 }
             }
         },
-        "/api/v2/administrators/{administratorId}": {
+        "/api/v2/administrators/{adminId}": {
             "get": {
                 "tags": [
                     "administrators"
                 ],
                 "summary": "Get Administrator",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Get administrator by ID.",
-                "operationId": "7b0c7aa05f2c6230af358826c3e6755a",
+                "operationId": "71a302c638b746ec7169b15da4ae7c9a",
                 "parameters": [
                     {
-                        "name": "administratorId",
+                        "name": "adminId",
                         "in": "path",
                         "description": "Administrator ID",
                         "required": true,
@@ -826,10 +836,10 @@
                 ],
                 "summary": "Update Administrator",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Update an administrator.",
-                "operationId": "08cb2e738c87f73709980cb140528918",
+                "operationId": "53023c81474020aca57ac09031e1c49c",
                 "parameters": [
                     {
-                        "name": "administratorId",
+                        "name": "adminId",
                         "in": "path",
                         "description": "Administrator ID",
                         "required": true,
@@ -880,10 +890,10 @@
                 ],
                 "summary": "Delete Administrator",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Delete an administrator.",
-                "operationId": "18f8713da580af36ce4b9909a8a1c01e",
+                "operationId": "52cdf4ca32e2fe304993bdac19c1bc92",
                 "parameters": [
                     {
-                        "name": "administratorId",
+                        "name": "adminId",
                         "in": "path",
                         "description": "Administrator ID",
                         "required": true,
@@ -1705,6 +1715,16 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -1787,6 +1807,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
                                 }
                             }
                         }
@@ -2418,44 +2448,7 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "title"
-                                ],
-                                "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "example": "Newsletter Template"
-                                    },
-                                    "content": {
-                                        "type": "string",
-                                        "example": "<html><body>[CONTENT]</body></html>"
-                                    },
-                                    "text": {
-                                        "type": "string",
-                                        "example": "[CONTENT]"
-                                    },
-                                    "file": {
-                                        "description": "Optional file upload for HTML content",
-                                        "type": "string",
-                                        "format": "binary"
-                                    },
-                                    "check_links": {
-                                        "description": "Check that all links have full URLs",
-                                        "type": "boolean",
-                                        "example": true
-                                    },
-                                    "check_images": {
-                                        "description": "Check that all images have full URLs",
-                                        "type": "boolean",
-                                        "example": false
-                                    },
-                                    "check_external_images": {
-                                        "description": "Check that all external images exist",
-                                        "type": "boolean",
-                                        "example": true
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/CreateTemplateRequest"
                             }
                         }
                     }
@@ -3546,6 +3539,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
                                 }
                             }
                         }
@@ -5851,6 +5854,46 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2025-04-29T12:34:56+00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "CreateTemplateRequest": {
+                "required": [
+                    "title"
+                ],
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "example": "Newsletter Template"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "<html><body>[CONTENT]</body></html>"
+                    },
+                    "text": {
+                        "type": "string",
+                        "example": "[CONTENT]"
+                    },
+                    "file": {
+                        "description": "Optional file upload for HTML content",
+                        "type": "string",
+                        "format": "binary"
+                    },
+                    "check_links": {
+                        "description": "Check that all links have full URLs",
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "check_images": {
+                        "description": "Check that all images have full URLs",
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "check_external_images": {
+                        "description": "Check that all external images exist",
+                        "type": "boolean",
+                        "example": true
                     }
                 },
                 "type": "object"
