@@ -1946,6 +1946,89 @@
                 }
             }
         },
+        "/api/v2/campaigns/{messageId}/forward": {
+            "post": {
+                "tags": [
+                    "campaigns"
+                ],
+                "summary": "Forward a message to recipients.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Queues forwarding of a campaign/message to provided recipient emails.",
+                "operationId": "1afdc107d604814010e51a6916aa99ce",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "messageId",
+                        "in": "path",
+                        "description": "message ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Forwarding payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ForwardMessageRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ForwardResult"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v2/list-messages/message/{messageId}/lists": {
             "get": {
                 "tags": [
@@ -5899,6 +5982,46 @@
                 },
                 "type": "object"
             },
+            "ForwardMessageRequest": {
+                "required": [
+                    "recipients"
+                ],
+                "properties": {
+                    "recipients": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "email"
+                        },
+                        "example": [
+                            "friend1@example.com",
+                            "friend2@example.com"
+                        ]
+                    },
+                    "uid": {
+                        "type": "string",
+                        "example": "fwd-123e4567-e89b-12d3-a456-426614174000",
+                        "nullable": true
+                    },
+                    "note": {
+                        "type": "string",
+                        "example": "Thought you might like this.",
+                        "nullable": true
+                    },
+                    "from_name": {
+                        "type": "string",
+                        "example": "Alice",
+                        "nullable": true
+                    },
+                    "from_email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "alice@example.com",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "MessageContentRequest": {
                 "required": [
                     "subject",
@@ -6074,6 +6197,52 @@
                 },
                 "type": "object"
             },
+            "ForwardRecipientResult": {
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "friend@example.com"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "sent"
+                    },
+                    "reason": {
+                        "type": "string",
+                        "example": "precache_failed",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "ForwardResult": {
+                "properties": {
+                    "total_requested": {
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "total_sent": {
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "total_failed": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "total_already_sent": {
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "recipients": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ForwardRecipientResult"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "ListMessage": {
                 "properties": {
                     "id": {
@@ -6145,16 +6314,6 @@
                                 "type": "string",
                                 "example": "text",
                                 "nullable": true
-                            },
-                            "format_options": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string"
-                                },
-                                "example": [
-                                    "as_html",
-                                    "as_text"
-                                ]
                             }
                         },
                         "type": "object"
