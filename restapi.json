@@ -1946,14 +1946,14 @@
                 }
             }
         },
-        "/api/v2/campaigns/{messageId}/forward": {
+        "/api/v2/email-forward/{messageId}": {
             "post": {
                 "tags": [
                     "campaigns"
                 ],
                 "summary": "Forward a message to recipients.",
                 "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Queues forwarding of a campaign/message to provided recipient emails.",
-                "operationId": "1afdc107d604814010e51a6916aa99ce",
+                "operationId": "c41e27bcaf3409ec2efda8660574850e",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
