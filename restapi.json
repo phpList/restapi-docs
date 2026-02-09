@@ -6001,7 +6001,7 @@
                     "uid": {
                         "type": "string",
                         "example": "fwd-123e4567-e89b-12d3-a456-426614174000",
-                        "nullable": true
+                        "nullable": false
                     },
                     "note": {
                         "type": "string",
@@ -6011,13 +6011,13 @@
                     "from_name": {
                         "type": "string",
                         "example": "Alice",
-                        "nullable": true
+                        "nullable": false
                     },
                     "from_email": {
                         "type": "string",
                         "format": "email",
                         "example": "alice@example.com",
-                        "nullable": true
+                        "nullable": false
                     }
                 },
                 "type": "object"
