@@ -1243,6 +1243,47 @@
                 }
             }
         },
+        "/api/v2/attachments/download/{id}": {
+            "get": {
+                "tags": [
+                    "attachments"
+                ],
+                "summary": "Download attachment",
+                "description": "Download an attachment by ID. `uid` query parameter is required.",
+                "operationId": "adf9081332610a149939c162b95e5286",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Attachment ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "uid",
+                        "in": "query",
+                        "description": "Download token (subscriber email or word \"forwarded\")",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File stream"
+                    },
+                    "403": {
+                        "description": "Unauthorized"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
         "/api/v2/bounces/regex": {
             "get": {
                 "tags": [
@@ -7135,6 +7176,10 @@
         {
             "name": "sessions",
             "description": "sessions"
+        },
+        {
+            "name": "attachments",
+            "description": "attachments"
         },
         {
             "name": "bounces",
