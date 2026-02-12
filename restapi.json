@@ -3056,6 +3056,41 @@
                 }
             }
         },
+        "/api/v2/t/open.gif": {
+            "get": {
+                "tags": [
+                    "tracking"
+                ],
+                "summary": "Track user message open",
+                "description": "1x1 tracking pixel endpoint that records a message view. Requires `u` (subscriber UID) and `m` (message ID) as query parameters.",
+                "operationId": "bc130b3f141501cd88e212b74a9b58c5",
+                "parameters": [
+                    {
+                        "name": "u",
+                        "in": "query",
+                        "description": "Subscriber unique identifier (UID)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "m",
+                        "in": "query",
+                        "description": "Message ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transparent 1x1 GIF"
+                    }
+                }
+            }
+        },
         "/api/v2/blacklist/check/{email}": {
             "get": {
                 "tags": [
@@ -7200,6 +7235,10 @@
         {
             "name": "analytics",
             "description": "analytics"
+        },
+        {
+            "name": "tracking",
+            "description": "tracking"
         },
         {
             "name": "blacklist",
