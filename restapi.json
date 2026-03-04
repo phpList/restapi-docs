@@ -4842,6 +4842,82 @@
                             "maximum": 100,
                             "minimum": 1
                         }
+                    },
+                    {
+                        "name": "is_confirmed",
+                        "in": "query",
+                        "description": "Filter by confirmed status",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "true",
+                                "false",
+                                "0",
+                                "1"
+                            ],
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "is_blacklisted",
+                        "in": "query",
+                        "description": "Filter by blacklisted status",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "true",
+                                "false",
+                                "0",
+                                "1"
+                            ],
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "description": "Column to sort by",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "id"
+                        }
+                    },
+                    {
+                        "name": "sort_direction",
+                        "in": "query",
+                        "description": "Sort direction",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ],
+                            "example": "desc"
+                        }
+                    },
+                    {
+                        "name": "find_column",
+                        "in": "query",
+                        "description": "Column to search in (requires find_value)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "email"
+                        }
+                    },
+                    {
+                        "name": "find_value",
+                        "in": "query",
+                        "description": "Value to search for (requires find_column)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "email@example.com"
+                        }
                     }
                 ],
                 "responses": {
@@ -6966,45 +7042,6 @@
                             "disabled",
                             "extraData"
                         ]
-                    }
-                },
-                "type": "object"
-            },
-            "SubscribersFilterRequest": {
-                "properties": {
-                    "is_confirmed": {
-                        "description": "Filter by confirmed status",
-                        "type": "boolean",
-                        "nullable": true
-                    },
-                    "is_blacklisted": {
-                        "description": "Filter by blacklisted status",
-                        "type": "boolean",
-                        "nullable": true
-                    },
-                    "sort_by": {
-                        "description": "Column to sort by",
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "sort_direction": {
-                        "description": "Sort direction",
-                        "type": "string",
-                        "enum": [
-                            "asc",
-                            "desc"
-                        ],
-                        "nullable": true
-                    },
-                    "find_column": {
-                        "description": "Column to search in (requires find_value)",
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "find_value": {
-                        "description": "Value to search for (requires find_column)",
-                        "type": "string",
-                        "nullable": true
                     }
                 },
                 "type": "object"
