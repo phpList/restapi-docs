@@ -4906,6 +4906,11 @@
                         "required": false,
                         "schema": {
                             "type": "string",
+                            "enum": [
+                                "email",
+                                "foreignKey",
+                                "uniqueId"
+                            ],
                             "example": "email"
                         }
                     },
