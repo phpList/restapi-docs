@@ -4876,30 +4876,6 @@
                         }
                     },
                     {
-                        "name": "sort_by",
-                        "in": "query",
-                        "description": "Column to sort by",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "example": "id"
-                        }
-                    },
-                    {
-                        "name": "sort_direction",
-                        "in": "query",
-                        "description": "Sort direction",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "asc",
-                                "desc"
-                            ],
-                            "example": "desc"
-                        }
-                    },
-                    {
                         "name": "find_column",
                         "in": "query",
                         "description": "Column to search in (requires find_value)",
