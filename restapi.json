@@ -1100,6 +1100,53 @@
             }
         },
         "/api/v2/sessions": {
+            "get": {
+                "tags": [
+                    "sessions"
+                ],
+                "summary": "Get auth user data.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Get auth user data.",
+                "operationId": "40cbcc55228ce9619dab556553582b53",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Administrator found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Administrator"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Not authorized."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "sessions"
