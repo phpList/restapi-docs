@@ -7312,6 +7312,12 @@
                         "items": {
                             "$ref": "#/components/schemas/SubscriberList"
                         }
+                    },
+                    "history": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/SubscriberHistory"
+                        }
                     }
                 },
                 "type": "object"
