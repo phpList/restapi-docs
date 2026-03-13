@@ -7304,6 +7304,10 @@
                         "type": "string",
                         "example": "69f4e92cf50eafca9627f35704f030f4"
                     },
+                    "uuid": {
+                        "type": "string",
+                        "example": "69f4e92-cf50eaf-ca9627f-35704f-030f4"
+                    },
                     "html_email": {
                         "type": "boolean",
                         "example": true
