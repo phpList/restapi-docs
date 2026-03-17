@@ -7101,10 +7101,6 @@
                     "disabled": {
                         "type": "boolean",
                         "example": false
-                    },
-                    "additional_data": {
-                        "type": "string",
-                        "example": "asdf"
                     }
                 },
                 "type": "object"
