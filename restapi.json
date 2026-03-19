@@ -3131,63 +3131,120 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "total_subscribers": {
+                                        "summary_statistics": {
                                             "properties": {
-                                                "value": {
-                                                    "type": "integer",
-                                                    "example": 48294
+                                                "total_subscribers": {
+                                                    "properties": {
+                                                        "value": {
+                                                            "type": "integer",
+                                                            "example": 48294
+                                                        },
+                                                        "change_vs_last_month": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 12.5
+                                                        }
+                                                    },
+                                                    "type": "object"
                                                 },
-                                                "change_vs_last_month": {
-                                                    "type": "number",
-                                                    "format": "float",
-                                                    "example": 12.5
+                                                "active_campaigns": {
+                                                    "properties": {
+                                                        "value": {
+                                                            "type": "integer",
+                                                            "example": 12
+                                                        },
+                                                        "change_vs_last_month": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 0
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "open_rate": {
+                                                    "properties": {
+                                                        "value": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 12
+                                                        },
+                                                        "change_vs_last_month": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 0
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "bounce_rate": {
+                                                    "properties": {
+                                                        "value": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 12
+                                                        },
+                                                        "change_vs_last_month": {
+                                                            "type": "number",
+                                                            "format": "float",
+                                                            "example": 0
+                                                        }
+                                                    },
+                                                    "type": "object"
                                                 }
                                             },
                                             "type": "object"
                                         },
-                                        "active_campaigns": {
-                                            "properties": {
-                                                "value": {
-                                                    "type": "integer",
-                                                    "example": 12
+                                        "recent_campaigns": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "March Newsletter"
+                                                    },
+                                                    "status": {
+                                                        "type": "string",
+                                                        "example": "sent",
+                                                        "nullable": true
+                                                    },
+                                                    "date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2026-03-15",
+                                                        "nullable": true
+                                                    },
+                                                    "open_rate": {
+                                                        "type": "string",
+                                                        "example": "42.50%"
+                                                    },
+                                                    "click_rate": {
+                                                        "type": "string",
+                                                        "example": "8.10%"
+                                                    }
                                                 },
-                                                "change_vs_last_month": {
-                                                    "type": "number",
-                                                    "format": "float",
-                                                    "example": 0
-                                                }
-                                            },
-                                            "type": "object"
+                                                "type": "object"
+                                            }
                                         },
-                                        "open_rate": {
-                                            "properties": {
-                                                "value": {
-                                                    "type": "number",
-                                                    "format": "float",
-                                                    "example": 12
+                                        "campaign_performance": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "date": {
+                                                        "type": "string",
+                                                        "format": "date",
+                                                        "example": "2026-03-19"
+                                                    },
+                                                    "opens": {
+                                                        "type": "integer",
+                                                        "example": 234
+                                                    },
+                                                    "clicks": {
+                                                        "type": "integer",
+                                                        "example": 57
+                                                    }
                                                 },
-                                                "change_vs_last_month": {
-                                                    "type": "number",
-                                                    "format": "float",
-                                                    "example": 0
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "bounce_rate": {
-                                            "properties": {
-                                                "value": {
-                                                    "type": "number",
-                                                    "format": "float",
-                                                    "example": 12
-                                                },
-                                                "change_vs_last_month": {
-                                                    "type": "number",
-                                                    "format": "float",
-                                                    "example": 0
-                                                }
-                                            },
-                                            "type": "object"
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"
