@@ -6005,6 +6005,77 @@
                     }
                 }
             },
+            "post": {
+                "tags": [
+                    "lists"
+                ],
+                "summary": "Update a subscriber list.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns updated list.",
+                "operationId": "0f8340a7d0a9f2c1f1bdffc728942d99",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "listId",
+                        "in": "path",
+                        "description": "List ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass parameters to create a new subscriber list.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateSubscriberListRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SubscriberList"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "delete": {
                 "tags": [
                     "lists"
@@ -7090,6 +7161,18 @@
                     "public": {
                         "type": "boolean",
                         "example": true
+                    },
+                    "category": {
+                        "type": "string",
+                        "example": "Marketing"
+                    },
+                    "subject_prefix": {
+                        "type": "string",
+                        "example": "[News]"
+                    },
+                    "rss_feed": {
+                        "type": "string",
+                        "example": "https://example.com/blog/rss"
                     }
                 },
                 "type": "object"
@@ -7411,7 +7494,7 @@
                     },
                     "subject_prefix": {
                         "type": "string",
-                        "example": "Newsletter: "
+                        "example": "[News]"
                     },
                     "public": {
                         "type": "boolean",
@@ -7419,7 +7502,11 @@
                     },
                     "category": {
                         "type": "string",
-                        "example": "News"
+                        "example": "Marketing"
+                    },
+                    "rss_feed": {
+                        "type": "string",
+                        "example": "https://example.com/blog/rss"
                     }
                 },
                 "type": "object"
