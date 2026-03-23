@@ -6002,6 +6002,16 @@
                                 }
                             }
                         }
+                    },
+                    "405": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -6044,7 +6054,7 @@
                     }
                 },
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {
@@ -6055,6 +6065,16 @@
                         }
                     },
                     "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
                         "description": "Failure",
                         "content": {
                             "application/json": {
@@ -6123,6 +6143,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
                                 }
                             }
                         }
