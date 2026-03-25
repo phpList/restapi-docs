@@ -7342,8 +7342,10 @@
                             "updatedAt",
                             "uniqueId",
                             "htmlEmail",
+                            "rssFrequency",
                             "disabled",
-                            "extraData"
+                            "extraData",
+                            "foreignKey"
                         ]
                     }
                 },
