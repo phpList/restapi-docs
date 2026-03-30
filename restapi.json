@@ -3706,23 +3706,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "emails"
-                                ],
-                                "properties": {
-                                    "emails": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string",
-                                            "format": "email"
-                                        },
-                                        "example": [
-                                            "test1@example.com",
-                                            "test2@example.com"
-                                        ]
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/SubscriptionRequest"
                             }
                         }
                     }
@@ -7326,6 +7310,34 @@
                         "type": "string",
                         "format": "date"
                     },
+                    "is_confirmed": {
+                        "description": "Whether subscriber is confirmed (true, false, 1, 0)",
+                        "type": "boolean",
+                        "enum": [
+                            "true",
+                            "false",
+                            "1",
+                            "0",
+                            true,
+                            false,
+                            1,
+                            0
+                        ]
+                    },
+                    "is_blacklisted": {
+                        "description": "Whether subscriber is blacklisted (true, false, 1, 0)",
+                        "type": "boolean",
+                        "enum": [
+                            "true",
+                            "false",
+                            "1",
+                            "0",
+                            true,
+                            false,
+                            1,
+                            0
+                        ]
+                    },
                     "columns": {
                         "description": "Columns to include in the export",
                         "type": "array",
@@ -7347,6 +7359,30 @@
                             "extraData",
                             "foreignKey"
                         ]
+                    }
+                },
+                "type": "object"
+            },
+            "SubscriptionRequest": {
+                "required": [
+                    "emails"
+                ],
+                "properties": {
+                    "emails": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "email"
+                        },
+                        "example": [
+                            "test1@example.com",
+                            "test2@example.com"
+                        ]
+                    },
+                    "autoConfirm": {
+                        "description": "Whether to automatically confirm subscriptions",
+                        "type": "boolean",
+                        "example": true
                     }
                 },
                 "type": "object"
