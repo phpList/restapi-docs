@@ -6846,6 +6846,11 @@
                                 "type": "string",
                                 "format": "date-time",
                                 "nullable": true
+                            },
+                            "send_start": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true
                             }
                         },
                         "type": "object"
