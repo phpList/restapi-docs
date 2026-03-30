@@ -6816,6 +6816,14 @@
                                 "type": "string",
                                 "example": "text",
                                 "nullable": true
+                            },
+                            "as_text": {
+                                "type": "integer",
+                                "example": 12
+                            },
+                            "as_html": {
+                                "type": "integer",
+                                "example": 12
                             }
                         },
                         "type": "object"
@@ -6827,8 +6835,8 @@
                                 "example": "sent"
                             },
                             "processed": {
-                                "type": "boolean",
-                                "example": true
+                                "type": "integer",
+                                "example": 12
                             },
                             "views": {
                                 "type": "integer",
