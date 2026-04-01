@@ -2036,6 +2036,69 @@
                 }
             }
         },
+        "/api/v2/campaigns/{messageId}/resend": {
+            "post": {
+                "tags": [
+                    "campaigns"
+                ],
+                "summary": "Processes/sends campaign/message by id to lists.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Processes/sends campaign/message by id to specified mailing lists.",
+                "operationId": "69aca3faa51e5a7b56745d35605e5563",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "messageId",
+                        "in": "path",
+                        "description": "message ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "List ids to send this campaign to.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminAttributeDefinitionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v2/email-forward/{messageId}": {
             "post": {
                 "tags": [
@@ -6648,6 +6711,27 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2025-04-20T00:00:00+04:00"
+                    }
+                },
+                "type": "object"
+            },
+            "ResendMessageToListsRequest": {
+                "required": [
+                    "list_ids"
+                ],
+                "properties": {
+                    "list_ids": {
+                        "description": "Target mailing list IDs.",
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "minimum": 1
+                        },
+                        "example": [
+                            1,
+                            2,
+                            3
+                        ]
                     }
                 },
                 "type": "object"
