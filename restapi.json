@@ -1676,22 +1676,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "status"
-                                ],
-                                "properties": {
-                                    "status": {
-                                        "type": "string",
-                                        "enum": [
-                                            "draft",
-                                            "scheduled",
-                                            "sent",
-                                            "canceled"
-                                        ],
-                                        "example": "draft"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/MessageMetadataRequest"
                             }
                         }
                     }
@@ -1788,6 +1773,16 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1826,7 +1821,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/AdminAttributeDefinitionRequest"
+                                "$ref": "#/components/schemas/ResendMessageToListsRequest"
                             }
                         }
                     }
@@ -6802,6 +6797,9 @@
                 "type": "object"
             },
             "MessageMetadataRequest": {
+                "required": [
+                    "status"
+                ],
                 "properties": {
                     "status": {
                         "type": "string",
