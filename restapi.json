@@ -6810,8 +6810,7 @@
             "MessageFormatRequest": {
                 "required": [
                     "html_formated",
-                    "send_format",
-                    "format_options"
+                    "send_format"
                 ],
                 "properties": {
                     "html_formated": {
