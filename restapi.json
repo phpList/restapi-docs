@@ -6826,20 +6826,6 @@
                             "invite"
                         ],
                         "example": "html"
-                    },
-                    "format_options": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "enum": [
-                                "text",
-                                "html",
-                                "pdf"
-                            ]
-                        },
-                        "example": [
-                            "html"
-                        ]
                     }
                 },
                 "type": "object"
@@ -7102,6 +7088,18 @@
                                 "example": 12
                             },
                             "as_html": {
+                                "type": "integer",
+                                "example": 12
+                            },
+                            "as_text_and_html": {
+                                "type": "integer",
+                                "example": 12
+                            },
+                            "as_pdf": {
+                                "type": "integer",
+                                "example": 12
+                            },
+                            "as_text_and_pdf": {
                                 "type": "integer",
                                 "example": 12
                             }
