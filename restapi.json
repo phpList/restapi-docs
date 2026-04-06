@@ -6355,7 +6355,30 @@
     },
     "components": {
         "schemas": {
+            "ErrorDetails": {
+                "type": "object",
+                "example": {
+                    "format.formatOptions[0]": [
+                        "The value you selected is not a valid choice."
+                    ],
+                    "schedule.repeatUntil": [
+                        "This value is not a valid datetime."
+                    ],
+                    "schedule.requeueUntil": [
+                        "This value is not a valid datetime."
+                    ]
+                },
+                "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
             "UnauthorizedResponse": {
+                "required": [
+                    "message"
+                ],
                 "properties": {
                     "message": {
                         "type": "string",
@@ -6365,15 +6388,25 @@
                 "type": "object"
             },
             "ValidationErrorResponse": {
+                "required": [
+                    "message",
+                    "errors"
+                ],
                 "properties": {
                     "message": {
                         "type": "string",
-                        "example": "Some fields are invalid"
+                        "example": "Validation failed"
+                    },
+                    "errors": {
+                        "$ref": "#/components/schemas/ErrorDetails"
                     }
                 },
                 "type": "object"
             },
             "BadRequestResponse": {
+                "required": [
+                    "message"
+                ],
                 "properties": {
                     "message": {
                         "type": "string",
@@ -6383,6 +6416,9 @@
                 "type": "object"
             },
             "AlreadyExistsResponse": {
+                "required": [
+                    "message"
+                ],
                 "properties": {
                     "message": {
                         "type": "string",
@@ -6399,6 +6435,18 @@
                     "message": {
                         "type": "string",
                         "example": "There is no entity with that ID."
+                    }
+                },
+                "type": "object"
+            },
+            "GenericErrorResponse": {
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "An unexpected error occurred."
                     }
                 },
                 "type": "object"
