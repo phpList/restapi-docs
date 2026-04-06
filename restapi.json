@@ -1850,6 +1850,79 @@
                 }
             }
         },
+        "/api/v2/campaigns/{messageId}/test-send": {
+            "post": {
+                "tags": [
+                    "campaigns"
+                ],
+                "summary": "Processes/sends campaign/message by id to specified subscribers.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Processes/sends campaign/message by id to specified subscribers.",
+                "operationId": "6503953d7fcf631b0582053a57d2f2a8",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "messageId",
+                        "in": "path",
+                        "description": "message ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Subscribers email to send this campaign to.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResendMessageToListsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v2/campaigns": {
             "get": {
                 "tags": [
@@ -6836,6 +6909,14 @@
                 "properties": {
                     "status": {
                         "type": "string",
+                        "enum": [
+                            "draft",
+                            "sent",
+                            "prepared",
+                            "submitted",
+                            "suspended",
+                            "requeued"
+                        ],
                         "example": "draft"
                     }
                 },
@@ -6912,6 +6993,26 @@
                             1,
                             2,
                             3
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "TestSendMessageToSubscribersRequest": {
+                "required": [
+                    "emails"
+                ],
+                "properties": {
+                    "emails": {
+                        "description": "Target subscribers emails.",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "email"
+                        },
+                        "example": [
+                            "user1@example.com",
+                            "user2@example.com"
                         ]
                     }
                 },
