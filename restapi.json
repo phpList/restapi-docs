@@ -6857,7 +6857,6 @@
                 "required": [
                     "subject",
                     "text",
-                    "text_message",
                     "footer"
                 ],
                 "properties": {
@@ -6868,10 +6867,6 @@
                     "text": {
                         "type": "string",
                         "example": "Full text content"
-                    },
-                    "text_message": {
-                        "type": "string",
-                        "example": "Short text message"
                     },
                     "footer": {
                         "type": "string",
