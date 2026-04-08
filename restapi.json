@@ -6877,14 +6877,9 @@
             },
             "MessageFormatRequest": {
                 "required": [
-                    "html_formated",
                     "send_format"
                 ],
                 "properties": {
-                    "html_formated": {
-                        "type": "boolean",
-                        "example": true
-                    },
                     "send_format": {
                         "type": "string",
                         "enum": [
