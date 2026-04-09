@@ -1983,6 +1983,16 @@
                             "maximum": 100,
                             "minimum": 1
                         }
+                    },
+                    {
+                        "name": "subject",
+                        "in": "query",
+                        "description": "Filter campaigns by subject (partial match)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "maxLength": 50
+                        }
                     }
                 ],
                 "responses": {
