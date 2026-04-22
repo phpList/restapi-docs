@@ -2974,6 +2974,108 @@
                 }
             }
         },
+        "/api/v2/templates/defaults": {
+            "get": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "Gets a list of all default templates.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all available default templates.",
+                "operationId": "bd28f733452097eca52a8f72549ffe92",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/templates/defaults/{key}": {
+            "post": {
+                "tags": [
+                    "templates"
+                ],
+                "summary": "Creates a template from a default template.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Creates a new template from a default template key.",
+                "operationId": "67e657e5c80cc0c88a4cc43a6eb55f99",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "description": "Default template key",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "system",
+                                "responsive"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Template"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v2/templates/{templateId}": {
             "get": {
                 "tags": [
