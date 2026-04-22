@@ -7005,6 +7005,11 @@
                         "type": "string",
                         "example": "[CONTENT]"
                     },
+                    "list_order": {
+                        "type": "integer",
+                        "example": 10,
+                        "nullable": true
+                    },
                     "file": {
                         "description": "Optional file upload for HTML content",
                         "type": "string",
@@ -7240,6 +7245,11 @@
                     "text": {
                         "type": "string",
                         "example": "[CONTENT]"
+                    },
+                    "list_order": {
+                        "type": "integer",
+                        "example": 10,
+                        "nullable": true
                     },
                     "file": {
                         "description": "Optional file upload for HTML content",
