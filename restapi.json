@@ -1333,6 +1333,107 @@
                 }
             }
         },
+        "/api/v2/bounces": {
+            "get": {
+                "tags": [
+                    "bounces"
+                ],
+                "summary": "Gets a list of all bounces.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of all bounces.",
+                "operationId": "98e6f5ee3a2c8cb61009583a938b22cb",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Bounce"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/bounces/{bounceId}": {
+            "delete": {
+                "tags": [
+                    "bounces"
+                ],
+                "summary": "Delete a bounce by its id",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Delete a bounce by its id.",
+                "operationId": "52d0665c9ee3e8d0276cfe65e43866f4",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "bounceId",
+                        "in": "path",
+                        "description": "Bounce id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v2/bounces/regex": {
             "get": {
                 "tags": [
@@ -7270,6 +7371,49 @@
                         "description": "Check that all external images exist",
                         "type": "boolean",
                         "example": true
+                    }
+                },
+                "type": "object"
+            },
+            "Bounce": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "not processed",
+                        "nullable": true
+                    },
+                    "date": {
+                        "type": "string",
+                        "example": "2023-01-01T12:00:00Z",
+                        "nullable": true
+                    },
+                    "message_id": {
+                        "type": "integer",
+                        "example": 123
+                    },
+                    "message_subject": {
+                        "type": "string",
+                        "example": "Newsletter",
+                        "nullable": true
+                    },
+                    "subscriber_id": {
+                        "type": "integer",
+                        "example": 0,
+                        "nullable": true
+                    },
+                    "subscriber_email": {
+                        "type": "string",
+                        "example": "user@example.com",
+                        "nullable": true
+                    },
+                    "comment": {
+                        "type": "string",
+                        "example": "Auto-generated rule",
+                        "nullable": true
                     }
                 },
                 "type": "object"
