@@ -1373,6 +1373,18 @@
                             "maximum": 100,
                             "minimum": 1
                         }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Bounce status",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "unidentified bounce",
+                            "maxLength": 100,
+                            "minLength": 1
+                        }
                     }
                 ],
                 "responses": {
