@@ -1469,6 +1469,134 @@
                 }
             }
         },
+        "/api/v2/bounces/by/campaign": {
+            "get": {
+                "tags": [
+                    "bounces"
+                ],
+                "summary": "Gets a list of bounce counts by campaign.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of bounce counts by campaign.",
+                "operationId": "a2de96a367d951e9047630b863fbc756",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "message_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "subject": {
+                                                "type": "string",
+                                                "example": "System"
+                                            },
+                                            "total_bounces": {
+                                                "type": "integer",
+                                                "example": 3
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/bounces/by/subscriber": {
+            "get": {
+                "tags": [
+                    "bounces"
+                ],
+                "summary": "Gets a list of bounce counts by subscriber.",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a JSON list of bounce counts by subscriber.",
+                "operationId": "e914619969016f6d3ec3da6b645b5ff3",
+                "parameters": [
+                    {
+                        "name": "php-auth-pw",
+                        "in": "header",
+                        "description": "Session key obtained from login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "subscriber_id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "example@email.com"
+                                            },
+                                            "confirmed": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "blacklisted": {
+                                                "type": "boolean",
+                                                "example": true
+                                            },
+                                            "total_bounces": {
+                                                "type": "integer",
+                                                "example": 3
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v2/bounces/regex": {
             "get": {
                 "tags": [
