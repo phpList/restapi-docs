@@ -1705,14 +1705,14 @@
                 }
             }
         },
-        "/api/v2/bounces/regex/{regexHash}": {
+        "/api/v2/bounces/regex/{ruleId}": {
             "get": {
                 "tags": [
                     "bounces"
                 ],
-                "summary": "Get a bounce regex by its hash",
-                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a bounce regex by its hash.",
-                "operationId": "be73154c156c45440b3b3f47513d8e86",
+                "summary": "Get a bounce regex by its ID",
+                "description": "🚧 **Status: Beta** – This method is under development. Avoid using in production. Returns a bounce regex by its ID.",
+                "operationId": "babc8c57b673d026ea5fc6100320d4a6",
                 "parameters": [
                     {
                         "name": "php-auth-pw",
@@ -1724,12 +1724,12 @@
                         }
                     },
                     {
-                        "name": "regexHash",
+                        "name": "ruleId",
                         "in": "path",
-                        "description": "Regex hash",
+                        "description": "Regex ID",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         }
                     }
                 ],
@@ -1765,9 +1765,7 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/v2/bounces/regex/{ruleId}": {
+            },
             "put": {
                 "tags": [
                     "bounces"
