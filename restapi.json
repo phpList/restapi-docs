@@ -1393,10 +1393,18 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/BounceView"
-                                    }
+                                    "properties": {
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/BounceView"
+                                            }
+                                        },
+                                        "pagination": {
+                                            "$ref": "#/components/schemas/CursorPagination"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
