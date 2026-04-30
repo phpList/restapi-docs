@@ -1865,7 +1865,7 @@
                         }
                     },
                     {
-                        "name": "regexHash",
+                        "name": "ruleId",
                         "in": "path",
                         "description": "Regex hash",
                         "required": true,
