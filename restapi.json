@@ -3816,7 +3816,7 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateTemplateRequest"
+                                "$ref": "#/components/schemas/CreateTemplateRequest"
                             }
                         }
                     }
@@ -3827,10 +3827,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Template"
-                                    }
+                                    "$ref": "#/components/schemas/Template"
                                 }
                             }
                         }
@@ -3841,6 +3838,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/UnauthorizedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Failure",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AlreadyExistsResponse"
                                 }
                             }
                         }
